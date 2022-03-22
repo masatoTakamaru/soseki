@@ -10,10 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_22_041344) do
+ActiveRecord::Schema.define(version: 2022_03_22_042004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.integer "student_id"
+    t.date "period"
+    t.string "class_name"
+    t.integer "category"
+    t.string "name"
+    t.float "price"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "postals", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.integer "user_id"
+    t.date "expire_date"
+    t.boolean "expire_flag"
+    t.date "start_date"
+    t.string "class_name"
+    t.string "family_name"
+    t.string "given_name"
+    t.string "family_name_kana"
+    t.string "given_name_kana"
+    t.string "gender"
+    t.date "birth_date"
+    t.string "school_belong_to"
+    t.string "grade"
+    t.string "guardian_family_name"
+    t.string "guardian_given_name"
+    t.string "guardian_family_name_kana"
+    t.string "guardian_given_name_kana"
+    t.string "phone1"
+    t.string "phone1_belong_to"
+    t.string "phone2"
+    t.string "phone2_belong_to"
+    t.string "postal_code"
+    t.string "address"
+    t.string "email"
+    t.string "user_name"
+    t.string "password_digest"
+    t.string "remarks"
+    t.string "sibling_group"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +73,7 @@ ActiveRecord::Schema.define(version: 2022_03_22_041344) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
