@@ -1,0 +1,8 @@
+<!-- エラーメッセージ -->
+<% if model.errors.any? %>
+  <% model.errors.full_messages.each do |message| %>
+    <div class="bg-blue-300 shadow flex justify-center py-2">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>

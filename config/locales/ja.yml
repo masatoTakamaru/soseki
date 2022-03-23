@@ -8,6 +8,7 @@ ja:
       log_in: "ログイン"
       log_out: "ログアウト"
       help: "ヘルプ"
+      item_master: "教科管理"
   home:
     index:
       catch: "小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。"
@@ -30,6 +31,9 @@ ja:
       mail_example: "例）example@gmail.com"
       content: "お問い合わせ内容"
       submit: "送信する"
+  item_master:
+    index:
+      new: "新規登録"
   activerecord:
     errors:
       messages:

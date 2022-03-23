@@ -43,6 +43,7 @@
           <p class="ml-1"><%= t(".students") %></p>
         </div>
       <% end %>
+      <%= link_to t(".item_master"), item_master_index_path, method: "get", class: "text-white mr-4" %>
       <%= link_to t(".help"), help_path, class: "text-white mr-4" %>
       <%= link_to t(".log_out"), destroy_user_session_path, method:"delete", class: "text-white mr-4" %>
     <% else %>

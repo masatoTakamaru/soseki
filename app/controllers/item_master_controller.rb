@@ -1,0 +1,2 @@
+class ItemMasterController < ApplicationController
+end

@@ -5,12 +5,12 @@ class StudentController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @students = Student.where(company_id: current_user[:company_id])
+    @students = current_user.students
     #所属クラスのカテゴリ配列の生成
-    @categories = @students.order(class_name: :asc).group(:class_name).pluck(:class_name)
-    @category_index = []
-    @categories.each do |c|
-      @category_index.push([c,c])
+    @classes = @students.order(class_name: :asc).group(:class_name).pluck(:class_name)
+    @class_list = []
+    @classes.each do |c|
+      @class_list.push([c,c])
     end
     if params[:class_name]
       if params[:class_name].present?

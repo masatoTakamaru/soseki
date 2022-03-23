@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :student
   resources :item
+  resources :item_master
 
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
   get "home/contact", to: "home#contact", as: "contact"
