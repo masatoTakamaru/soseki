@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :itemMaster do
+  factory :item_master do
     class_name    {"中3A"}
     category      {1}
     name          {"国語"}

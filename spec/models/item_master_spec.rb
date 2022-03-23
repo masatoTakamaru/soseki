@@ -4,7 +4,7 @@ RSpec.describe ItemMaster, type: :model do
   context "教科マスターが正しく登録できる" do
 
     before do
-      @item_master = FactoryBot.build(:itemMaster)
+      @item_master = FactoryBot.build(:item_master)
     end
 
     it "教科マスターが登録できる" do
