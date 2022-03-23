@@ -1,16 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>Workspace</title>
+    <title><%= full_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= favicon_link_tag('favicon.ico') %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body class="bg-gray-100">
+  <div class="header bg-teal-500 flex items-center justify-between">
+    <!-- ロゴ -->
+    <%= link_to root_path do %>
+      <div class="flex items-center ml-4">
+        <%= image_tag "fabicon-24x24.webp" %>
+        <p class="text-white ml-4"><%= @app_name %></p>
+      </div>
+    <% end %>
+    <!-- メニュー -->
+    <div class="menu-wrapper">
+      <% if user_signed_in? %>
+        <%= link_to current_user.company_name, account_path, class: "text-white mr-4" %></p>
+        <%= link_to "ダッシュボード", dashboard_path, class: "text-white mr-4" %>
+        <%= link_to "生徒一覧", student_index_path, class: "text-white mr-4"%>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: 'text-white mr-4' %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if notice %>
+    <div class="bg-teal-600">
+      <p class="notice p-2 text-white text-center"><%= notice %></p>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="bg-teal-600">
+      <p class="alert p-4 text-white text-center"><%= alert %></p>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+</body>
 </html>

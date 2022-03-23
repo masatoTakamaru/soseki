@@ -10,7 +10,6 @@ body {
 /*リンク*/
 
 a {
-  color: white;
   text-decoration:none;
 }
 
@@ -155,7 +154,7 @@ input, select, textarea {
 .underline {text-decoration: underline;}
 
 @for $i from 0 through 100 {
-  .text-#{$i*5} {font-size: #{$i*0.01}rem;}
+  .text-#{$i*5} {font-size: #{$i*0.05}rem;}
 }
 
 /*見出し*/
