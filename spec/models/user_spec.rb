@@ -2,16 +2,49 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー登録' do
+
+    let(:user) {FactoryBot.create(:user)}
+
     it "ユーザーが登録できればOK" do
-      user = build(:user)
       expect(user).to be_valid
     end
     it "usenameが空白ならNG" do
-      user = build(:user)
-      expect(user).to be_valid
+      user.username = ""
+      expect(user).to be_invalid
+    end
+    it "usenameが21字以上ならNG" do
+      user.username = "あいうえおかきくけこあいうえおかきくけこあ"
+      expect(user).to be_invalid
+    end
+    it "emailが空白ならNG" do
+      user.email = ""
+      expect(user).to be_invalid
+    end
+    it "emailが不正ならNG" do
+      user.email = "examplegmail.com"
+      expect(user).to be_invalid
+    end
+    it "emailが不正ならNG" do
+      user.email = "example@@gmail.com"
+      expect(user).to be_invalid
+    end
+    it "passwordが6字未満ならNG" do
+      user.password = "12345"
+      expect(user).to be_invalid
+    end
+    it "passwordが不正ならNG" do
+      user.password = "あいう"
+      expect(user).to be_invalid
+    end
+    it "password_confirmationが6字未満ならNG" do
+      user.password_confirmation = "12345"
+      expect(user).to be_invalid
+    end
+    it "passwordが不正ならNG" do
+      user.password_confirmation = "あいう"
+      expect(user).to be_invalid
     end
 
-    
 
 
 
