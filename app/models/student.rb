@@ -6,12 +6,12 @@ class Student < ApplicationRecord
   has_secure_password validations: false
 
   HUMAN_NAME_REGEXP = /\A[\p{han}\p{hiragana}\p{katakana}\u{30fc}A-Za-z]+\z/
-  KATAKANA_REGEXP = /\A[\p{katakana}\u{30fc}]+\z/
+  KATAKANA_REGEXP = /\A[ァ-ヶー－]+\z/
   PHONE_NUMBER_REGEXP = /\A\d{2,5}-\d{2,5}-\d{2,5}\z/
   POSTAL_CODE_REGEXP = /\A\d{7}\z/
   EMAIL_REGEXP = /\A\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*\z/
   USER_NAME_REGEXP = /\A[ -~]+\z/
-  PASSWORD = /\A[ -~]+\z/
+  PASSWORD_REGEXP = /\A[ -~]+\z/
 
   validates :start_date,
     presence: {message: "に誤りがあります。正しい日付を入力して下さい。"}
@@ -67,11 +67,13 @@ class Student < ApplicationRecord
     format: {with: EMAIL_REGEXP, message: "に誤りがあります。",
               allow_blank: true}
   validates :user_name,
-    format: {with: USER_NAME_REGEXP, message: "に誤りがあります。",
-              allow_blank: true}
+    length: {maximum: 20},
+    format: {with: USER_NAME_REGEXP, message: "は半角文字で入力して下さい。",
+            allow_blank: true}
   validates :password,
-    allow_blank: true,
-    length: {maximum: 72}
+    length: {maximum: 40},
+    format: {with: PASSWORD_REGEXP, message: "は半角文字で入力して下さい。",
+            allow_blank: true}    
   validates :remarks, length: {maximum: 240}
 
 end
