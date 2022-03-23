@@ -64,7 +64,7 @@ table {
   background-color: $gray-300;
 }
 
-/*ボタン基本*/
+/*ボタン*/
 .btn {
   color: white;
   font-size: 1rem;
@@ -78,11 +78,11 @@ table {
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
   font-weight: bold;
   border: solid 2px $teal-600;
-}
 
-.btn:hover {
+  &:hover {
   cursor: pointer;
   box-shadow: 0 0 3px 2px $teal-500;
+  }
 }
 
 .btn-flat {
@@ -110,6 +110,14 @@ table {
   border-radius: 4px;
 }
 
+.badge {
+  font-size: 0.8rem;
+  color: white;
+  background-color: $teal-500;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
 
 /*入力フィールド*/
 
