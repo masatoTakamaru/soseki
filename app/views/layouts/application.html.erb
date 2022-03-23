@@ -18,7 +18,7 @@
   <%= link_to root_path do %>
     <div class="flex items-center ml-4">
       <%= image_tag "fabicon-24x24.webp" %>
-      <p class="app-name text-white ml-4"><%= t("app_name") %></p>
+      <p class="app-name text-teal-700 ml-4"><%= t("app_name") %></p>
     </div>
   <% end %>
   <!-- メニュー -->
@@ -26,10 +26,29 @@
     <% if user_signed_in? %>
       <%= link_to current_user.username, account_path, class: "text-white mr-4" %></p>
       <%= link_to t(".dashboard"), item_index_path, class: "text-white mr-4" %>
-      <%= link_to t(".students"), student_index_path, class: "text-white mr-4" %>
-      <%= link_to t(".log_out"), destroy_user_session_path, class: "text-white mr-4" %>
+      <%= link_to student_index_path, class: "text-white mr-4" do %>
+        <div class="flex item-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+          </svg>
+          <p class="ml-1"><%= t(".students") %></p>
+        </div>
+      <% end %>
+      <%= link_to t(".help"), help_path, class: "text-white mr-4" %>
+      <%= link_to t(".log_out"), destroy_user_session_path, method:"delete", class: "text-white mr-4" %>
     <% else %>
-      <%= link_to t(".log_in"), new_user_session_path, class: 'text-white mr-4' %>
+      <%= link_to new_user_session_path, class: 'text-white mr-4' do %>
+        <div class="flex item-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+          </svg>
+          <p class="ml-1"><%= t(".log_in") %></p>
+        </div>
+      <% end %>
+      <%= link_to t(".help"), help_path, class: "text-white mr-4" %>
     <% end %>
   </div>
 </div>

@@ -7,6 +7,7 @@ ja:
       students: "生徒一覧"
       log_in: "ログイン"
       log_out: "ログアウト"
+      help: "ヘルプ"
   home:
     index:
       catch: "小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。"
