@@ -1,0 +1,21 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+ .header {
+  width: 100%;
+  box-shadow: 0 2px 4px #a0aec0;
+}
+
+.session-links {
+  padding-top: 4rem;
+  line-height: 2rem;
+}
+
+.menu-wrapper {
+  display: flex;
+  align-items: center;
+  color: white;
+  height: 2.5rem;
+}

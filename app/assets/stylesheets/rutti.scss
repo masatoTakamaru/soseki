@@ -1,0 +1,193 @@
+@import "tailwind_color";
+
+/* ボディ */
+
+body {
+  font-family: 'Helvetica','Arial','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'sans-serif;
+  margin: 0px;
+}
+
+/*リンク*/
+
+a {
+  color: white;
+  text-decoration:none;
+}
+
+/* コンテナ */
+
+.container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+/* ドロップダウンメニュー */
+
+#dropdown {display: none;}
+.menu {
+  line-height: 1.5;
+  background-color: $teal-500;
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  visibility: hidden;
+  opacity: 0.9;
+  z-index: 100;
+}
+.dropdown-label {
+  position: relative;
+  top: 2px;
+}
+#dropdown:checked + .dropdown-label + .menu {visibility: visible;}
+
+
+div {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+p {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+/*table関係*/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/*テーブル偶数行の色を変更*/
+.row-striped tr:nth-child(even) td {
+  background-color: $gray-300;
+}
+
+/*ボタン基本*/
+.btn {
+  color: white;
+  font-size: 1rem;
+  line-height: 1rem;
+  background-color: $teal-500;
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  border: solid 2px $teal-600;
+}
+
+.btn:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px 2px $teal-500;
+}
+
+.btn-flat {
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.75rem;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-cancel {
+  color: $teal-500;
+  background-color: white;
+}
+
+.btn-flat-cancel {
+  color: $teal-500;
+  font-weight: 500;
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0.1rem 0.75rem;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  border: solid 1px $teal-500;
+  border-radius: 4px;
+}
+
+
+/*入力フィールド*/
+
+input, select, textarea {
+  margin: 0.15rem;
+  padding: 0.5rem;
+  font-size: 1.15rem;
+  border-radius: 4px;
+  border: 1px solid $gray-500;
+  box-sizing: border-box;
+}
+
+.select-mini select {
+  padding: 0.15rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: 1px solid $gray-500;
+  box-sizing: border-box;
+}
+
+.field {
+  line-height: 3rem;
+}
+
+/* flex関連 */
+
+.flex {display: flex;}
+.justify-start {justify-content: flex-start;}
+.justify-end {justify-content: flex-end;}
+.justify-center {justify-content: center;}
+.justify-between {justify-content: space-between;}
+.justify-evenly {justify-content: space-evenly;}
+.items-stretch {align-items: stretch;}
+.items-start {align-items: flex-start;}
+.items-center {align-items: center;}
+.items-end {align-items: flex-end;}
+.items-baseline {align-items: baseline;}
+
+/*テキスト関係*/
+.font-bold {font-weight: 700;}
+.text-center {text-align: center;}
+.underline {text-decoration: underline;}
+
+@for $i from 0 through 100 {
+  .text-#{$i*5} {font-size: #{$i*0.01}rem;}
+}
+
+/*見出し*/
+
+h2 {
+  font-size: 1.15rem;
+  padding-left: 12px;
+  border-left: solid 4px $teal-500;
+}
+
+
+/* padding */
+
+@for $i from 0 through 100 {
+  .m-#{$i} {margin: 0.25rem * $i;}
+  .my-#{$i} {margin-top: 0.25rem * $i; margin-bottom: 0.25rem * $i;}
+  .mx-#{$i} {margin-left: 0.25rem * $i; margin-right: 0.25rem * $i;}
+  .mt-#{$i} {margin-top: 0.25rem * $i;}
+  .mr-#{$i} {margin-right: 0.25rem * $i;}
+  .mb-#{$i} {margin-bottom: 0.25rem * $i;}
+  .ml-#{$i} {margin-left: 0.25rem * $i;}
+  .p-#{$i} {padding: 0.25rem * $i;}
+  .py-#{$i} {padding-top: 0.25rem * $i; padding-bottom: 0.25rem * $i;}
+  .px-#{$i} {padding-left: 0.25rem * $i; padding-right: 0.25rem * $i;}
+  .pt-#{$i} {padding-top: 0.25rem * $i;}
+  .pr-#{$i} {padding-right: 0.25rem * $i;}
+  .pb-#{$i} {padding-bottom: 0.25rem * $i;}
+  .pl-#{$i} {padding-left: 0.25rem * $i;}
+}
+
+/*opacity*/
+
+@for $i from 0 through 20 {
+  .opacity-#{$i*5} {opacity: #{$i*5*0.01}}
+}

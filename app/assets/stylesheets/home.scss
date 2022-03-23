@@ -1,3 +1,28 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Noto+Serif+JP&display=swap');
+
+.font-top-page {
+  font-family: 'Merriweather','Noto Serif JP', serif;
+  transform: rotate(0.04deg);
+}
+
+.home-container {
+  width: 1180px;
+  height: 600px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px;
+  background-image: url("home-image.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.registration-wrapper {
+  width: 350px;
+  height: 60px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
