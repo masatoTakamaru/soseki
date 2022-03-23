@@ -465,6 +465,7 @@ RSpec.describe Student, type: :model do
 
     it 'ユーザーを削除したら生徒も削除される' do
       current_user.students << student
+      current_user.destroy
       expect(current_user.students.first).to be_nil
     end
 
