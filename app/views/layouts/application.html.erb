@@ -18,15 +18,16 @@
     <%= link_to root_path do %>
       <div class="flex items-center ml-4">
         <%= image_tag "fabicon-24x24.webp" %>
-        <p class="app-name text-white ml-4"><%= @app_name %></p>
+        <p class="app-name text-white ml-4"><%= t "app_name" %></p>
       </div>
     <% end %>
     <!-- メニュー -->
     <div class="menu-wrapper">
       <% if user_signed_in? %>
         <%= link_to current_user.username, account_path, class: "text-white mr-4" %></p>
-        <%= link_to "ダッシュボード", dashboard_path, class: "text-white mr-4" %>
-        <%= link_to "生徒一覧", student_index_path, class: "text-white mr-4"%>
+        <%= link_to "ダッシュボード", sheets_path, class: "text-white mr-4" %>
+        <%= link_to "生徒一覧", students_path, class: "text-white mr-4" %>
+        <%= link_to "ログアウト", destroy_user_session_path, class: "text-white mr-4" %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, class: 'text-white mr-4' %>
       <% end %>

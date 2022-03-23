@@ -1,16 +1,16 @@
 <div class="home-container">
 <div>
-  <p class="flex items-center font-top-page text-200 text-teal-600 pt-8 pl-8"><img class="mr-2" src="fabicon-64x64.png"/><%= @app_name %></p>
-  <p class="font-top-page text-120 text-teal-600 font-bold mt-4 ml-20 opacity-80">小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。</p>
+  <p class="flex items-center font-top-page text-200 text-teal-600 pt-8 pl-8"><img class="mr-2" src="fabicon-64x64.png"/><%= t("app_name") %></p>
+  <p class="font-top-page text-120 text-teal-600 font-bold mt-4 ml-20 opacity-80"><%= t(".catch") %></p>
   <div class="flex justify-start">
     <div class="list-wrapper">
       <ul>
-        <li class="text-110 py-2">完全無料（広告が入ります）。</li>
-        <li class="text-110 py-2">生徒数30人まで。</li>
-        <li class="text-110 py-2">月ごとの名簿・月謝管理。</li>
+        <li class="text-110 py-2"><%= t ".item_first" %></li>
+        <li class="text-110 py-2"><%= t ".item_second" %></li>
+        <li class="text-110 py-2"><%= t ".item_third" %></li>
       </ul>
       <div class="flex justify-center">
-        <%= link_to "新規登録はこちらから", new_user_registration_path, class: "btn text-center text-teal-500 bg-white py-4 px-4 my-10 opacity-90" %>
+        <%= link_to t(".registration"), new_user_registration_path, class: "btn text-center text-teal-500 bg-white py-4 px-4 my-10 opacity-90" %>
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@
 <div class="home-footer">
   <div class="flex justify-end">
     <ul class="footer-list mr-4">
-      <li><%= link_to "プライバシーポリシー", privacy_policy_path, class: "text-teal-500" %></li>
-      <li><%= link_to "お問い合わせ", contact_path, class: "text-teal-500" %></li>
+      <li><%= link_to t(".privacy_policy"), privacy_policy_path, class: "text-teal-500" %></li>
+      <li><%= link_to t(".contact"), contact_path, class: "text-teal-500" %></li>
       <li class="pt-2">powered by mmsankosho 2022</li>
     </ul>
   </div>

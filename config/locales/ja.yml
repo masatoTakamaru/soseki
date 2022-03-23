@@ -1,12 +1,49 @@
 ---
 ja:
+  app_name: "Soseki"
+  home:
+    index:
+      catch: "小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。"
+      item_first: "完全無料（広告が入ります）。"
+      item_second: "生徒数30人まで。"
+      item_third: "月ごとの名簿・月謝管理。"
+      privacy_policy: "プライバシーポリシー"
+      contact: "お問い合わせ"
+      registration: "新規登録はこちらから"
   activerecord:
     errors:
       messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+        attributes:
+      student:
+        start_date: 入会日
+        expire_date: 退会日
+        class_name: 所属クラス
+        family_name: 生徒の名
+        given_name: 生徒の性
+        family_name_kana: 生徒の性のフリガナ
+        given_name_kana: 生徒の名のフリガナ
+        gender: 性別
+        birth_date: 生年月日
+        school_belong_to: 学校名
+        grade: 学年
+        guardian_family_name: 保護者の性
+        guardian_given_name: 保護者の名
+        guardian_family_name_kana: 保護者の性のフリガナ
+        guardian_given_name_kana: 保護者の名のフリガナ
+        phone1: 電話番号１
+        phone1_belong_to: 電話番号１の続柄
+        phone2: 電話番号２
+        phone2_belong_to: 電話番号２の続柄
+        postal_code: 郵便番号
+        address: 住所
+        email: メールアドレス
+        user_name: ユーザー名
+        password: パスワード
+        remarks: 備考欄
   date:
     abbr_day_names:
     - 日

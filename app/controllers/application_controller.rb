@@ -16,9 +16,6 @@ class ApplicationController < ActionController::Base
       "既卒"
     ]
 
-    #アプリ名
-    @app_name = "Soseki"
-
   end
 
 
