@@ -1,8 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :student
 
-# 全て数値（半角）
-
   PRICE_REGEXP = /\A-?\d+.\d+\z/
 
   validates :period, presence: true
