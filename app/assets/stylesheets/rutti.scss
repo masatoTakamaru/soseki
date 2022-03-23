@@ -22,6 +22,18 @@ a {
   padding: 20px;
 }
 
+/*通知*/
+.notice {
+  background-color: $orange-400;
+  border: solid 1px rgba(246, 173, 85, 0.7);
+}
+
+.alert {
+  background-color: $orange-300;
+  border: solid 1px rgba(246, 173, 85, 0.7);
+}
+
+
 /* ドロップダウンメニュー */
 
 #dropdown {display: none;}
@@ -139,7 +151,7 @@ input, select, textarea {
 }
 
 .field {
-  line-height: 3rem;
+  line-height: 2rem;
 }
 
 /* flex関連 */
@@ -166,6 +178,10 @@ input, select, textarea {
 }
 
 /*見出し*/
+
+h1 {
+  font-size: 1.15rem;
+}
 
 h2 {
   font-size: 1.15rem;

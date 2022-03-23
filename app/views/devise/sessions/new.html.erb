@@ -1,6 +1,12 @@
+<div class="container">
+
+<div class="flex justify-center">
+<div class="form-box mt-8 p-8">
+
 <h2><%= t('.sign_in') %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -19,8 +25,13 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit t('.sign_in') %>
+    <%= f.submit t('.sign_in'), class: "btn py-3 px-22 mb-4" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</div>
+</div>
+
+</div>

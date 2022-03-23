@@ -12,19 +12,19 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-200">
   <div class="header bg-teal-500 flex items-center justify-between">
     <!-- ロゴ -->
     <%= link_to root_path do %>
       <div class="flex items-center ml-4">
         <%= image_tag "fabicon-24x24.webp" %>
-        <p class="text-white ml-4"><%= @app_name %></p>
+        <p class="app-name text-white ml-4"><%= @app_name %></p>
       </div>
     <% end %>
     <!-- メニュー -->
     <div class="menu-wrapper">
       <% if user_signed_in? %>
-        <%= link_to current_user.company_name, account_path, class: "text-white mr-4" %></p>
+        <%= link_to current_user.username, account_path, class: "text-white mr-4" %></p>
         <%= link_to "ダッシュボード", dashboard_path, class: "text-white mr-4" %>
         <%= link_to "生徒一覧", student_index_path, class: "text-white mr-4"%>
       <% else %>
@@ -34,14 +34,10 @@
   </div>
 
   <% if notice %>
-    <div class="bg-teal-600">
-      <p class="notice p-2 text-white text-center"><%= notice %></p>
-    </div>
+    <p class="notice p-2 text-white text-center text-orange-800"><%= notice %></p>
   <% end %>
   <% if alert %>
-    <div class="bg-teal-600">
-      <p class="alert p-4 text-white text-center"><%= alert %></p>
-    </div>
+    <p class="alert p-4 text-white text-center text-orange-800"><%= alert %></p>
   <% end %>
 
   <%= yield %>
