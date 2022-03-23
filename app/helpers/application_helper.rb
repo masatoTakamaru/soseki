@@ -2,7 +2,7 @@ module ApplicationHelper
 
   #ブラウザタグの見出し
   def full_title(page_title = '')
-    base_title = @app_name
+    base_title = t("app_name")
     if page_title.empty?
       base_title
     else

@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= favicon_link_tag('favicon.ico') %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= favicon_link_tag('favicon.ico') %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
 <body class="bg-gray-200">
-  <div class="header bg-teal-500 flex items-center justify-between">
-    <!-- ロゴ -->
-    <%= link_to root_path do %>
-      <div class="flex items-center ml-4">
-        <%= image_tag "fabicon-24x24.webp" %>
-        <p class="app-name text-white ml-4"><%= t "app_name" %></p>
-      </div>
-    <% end %>
-    <!-- メニュー -->
-    <div class="menu-wrapper">
-      <% if user_signed_in? %>
-        <%= link_to current_user.username, account_path, class: "text-white mr-4" %></p>
-        <%= link_to "ダッシュボード", sheets_path, class: "text-white mr-4" %>
-        <%= link_to "生徒一覧", students_path, class: "text-white mr-4" %>
-        <%= link_to "ログアウト", destroy_user_session_path, class: "text-white mr-4" %>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: 'text-white mr-4' %>
-      <% end %>
+
+<div class="header bg-teal-500 flex items-center justify-between">
+  <!-- ロゴ -->
+  <%= link_to root_path do %>
+    <div class="flex items-center ml-4">
+      <%= image_tag "fabicon-24x24.webp" %>
+      <p class="app-name text-white ml-4"><%= t("app_name") %></p>
     </div>
+  <% end %>
+  <!-- メニュー -->
+  <div class="menu-wrapper">
+    <% if user_signed_in? %>
+      <%= link_to current_user.username, account_path, class: "text-white mr-4" %></p>
+      <%= link_to t(".dashboard"), item_index_path, class: "text-white mr-4" %>
+      <%= link_to t(".students"), student_index_path, class: "text-white mr-4" %>
+      <%= link_to t(".log_out"), destroy_user_session_path, class: "text-white mr-4" %>
+    <% else %>
+      <%= link_to t(".log_in"), new_user_session_path, class: 'text-white mr-4' %>
+    <% end %>
   </div>
+</div>
 
-  <% if notice %>
-    <p class="notice p-2 text-white text-center text-orange-800"><%= notice %></p>
-  <% end %>
-  <% if alert %>
-    <p class="alert p-4 text-white text-center text-orange-800"><%= alert %></p>
-  <% end %>
+<% if notice %>
+  <p class="notice p-2 text-white text-center text-orange-800"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert p-4 text-white text-center text-orange-800"><%= alert %></p>
+<% end %>
 
-  <%= yield %>
+<%= yield %>
 
 </body>
 </html>

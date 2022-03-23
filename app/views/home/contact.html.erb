@@ -1,27 +1,27 @@
 <div class="container">
-  <h2>お問い合わせ</h2>
+  <h2><%= t(".contact") %></h2>
   <div class="flex justify-center">
     <div>
       <div class="form-item">
         <p>
-          <span class="badge">必須</span>会社または教室名
+          <span class="badge"><%= t(".required") %></span><%= t(".company") %>
         </p>
         <input type="text" placeholder="例）令和ゼミナール">
       </div>
       <div class="form-item">
-        <p><span class="badge">必須</span>氏名</p>
+        <p><span class="badge"><%= t(".required") %></span>氏名</p>
         <input type="text" placeholder="例）山田太郎">
       </div>
       <div class="form-item">
-        <p><span class="badge">必須</span>電話番号</p>
+        <p><span class="badge"><%= t(".required") %></span>電話番号</p>
         <input type="text" placeholder="例）000-0000-0000">
       </div>
       <div class="form-item">
-        <p><span class="badge">必須</span>メールアドレス</p>
+        <p><span class="badge"><%= t(".required") %></span>メールアドレス</p>
         <input type="email" placeholder="例）example@gmail.com">
       </div>
       <div class="form-item">
-        <p><span class="badge">必須</span>お問い合わせ内容</p>
+        <p><span class="badge"><%= t(".required") %></span>お問い合わせ内容</p>
         <textarea class="form-item-textarea" rows="8" cols="40"></textarea>
       </div>
       <div class="flex justify-center">
