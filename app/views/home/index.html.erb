@@ -1,2 +1,14 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="home-container">
+<div>
+  <p class="flex items-center font-top-page text-200 text-teal-600 pt-8 pl-8"><img class="mr-2" src="fabicon-64x64.png"/><%= @app_name %></p>
+  <p class="font-top-page text-110 text-teal-600 mt-4 ml-20 opacity-80">小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。</p>
+  <ul class="mt-8 ml-20">
+    <li class="text-lg py-2">完全無料（広告が入ります）。</li>
+    <li class="text-lg py-2">生徒数30人まで。</li>
+    <li class="text-lg py-2">月ごとの名簿・月謝管理。</li>
+  </ul>
+  <div class="registration-wrapper ml-20 mt-20">
+    <%= link_to "新規登録はこちらから", new_user_registration_path, class: "btn text-center text-teal-500 bg-white block py-2 px-4 mb-4 opacity-90" %>
+  </div>
+</div>
+</div>
