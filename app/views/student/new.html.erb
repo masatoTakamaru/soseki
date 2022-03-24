@@ -10,7 +10,7 @@
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center my-4">
     <%= f.submit t(".registration"), class: "btn text-white bg-teal-500 py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
-    <%= link_to t(".cancel"), student_index_path, class: "btn text-teal-500 bg-white py-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
+    <%= link_to t(".cancel"), student_index_path, class: "btn text-teal-500 bg-white pt-3 pb-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
   </div>
 <% end %>
 

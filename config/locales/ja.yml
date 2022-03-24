@@ -10,7 +10,8 @@ ja:
     attributes:
       student:
         start_date: 入会日
-        expire_date: 退会日
+        expire_date: 卒・退会日
+        expire_flag: 卒・退会
         class_name: 所属クラス
         family_name: 生徒の名
         given_name: 生徒の性
@@ -38,11 +39,11 @@ ja:
   layouts:
     application:
       dashboard: "ダッシュボード"
-      students: "生徒一覧"
+      students: "生徒"
       log_in: "ログイン"
       log_out: "ログアウト"
       help: "ヘルプ"
-      item_master: "教科管理"
+      item_master: "教科"
   home:
     index:
       catch: "小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。"
@@ -90,12 +91,14 @@ ja:
       confirmation: "生徒を登録してもよろしいですか？"
       cancel_confirmation: "登録を取り消しますか？"
       required: "印の付いた項目は入力必須です。"
-      telephone_example: "例：2021-01-21(半角)"
+      date_example: "例：2021-01-21(半角)"
+      telephone_example: "例：03-1234-5678(半角)"
+      expire_explanation: "チェックを入れると生徒一覧から削除され、卒・退会者名簿に移動します。"
       name: "名前"
       kana: "フリガナ"
       zen_kana: "全角カタカナ"
       male: "男"
-      felame: "女"
+      female: "女"
       other: "その他"
       select: "選択して下さい。"
       date_example: "例：2021-01-21(半角)"

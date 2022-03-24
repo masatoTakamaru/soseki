@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   get "sheet/account", to: "sheet#account", as: "account"
 
+  get "search/:postal_code" => "search#postal_code"
+
 end
