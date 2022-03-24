@@ -28,3 +28,19 @@
   border: solid 1px $gray-500;
   overflow-y: scroll;
 }
+
+
+.form-box {
+  background-color: rgba(254, 235, 200, 0.8);
+  border: solid 1px $orange-400;
+  border-radius: 12px;
+}
+
+.form-item {
+  border-top: solid 1px $gray-500;
+  padding: 1rem 0;
+}
+
+.form-item-textarea {
+  resize: none;
+}

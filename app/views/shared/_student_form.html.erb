@@ -1,6 +1,6 @@
 <!-- 生徒フォーム：半角入力はtelephone_fieldで統一 -->
 <div class="flex justify-end">
-  <p><span class="text-red">*</span>印の付いた項目は入力必須です。</p>
+  <p><span class="text-red">*</span><%= t("student.new.required") %></p>
 </div>
 <table>
 <tbody>
@@ -9,9 +9,9 @@
     <div class="flex items-center">
       <%= f.label :start_date %><span class="text-red">*</span>
       <%= f.telephone_field :start_date, size: 10, class: "p-1 mx-4" %>
-      <%= f.label :end_date %>
-      <%= f.telephone_field :end_date, size: 10, class: "p-1 mx-4" %>
-      <p class="text-gray-500">例：2021-01-21(半角)</p>
+      <%= f.label :expire_date %>
+      <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4" %>
+      <p class="text-gray-500"><%= t("student.new.telephone_example") %></p>
     </div>
   </td>
 </tr>
@@ -22,31 +22,31 @@
   </td>
 </tr>
 <tr>
-  <td class="pr-2">名前<span class="text-red">*</span></td>
+  <td class="pr-2"><%= t("student.new.name") %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :family_name, class: "p-1"  %>
     <%= f.text_field :given_name, class: "p-1"  %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2">フリガナ<span class="text-red">*</span></td>
+  <td class="pr-2"><%= t("student.new.kana") %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :family_name_kana, class: "p-1"  %>
     <%= f.text_field :given_name_kana, class: "p-1"  %>
-    <p class="ml-2">全角カタカナ</p>
+    <p class="ml-2"><%= t("student.new.zen_kana") %></p>
   </td>
 </tr>
 <tr>
   <td class="pr-2"><%= f.label :gender %><span class="text-red">*</span></td>
   <td class="flex items-center">
-    <%= f.select :gender, [["男","男"],["女","女"],["その他","その他"]], include_blank: "選択して下さい。" %>
+    <%= f.select :gender, [[t("student.new.male"),t("student.new.male")],[t("student.new.female"),t("student.new.female")],[t("student.new.other"),t("student.new.other")]], include_blank: t("student.new.select") %>
   </td>
 </tr>
 <tr>
   <td class="pr-2"><%= f.label :birth_date %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.telephone_field :birth_date, size:10, class: "p-1" %>
-    <p class="text-gray-500 pl-2">例：2021-01-21(半角)</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.date_example") %></p>
   </td>
 </tr>
 <tr>
@@ -58,50 +58,50 @@
 <tr>
   <td class="pr-2"><%= f.label :grade %><span class="text-red">*</span></td>
   <td class="flex items-center">
-    <%= f.select :grade, @grades, include_blank: "選択して下さい。" %>
+    <%= f.select :grade, @grades, include_blank: t("student.new.select") %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2">保護者名<span class="text-red">*</span></td>
+  <td class="pr-2"><%= t("student.new.guardian_name") %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name, class: "p-1" %>
     <%= f.text_field :guardian_given_name, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2">フリガナ<span class="text-red">*</span></td>
+  <td class="pr-2"><%= t("student.new.kana") %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name_kana, class: "p-1" %>
     <%= f.text_field :guardian_given_name_kana, class: "p-1" %>
-    <p class="ml-2">全角カタカナ</p>
+    <p class="ml-2"><%= t("student.new.zen_kana") %></p>
   </td>
 </tr>
 <tr>
   <td class="pr-2"><%= f.label :phone1 %><span class="text-red">*</span></td>
   <td class="flex items-center">
     <%= f.telephone_field :phone1, size:13, class: "p-1" %>
-    <p class="text-gray-500 pl-2">例：03-1234-5678 (半角)</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.telephone_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone1_belong_to, "続柄" %></td>
+  <td class="pr-2"><%= f.label :phone1_belong_to, t("student.new.belong") %></td>
   <td class="flex items-center">
     <%= f.text_field :phone1_belong_to, size:20, class: "p-1" %>
-    <p class="text-gray-500 pl-2">例：自宅、父、母</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.belong_example") %></p>
   </td>
 </tr>
 <tr>
   <td class="pr-2"><%= f.label :phone2 %></td>
   <td class="flex items-center">
     <%= f.telephone_field :phone2, size:13, class: "p-1" %>
-    <p class="text-gray-500 pl-2">例：080-1234-5678 (半角)</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.telephone_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone2_belong_to, "続柄" %></td>
+  <td class="pr-2"><%= f.label :phone2_belong_to, t("student.new.belong") %></td>
   <td class="flex items-center">
     <%= f.text_field :phone2_belong_to, size:20, class: "p-1" %>
-    <p class="text-gray-500 pl-2">例：自宅、父、母</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.belong_example") %></p>
   </td>
 </tr>
 <tr>
@@ -112,9 +112,9 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg>
-      <p class="search-postal-code px-1">郵便番号から住所を自動入力</p>
+      <p class="search-postal-code px-1"><%= t("student.new.search_postal_code") %></p>
     </div>
-    <span class="text-gray-500 pl-2">例：4620003(半角数字)</span>
+    <span class="text-gray-500 pl-2"><%= t("student.new.postal_code_example") %></span>
     <p class="search-postal-code-error text-red"></p>
   </td>
 </tr>
@@ -134,18 +134,18 @@
   <td class="pr-2"><%= f.label :user_name %></td>
   <td class="flex items-center">
     <%= f.telephone_field :user_name, size:30, class: "p-1" %>
-    <p class="text-gray-500 pl-2">(半角)</p>
+    <p class="text-gray-500 pl-2"><%= t("student.new.hankaku") %></p>
   </td>
 </tr>
 <tr>
   <td class="pr-2"><%= f.label :password %></td>
   <td class="flex items-center">
     <%= f.telephone_field :password, size:30, class: "p-1" %>
-    <span class="text-gray-500 pl-2">(半角)</span>
+    <span class="text-gray-500 pl-2"><%= t("student.new.hankaku") %></span>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :remarks, "備考欄(240字まで)" %></td>
+  <td class="pr-2"><%= f.label :remarks, t("student.new.remarks") %></td>
   <td class="flex items-center">
     <%= f.text_area :remarks, size:"50x5", class: "p-1" %>
   </td>

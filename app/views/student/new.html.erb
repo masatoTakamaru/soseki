@@ -1,16 +1,16 @@
-<%= provide :title, "新規生徒の登録" %>
+<%= provide :title, t(".title") %>
 <%= render "shared/input_errors", model: @student %>
 
 <div class="container mx-8 pt-4">
 
-<h2>新規生徒の登録</h2>
+<h2><%= t(".title") %>  </h2>
 
 <hr class="my-4"/>
 <%= form_with model: @student, url: student_index_path, method: :post, local:true do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center my-4">
-    <%= f.submit "新規生徒を登録する", class: "btn text-white bg-teal-500 py-2 px-4 mr-4", data: {confirm: "新規生徒を登録してもよろしいですか？"} %>
-    <%= link_to "キャンセル", student_index_path, class: "btn text-teal-500 bg-white py-2 px-4", data: {confirm: "登録を設定を取り消しますか？"} %>
+    <%= f.submit t(".registration"), class: "btn text-white bg-teal-500 py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
+    <%= link_to t(".cancel"), student_index_path, class: "btn text-teal-500 bg-white py-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
   </div>
 <% end %>
 

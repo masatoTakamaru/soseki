@@ -1,16 +1,14 @@
-<%= provide :title, "生徒一覧" %>
+<%= provide :title, t(".title") %>
 
 <div class="container">
 
 <div class="flex justify-between">
-	<% if @students.count == 0 %>
-		<p class="font-bold">該当する生徒が存在しません。</p>
-	<% else %>
-		<p class="font-bold">生徒数：<span><%= @students.count %></span>人</p>
+	<% unless @students.count == 0 %>
+		<p class="font-bold"><%= t(".number_of_students") %> : <span><%= @students.count %></span><%= t(".people") %></p>
+		<div>
+			<%= link_to t(".registration"), new_student_path, class:"btn" %>
+		</div>
 	<% end %>
-	<div>
-		<%= link_to "新規生徒の登録", new_student_path, class:"btn" %>
-	</div>
 </div>
 
 <%= render "shared/select_students", link_path: student_index_path %>
@@ -18,34 +16,50 @@
 <table class="border-2 row-striped w-full bm-4 mb-8">
 <thead>
 <tr class="pl-2 bg-gray-200">
-	<th>所属<br>クラス</th>
-	<th>名前</th>
-	<th>フリガナ</th>
-	<th>性別</th>
-	<th>学年</th>
-	<th>学校名</th>
-	<th>受講教科</th>
-	<th>電話番号１</th>
-	<th>続柄</th>
-	<th>電話番号２</th>
-	<th class="pr-2">続柄</th>
+	<th><%= t(".class_name") %></th>
+	<th><%= t(".name") %></th>
+	<th><%= t(".name_kana") %></th>
+	<th><%= t(".gender") %></th>
+	<th><%= t(".grade") %></th>
+	<th><%= t(".school_belong_to") %></th>
+	<th><%= t(".items") %></th>
+	<th><%= t(".phone1") %></th>
+	<th><%= t(".phone1_belong_to") %></th>
+	<th><%= t(".phone2") %></th>
+	<th class="pr-2"><%= t(".phone2_belong_to") %></th>
 </tr>
 </thead>
 <tbody>
-<% @students.each do |student| %>
+<% if @students.count == 0 %>
 	<tr>
-		<td class="pl-2"><%= student.class_name %></td>
-		<td class="font-bold underline"><%= link_to student.family_name + " " + student.given_name, student_path(student[:student_id]), class: "text-blue" %></td>
-		<td><%= student.family_name_kana + " " + student.given_name_kana %></td>
-		<td><%= student.gender %></td>
-		<td><%= student.grade %></td>
-		<td><%= student.school_belong_to %></td>
-		<td>[未設定]</td>
-		<td><%= student.phone1 %></td>
-		<td><%= student.phone1_belong_to %> </td>
-		<td><%= student.phone2 %></td>
-		<td><%= student.phone2_belong_to %> </td>
+		<td colspan="11">
+			<div class="flex justify-center mt-4">
+				<div class="form-box p-8">
+					<p class="text-center mb-8"><%= t(".students_empty") %></p>
+					<p class="text-center"><%= link_to t(".registration"), new_student_path, class:"btn py-4 px-10" %></p>
+				</div>
+			</div>
+		</td>
+	</tr>
+<% else %>
+	<% @students.each do |student| %>
+		<tr>
+			<td class="pl-2"><%= student.class_name %></td>
+			<td class="font-bold underline">
+				<%= link_to student.family_name + " " + student.given_name, student_path(student[:student_id]), class: "text-blue" %>
+			</td>
+			<td><%= student.family_name_kana + " " + student.given_name_kana %></td>
+			<td><%= student.gender %></td>
+			<td><%= student.grade %></td>
+			<td><%= student.school_belong_to %></td>
+			<td>[未設定]</td>
+			<td><%= student.phone1 %></td>
+			<td><%= student.phone1_belong_to %> </td>
+			<td><%= student.phone2 %></td>
+			<td><%= student.phone2_belong_to %> </td>
+		</tr>
 	<% end %>
+<% end %>
 </tbody>
 </table>
 

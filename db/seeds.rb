@@ -1,6 +1,7 @@
 require "csv"
 require "date"
 
+=begin
 CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |info|
   Student.create!(
     user_id: info[0],
@@ -30,8 +31,8 @@ CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |info|
     sibling_group: info[24]
     )
 end
+=end
 
-=begin
 CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |info|
   Postal.create(
     postal_code: info[0],
@@ -40,4 +41,3 @@ CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |info|
     town: info[3],
     )
 end
-=end
