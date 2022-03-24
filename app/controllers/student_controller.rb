@@ -37,21 +37,9 @@ class StudentController < ApplicationController
   end
 
   def create
-    @student = Student.new
-    #paramsのデータを一つずつ取り出し@studentを更新
-    params[:student].each do |key, value|
-      if key == "password"
-        #passwordだけ別処理
-        @student.password = params[:student][:password]
-      else
-        @student[key] = params[:student][key]
-      end
-    end
-    @student[:student_id] = SecureRandom.uuid
-    @student[:company_id] = current_user.company_id
-    
+    @student = current_user.students.new(student_params)
     if @student.save
-      flash[:notice] = "新規生徒が登録されました。"
+      flash[:notice] = t(".new_student_created")
       redirect_to student_index_path
     else
       render new_student_path
@@ -127,5 +115,21 @@ class StudentController < ApplicationController
   #進級処理の実行
   def advance_grade_run
   end
+
+  private
+
+    def student_params
+      params.require(:student).permit(
+        :user_id, :expire_date, :expire_flag, :start_date, :class_name,
+        :family_name, :given_name, :family_name_kana, :given_name_kana,
+        :gender, :birth_date, :school_belong_to, :grade,
+        :guardian_family_name, :guardian_given_name,
+        :guardian_family_name_kana, :guardian_given_name_kana,
+        :phone1, :phone1_belong_to, :phone2, :phone2_belong_to,
+        :postal_code, :address, :email, :user_name, :password,
+        :remarks, :sibling_group)
+    end
+
+     
 
 end

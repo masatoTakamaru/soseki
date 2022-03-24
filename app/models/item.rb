@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-  belongs_to :user
   belongs_to :student
 
   PRICE_REGEXP = /\A-?\d+.\d+\z/

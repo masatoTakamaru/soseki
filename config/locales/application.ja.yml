@@ -1,0 +1,11 @@
+---
+ja:
+  app_name: "Soseki"
+  layouts:
+    application:
+      dashboard: "ダッシュボード"
+      students: "生徒"
+      log_in: "ログイン"
+      log_out: "ログアウト"
+      help: "ヘルプ"
+      item_master: "教科"

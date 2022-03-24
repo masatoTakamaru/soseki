@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :item
   resources :item_master
 
+  get "home/index"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
   get "home/contact", to: "home#contact", as: "contact"
   get "home/help", to: "home#help", as:"help"

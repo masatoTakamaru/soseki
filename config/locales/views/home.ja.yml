@@ -1,0 +1,24 @@
+---
+ja:
+  home:
+    index:
+      catch: "小規模学習塾・習い事教室の生徒・月謝管理をより手軽に。"
+      item_first: "完全無料（広告が入ります）。"
+      item_second: "生徒数30人まで。"
+      item_third: "月ごとの名簿・月謝管理。"
+      privacy_policy: "プライバシーポリシー"
+      contact: "お問い合わせ"
+      registration: "新規登録はこちらから"
+    contact:
+      contact: "お問い合わせ"
+      required: "必須"
+      company: "会社または教室名"
+      company_example: "例）令和ゼミナール"
+      name: "氏名"
+      name_example: "例）山田太郎"
+      phone: "電話番号"
+      phone_example: "例）000-0000-0000"
+      mail: "メールアドレス"
+      mail_example: "例）example@gmail.com"
+      content: "お問い合わせ内容"
+      submit: "送信する"
