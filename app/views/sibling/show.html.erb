@@ -1,0 +1,62 @@
+<%= provide :title, "兄弟・姉妹の設定" %>
+
+<div class="lg:container mx-8 pt-4">
+
+<h2 class="mb-4">兄弟・姉妹の設定</h2>
+
+<div class="flex mb-4">
+  <p>生徒名：</p>
+  <p class="font-bold pr-6"><%= @student[:family_name] + " " + @student[:given_name] %></p>
+  <p>所属クラス：</p>
+  <p class="pr-6"><%= @student[:class_name] %></p>
+  <p>学年：</p>
+  <p><%= @student[:grade] %></p>
+</div>
+
+<%= render "shared/select_students", link_path: sibling_path %>
+
+<table class="row-striped w-full bm-4 mb-8">
+  <thead class="table-head">
+  <tr>
+  <th>所属<br>クラス</th>
+  <th>兄弟<br>姉妹</th>
+  <th>名前</th>
+  <th>フリガナ</th>
+  <th>性別</th>
+  <th>学年</th>
+  <th>学校名</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @students.each do |student| %>
+    <% unless student[:student_id] == @student[:student_id] %>
+      <tr>
+      <td><%= student[:class_name] %></td>
+      <td class="text-center">
+        <% if @student[:sibling_group] == student[:sibling_group] %>
+          <%= button_to "設定を解除",
+            sibling_path, {method: :delete, class: "btn btn-flat-cancel px-1",
+            params: {student_id: @student[:student_id], sibling_id: student[:student_id]}}
+          %>
+        <% else %>
+          <%= button_to "設定",
+            sibling_path, {method: :patch, class: "btn btn-flat text-white bg-teal-500 px-1",
+            params: {student_id: @student[:student_id], sibling_id: student[:student_id], sibling_group: @student[:sibling_group]}}
+          %>
+        <% end %>
+      </td>
+      <td class="font-bold">
+        <%= student[:family_name] + " " + student[:given_name] %>
+      </td>
+      <td><%= student[:family_name_kana] + " " + student[:given_name_kana] %></td>
+      <td><%= student[:gender] %></td>
+      <td><%= student[:grade] %></td>
+      <td><%= student[:school_belong_to] %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+</div>

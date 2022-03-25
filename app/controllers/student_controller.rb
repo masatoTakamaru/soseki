@@ -39,7 +39,7 @@ class StudentController < ApplicationController
   def create
     @student = current_user.students.new(student_params)
     if @student.save
-      flash[:notice] = t(".new_student_created")
+      flash[:notice] = t("notice.new_student_created")
       redirect_to student_index_path
     else
       render new_student_path
@@ -47,9 +47,10 @@ class StudentController < ApplicationController
   end
 
   def show
-    @student = Student.find_by(student_id: params[:id])
+    @student = current_user.students.find(params[:id])
+    @student_full_name = @student[:family_name] + " " + @student[:given_name]
     if @student[:sibling_group].present?
-      @siblings = Student.where(sibling_group: @student[:sibling_group])
+      @siblings = current_user.students.where(sibling_group: @student[:sibling_group])
     end
   end
 

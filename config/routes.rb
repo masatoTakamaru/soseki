@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :student
   resources :item
   resources :item_master
+  resources :sibling, only: [:show, :update, :destroy]
 
   get "home/index"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"

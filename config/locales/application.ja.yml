@@ -9,3 +9,5 @@ ja:
       log_out: "ログアウト"
       help: "ヘルプ"
       item_master: "教科"
+  notice:
+    new_student_created: "新規生徒が登録されました。"
