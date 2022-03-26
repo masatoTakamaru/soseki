@@ -1,4 +1,4 @@
-<%= provide :title, t(".title") %>
+<%= provide :title, t("title.student.index") %>
 
 <div class="container">
 
@@ -46,7 +46,7 @@
 		<tr>
 			<td class="pl-2"><%= student.class_name %></td>
 			<td class="font-bold underline">
-				<%= link_to student.family_name + " " + student.given_name, student_path(student[:id]), class: "text-blue" %>
+				<%= link_to student.family_name + " " + student.given_name, student_path(id: student.hashid), class: "text-blue" %>
 			</td>
 			<td><%= student.family_name_kana + " " + student.given_name_kana %></td>
 			<td><%= student.gender %></td>

@@ -11,5 +11,6 @@ ja:
       new: 生徒の新規登録
       show: 生徒の情報
       edit: 生徒の編集
+      advance_grade_confirm: "生徒の進級"
     sibling:
       show: 兄弟姉妹の設定

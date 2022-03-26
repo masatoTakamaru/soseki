@@ -1,15 +1,15 @@
-<%= provide :title, @student_full_name %>
+<%= provide :title, "#{@student_full_name} | #{t("title.student.show")}" %>
 
 <div class="container mx-8 pt-4">
 
-<h2><%= t(".title") %></h2>
+<h2><%= t("title.student.show") %></h2>
 
 <div class="flex justify-between pt-12 pb-4">
   <div>
-    <%= link_to t(".edit"), edit_student_path(@student[:id]), class: "btn py-2 px-4" %>
-    <%= link_to t(".edit_siblings"), sibling_path(@student[:id]), class: "btn py-2 px-4" %>
+    <%= link_to t(".edit"), edit_student_path(@student.hashid), class: "btn py-2 px-4" %>
+    <%= link_to t(".edit_siblings"), sibling_path(@student.hashid), class: "btn py-2 px-4" %>
   </div>
-  <%= link_to t(".delete"), student_path(@student[:id]),
+  <%= link_to t(".delete"), student_path(@student.hashid),
               class:"btn py-2 px-4",
               data: {confirm: t(".delete_confirmation")}, method: "delete" %>
 </div>
@@ -108,7 +108,7 @@
   <div class="mt-4 p-4 bg-white">
     <p><%= t(".siblings") %></p>
     <% @siblings.each do |sibling| %>
-      <% unless sibling[:id] == @student[:id] %>
+      <% unless sibling.hashid == @student.hashid %>
         <div class="flex">
           <p class="font-bold ml-4 mr-4"><%= sibling[:family_name] + " " + sibling[:given_name] %></p>
           <p class="mr-4"><%= sibling[:family_name_kana] + " " + sibling[:given_name_kana] %></p>

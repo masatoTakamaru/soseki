@@ -26,7 +26,7 @@ class StudentController < ApplicationController
   end
 
   def show
-    @student = current_user.students.find(params[:id])
+    @student = current_user.students.find_by_hashid(params[:id])
     @student_full_name = @student[:family_name] + " " + @student[:given_name]
     if @student[:sibling_group].present?
       @siblings = current_user.students.where(sibling_group: @student[:sibling_group])
@@ -34,11 +34,11 @@ class StudentController < ApplicationController
   end
 
   def edit
-    @student = current_user.students.find_by(id: params[:id])
+    @student = current_user.students.find_by_hashid(params[:id])
   end
 
   def update
-    @student = current_user.students.find_by(id: params[:id])
+    @student = current_user.students.find_by_hashid(params[:id])
     if @student.update(student_params)
       flash[:notice] = t("notice.student_updated")
       redirect_to student_index_path
@@ -48,7 +48,7 @@ class StudentController < ApplicationController
   end
 
   def destroy
-    @student = current_user.students.find_by(id: params[:id])
+    @student = current_user.students.find(params[:id])
     @student.destroy
     flash[:notice] = t("notice.student_destroy")
     redirect_to student_index_path

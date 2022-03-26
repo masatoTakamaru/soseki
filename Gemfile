@@ -16,6 +16,7 @@ gem 'factory_bot_rails', '~> 6.1.0'
 gem 'rails-i18n', '~> 6.0'
 gem "devise"
 gem 'devise-i18n'
+gem 'hashid-rails'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 

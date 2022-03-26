@@ -1,19 +1,19 @@
-<%= provide(:title, t(".title")) %>
+<%= provide(:title, t("title.student.edit")) %>
 <%= render "shared/input_errors", model: @student %>
 
 <div class="container mx-8 pt-4">
 
-<h2><%= t(".title") %></h2>
+<h2><%= t("title.student.edit") %></h2>
 <div class="flex justify-end">
   <p><%= t("created_at") + @student.created_at.strftime(": %Y-%m-%d") %> <%= t("updated_at") + @student.updated_at.strftime(": %Y-%m-%d") %></p>
 </div>
 
 <hr class="my-4"/>
-<%= form_with model: @student, url: student_path(@student[:id]), method: "patch" do |f| %>
+<%= form_with model: @student, url: student_path(@student.hashid), method: "patch" do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center items-center mt-4 mb-10">
     <%= f.submit t(".update"), class: "btn mr-4 py-2 px-8", data: {confirm: t(".update_confirmation")} %>
-    <%= link_to t("cancel"), student_path(@student[:id]), class: "btn btn-cancel py-2", data: {confirm: t(".cancel_confirmation")} %>
+    <%= link_to t("cancel"), student_path(@student.hashid), class: "btn btn-cancel py-2", data: {confirm: t(".cancel_confirmation")} %>
   </div>
 <% end %>
 

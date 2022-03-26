@@ -1,9 +1,9 @@
-<%= provide :title, t(".title") %>
+<%= provide :title, t("title.student.new") %>
 <%= render "shared/input_errors", model: @student %>
 
 <div class="container mx-8 pt-4">
 
-<h2><%= t(".title") %>  </h2>
+<h2><%= t("title.student.new") %>  </h2>
 
 <hr class="my-4"/>
 <%= form_with model: @student, url: student_index_path, method: :post, local:true do |f| %>
