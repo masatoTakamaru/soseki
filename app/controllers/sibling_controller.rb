@@ -4,7 +4,7 @@ class SiblingController < ApplicationController
 
 before_action :authenticate_user!
 
-#兄弟・姉妹の設定
+#兄弟姉妹の設定
 def show
   @student = current_user.students.find(params[:id])
   student_extraction    #所属クラス・学年による生徒の抽出

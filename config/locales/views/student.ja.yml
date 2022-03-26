@@ -63,10 +63,10 @@ ja:
     show:
       title: 生徒の情報
       edit: 生徒の編集
-      edit_siblings: 兄弟・姉妹の設定
+      edit_siblings: 兄弟姉妹の設定
       delete: 生徒の削除
       delete_confirmation: 削除した生徒は元に戻せません。削除してもよろしいですか？
-      siblings: 兄弟・姉妹
+      siblings: 兄弟姉妹
     edit:
       title: 生徒の編集
       update: 更新

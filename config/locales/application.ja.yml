@@ -13,7 +13,7 @@ ja:
     new_student_created: "新規生徒が登録されました。"
     student_updated: "生徒情報が更新されました。"
     student_destroy: "生徒が削除されました。"
-    update_sibling_group: "兄弟・姉妹を設定しました。"
+    update_sibling_group: "兄弟姉妹を設定しました。"
     destroy_sibling_group: "設定を解除しました。"
   cancel: "キャンセル"
   created_at: "作成日"
