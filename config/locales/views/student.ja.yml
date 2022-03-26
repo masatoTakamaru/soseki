@@ -50,25 +50,21 @@ ja:
     zen_kana: 全角カタカナ
 
     index:
-      title: 生徒
       number_of_students: 生徒数
       people: 人
       students_empty: 生徒は登録されていません。「新規登録」をクリックして生徒を登録して下さい。
       registration: 新規登録
     new:
-      title: 生徒の新規登録
       registration: 生徒を登録する
       confirmation: 生徒を登録してもよろしいですか？
       cancel_confirmation: 登録を取り消しますか？
     show:
-      title: 生徒の情報
       edit: 生徒の編集
       edit_siblings: 兄弟姉妹の設定
       delete: 生徒の削除
       delete_confirmation: 削除した生徒は元に戻せません。削除してもよろしいですか？
       siblings: 兄弟姉妹
     edit:
-      title: 生徒の編集
       update: 更新
       update_confirmation: 生徒情報を更新してもよろしいですか？
       cancel_confirmation: 編集を取り消しますか？

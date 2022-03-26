@@ -2,7 +2,10 @@ require "date"
 
 class StudentController < ApplicationController
 
+  include ApplicationHelper
+
   before_action :authenticate_user!
+
 
   def index
     student_extraction  #所属クラス・学年による生徒の抽出
