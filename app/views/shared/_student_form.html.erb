@@ -1,17 +1,17 @@
 <!-- 生徒フォーム：半角入力はtelephone_fieldで統一 -->
 <div class="flex justify-end">
-  <p><span class="text-red-500">*</span><%= t("student.new.required") %></p>
+  <p><span class="text-red-500">*</span><%= t("student.required") %></p>
 </div>
 <table>
 <tbody>
 <tr>
   <td colspan="2">
     <div class="flex items-center">
-      <%= f.label :start_date %><span class="text-red-500">*</span>
+      <%= f.label t("student.start_date") %><span class="text-red-500">*</span>
       <%= f.telephone_field :start_date, size: 10, class: "p-1 mx-4" %>
-      <%= f.label :expire_date %>
+      <%= f.label t("student.expire_date") %>
       <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4" %>
-      <p class="text-gray-600"><%= t("student.new.date_example") %></p>
+      <p class="text-gray-600"><%= t("student.date_example") %></p>
     </div>
   </td>
 </tr>
@@ -19,102 +19,102 @@
   <td colspan="2">
     <div class="flex items-center">
       <%= f.check_box :expire_flag, {class:"ml-8"}, true, false %>
-      <%= f.label :expire_flag, class: "ml-2 mr-4" %>
-      <p class="text-gray-600"><%= t("student.new.expire_explanation") %></p>
+      <%= f.label t("student.expire_flag"), class: "ml-2 mr-4" %>
+      <p class="text-gray-600"><%= t("student.expire_explanation") %></p>
     </div>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :class_name %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.class_name") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :class_name, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.new.name") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.name") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :family_name, class: "p-1"  %>
     <%= f.text_field :given_name, class: "p-1"  %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.new.kana") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.kana") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :family_name_kana, class: "p-1"  %>
     <%= f.text_field :given_name_kana, class: "p-1"  %>
-    <p class="ml-2"><%= t("student.new.zen_kana") %></p>
+    <p class="ml-2"><%= t("student.zen_kana") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :gender %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.gender") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
-    <%= f.select :gender, [[t("student.new.male"),t("student.new.male")],[t("student.new.female"),t("student.new.female")],[t("student.new.other"),t("student.new.other")]], include_blank: t("student.new.select") %>
+    <%= f.select :gender, [[t("student.male"),t("student.male")],[t("student.female"),t("student.female")],[t("student.other"),t("student.other")]], include_blank: t("student.select") %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :birth_date %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.birth_date") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.telephone_field :birth_date, size:10, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.date_example") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.date_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :school_belong_to %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.school_belong_to") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :school_belong_to, size:60, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :grade %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.grade") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
-    <%= f.select :grade, @grades, include_blank: t("student.new.select") %>
+    <%= f.select :grade, @grades, include_blank: t("student.select") %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.new.guardian_name") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.guardian_name") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name, class: "p-1" %>
     <%= f.text_field :guardian_given_name, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.new.kana") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.kana") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name_kana, class: "p-1" %>
     <%= f.text_field :guardian_given_name_kana, class: "p-1" %>
-    <p class="ml-2"><%= t("student.new.zen_kana") %></p>
+    <p class="ml-2"><%= t("student.zen_kana") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone1 %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.phone1") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.telephone_field :phone1, size:13, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.telephone_example") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.telephone_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone1_belong_to, t("student.new.belong") %></td>
+  <td class="pr-2"><%= f.label t("student.phone1_belong_to"), t("student.belong") %></td>
   <td class="flex items-center">
     <%= f.text_field :phone1_belong_to, size:20, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.belong_example") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.belong_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone2 %></td>
+  <td class="pr-2"><%= f.label t("student.phone2") %></td>
   <td class="flex items-center">
     <%= f.telephone_field :phone2, size:13, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.telephone_example") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.telephone_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :phone2_belong_to, t("student.new.belong") %></td>
+  <td class="pr-2"><%= f.label t("student.belong") %></td>
   <td class="flex items-center">
     <%= f.text_field :phone2_belong_to, size:20, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.belong_example") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.belong_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :postal_code %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.postal_code") %><span class="text-red-500">*</span></td>
   <td>
     <div class="flex items-center">
       <%= f.text_field :postal_code, size:7, class: "p-1" %>
@@ -122,41 +122,41 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
-        <p class="search-postal-code px-1"><%= t("student.new.search_postal_code") %></p>
+        <p class="search-postal-code px-1"><%= t("student.search_postal_code") %></p>
       </div>
-      <p class="text-gray-600 pl-2"><%= t("student.new.postal_code_example") %></p>
+      <p class="text-gray-600 pl-2"><%= t("student.postal_code_example") %></p>
     </div>
   <p class="search-postal-code-error text-red-500-500"></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :address %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.address") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
     <%= f.text_field :address, size:60, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :email %></td>
+  <td class="pr-2"><%= f.label t("student.email") %></td>
   <td class="flex items-center">
     <%= f.telephone_field :email, size:40, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :user_name %></td>
+  <td class="pr-2"><%= f.label t("student.user_name") %></td>
   <td class="flex items-center">
     <%= f.telephone_field :user_name, size:30, class: "p-1" %>
-    <p class="text-gray-600 pl-2"><%= t("student.new.hankaku") %></p>
+    <p class="text-gray-600 pl-2"><%= t("student.hankaku") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :password %></td>
+  <td class="pr-2"><%= f.label t("student.password") %></td>
   <td class="flex items-center">
     <%= f.telephone_field :password, size:30, class: "p-1" %>
-    <span class="text-gray-600 pl-2"><%= t("student.new.hankaku") %></span>
+    <span class="text-gray-600 pl-2"><%= t("student.hankaku") %></span>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label :remarks, t("student.new.remarks") %></td>
+  <td class="pr-2"><%= f.label t("student.remarks") %></td>
   <td class="flex items-center">
     <%= f.text_area :remarks, size:"50x5", class: "p-1" %>
   </td>

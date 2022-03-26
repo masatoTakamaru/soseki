@@ -9,8 +9,8 @@
 <%= form_with model: @student, url: student_index_path, method: :post, local:true do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center my-4">
-    <%= f.submit t(".registration"), class: "btn text-white bg-teal-500 py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
-    <%= link_to t(".cancel"), student_index_path, class: "btn text-teal-500 bg-white pt-3 pb-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
+    <%= f.submit t(".registration"), class: "btn py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
+    <%= link_to t("cancel"), student_index_path, class: "btn btn-cancel pt-3 pb-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
   </div>
 <% end %>
 

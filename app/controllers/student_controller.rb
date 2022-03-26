@@ -5,31 +5,7 @@ class StudentController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @students = current_user.students
-    #所属クラスのカテゴリ配列の生成
-    @classes = @students.order(class_name: :asc).group(:class_name).pluck(:class_name)
-    @class_list = []
-    @classes.each do |c|
-      @class_list.push([c,c])
-    end
-    if params[:class_name]
-      if params[:class_name].present?
-        @class_name = params[:class_name]
-        @students = @students.where(class_name: @class_name)
-      else
-        @students = @students.order(created_at: :desc)
-      end
-    #学年の抽出
-    elsif params[:grade]
-      if params[:grade].present?
-        @grade = params[:grade]
-        @students = @students.where(grade: @grade)
-      else
-        @students = @students.order(created_at: :desc)
-      end
-    else
-      @students = @students.all.order(created_at: :desc)
-    end
+    student_extraction  #所属クラス・学年による生徒の抽出
   end
 
   def new
@@ -55,34 +31,23 @@ class StudentController < ApplicationController
   end
 
   def edit
-    @student = Student.find_by(student_id: params[:id])
+    @student = current_user.students.find_by(id: params[:id])
   end
 
   def update
-    @student = Student.find_by(student_id: params[:id])
-    #paramsのデータを一つずつ取り出し@studentを更新
-    params[:student].each do |key, value|
-      if key == "password"
-        #passwordだけ別処理
-        @student.password = params[:student][:password]
-      else
-        @student[key] = params[:student][key]
-      end
-    end
-    @student[:company_id] = current_user.company_id
-    
-    if @student.save
-      flash[:notice] = "生徒情報が更新されました。"
+    @student = current_user.students.find_by(id: params[:id])
+    if @student.update(student_params)
+      flash[:notice] = t("notice.student_updated")
       redirect_to student_index_path
     else
-      render "edit"
+      render edit_student_path
     end
   end
 
   def destroy
-    @student = Student.find_by(student_id: params[:id])
+    @student = current_user.students.find_by(id: params[:id])
     @student.destroy
-    flash[:notice] = "生徒が削除されました。"
+    flash[:notice] = t("notice.student_destroy")
     redirect_to student_index_path
   end
 
@@ -130,7 +95,5 @@ class StudentController < ApplicationController
         :postal_code, :address, :email, :user_name, :password,
         :remarks, :sibling_group)
     end
-
-     
 
 end

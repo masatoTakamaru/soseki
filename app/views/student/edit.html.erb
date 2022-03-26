@@ -1,19 +1,19 @@
-<%= provide(:title, "生徒の編集") %>
+<%= provide(:title, t(".title")) %>
 <%= render "shared/input_errors", model: @student %>
 
 <div class="container mx-8 pt-4">
 
-<h2>生徒の編集</h2>
+<h2><%= t(".title") %></h2>
 <div class="flex justify-end">
-  <p><%= @student.created_at.strftime "作成日: %Y-%m-%d" %> <%= @student.updated_at.strftime "最終更新日: %Y-%m-%d" %></p>
+  <p><%= t("created_at") + @student.created_at.strftime(": %Y-%m-%d") %> <%= t("updated_at") + @student.updated_at.strftime(": %Y-%m-%d") %></p>
 </div>
 
 <hr class="my-4"/>
-<%= form_with model: @student, url: student_path(@student[:student_id]), method: "patch" do |f| %>
+<%= form_with model: @student, url: student_path(@student[:id]), method: "patch" do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center items-center mt-4 mb-10">
-    <%= f.submit "生徒情報を更新する", class: "btn text-white bg-teal-500 mr-4 py-2", data: {confirm: "生徒情報を更新してもよろしいですか？"} %>
-    <%= link_to "キャンセル", student_path(@student[:student_id]), class: "btn text-teal-500 bg-white py-2", data: {confirm: "編集を設定を取り消しますか？"} %>
+    <%= f.submit t(".update"), class: "btn mr-4 py-2 px-8", data: {confirm: t(".update_confirmation")} %>
+    <%= link_to t("cancel"), student_path(@student[:id]), class: "btn btn-cancel py-2", data: {confirm: t(".cancel_confirmation")} %>
   </div>
 <% end %>
 

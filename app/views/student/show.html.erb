@@ -6,115 +6,115 @@
 
 <div class="flex justify-between pt-12 pb-4">
   <div>
-    <%= link_to t(".edit"), edit_student_path(@student[:id]), class: "btn text-white bg-teal-500 py-2 px-4" %>
-    <%= link_to t(".edit_siblings"), sibling_path(@student[:student_id]), class: "btn text-white bg-teal-500 py-2 px-4" %>
+    <%= link_to t(".edit"), edit_student_path(@student[:id]), class: "btn py-2 px-4" %>
+    <%= link_to t(".edit_siblings"), sibling_path(@student[:id]), class: "btn py-2 px-4" %>
   </div>
-  <%= link_to "生徒の削除", student_path(@student[:student_id]),
-              class:"btn text-white bg-teal-500 py-2 px-4",
-              data: {confirm: "削除した生徒は元に戻せません。削除してもよろしいですか？"}, method: "delete" %>
+  <%= link_to t(".delete"), student_path(@student[:id]),
+              class:"btn py-2 px-4",
+              data: {confirm: t(".delete_confirmation")}, method: "delete" %>
 </div>
-<div class="flex justify-evenly bg-white rounded leading-loose">
+<div class="flex justify-evenly bg-white">
   <div class="p-4">
     <table>
       <tr>
-        <td>入会日：</td>
-        <td class="font-medium"><%= @student[:start_date] %></td>
+        <td><%= t("student.start_date") %>:</td>
+        <td class="font-bold"><%= @student[:start_date] %></td>
       </tr>
       <tr>
-        <td>所属クラス：</td>
-        <td class="font-medium"><%= @student[:class_name] %></td>
+        <td><%= t("student.class_name") %>:</td>
+        <td class="font-bold"><%= @student[:class_name] %></td>
       </tr>
       <tr>
-        <td>生徒名：</td>
-        <td class="font-medium"><%= @student[:family_name] + " " + @student[:given_name] %></td>
+        <td><%= t("student.name") %>:</td>
+        <td class="font-bold"><%= @student[:family_name] + " " + @student[:given_name] %></td>
       </tr>
       <tr>
-        <td>フリガナ：</td>
-        <td class="font-medium"><%= @student[:family_name_kana] + " " + @student[:given_name_kana] %></td>
+        <td><%= t("student.kana") %>:</td>
+        <td class="font-bold"><%= @student[:family_name_kana] + " " + @student[:given_name_kana] %></td>
       </tr>
       <tr>
-        <td>性別：</td>
-        <td class="font-medium"><%= @student[:gender] %></td>
+        <td><%= t("student.gender") %>:</td>
+        <td class="font-bold"><%= @student[:gender] %></td>
       </tr>
       <tr>
-        <td>生年月日：</td>
-        <td class="font-medium"><%= @student[:birth_date] %></td>
+        <td><%= t("student.birth_date") %>:</td>
+        <td class="font-bold"><%= @student[:birth_date] %></td>
       </tr>
       <tr>
-        <td>学校名：</td>
-        <td class="font-medium"><%= @student[:school_belong_to] %></td>
+        <td><%= t("student.school_belong_to") %>:</td>
+        <td class="font-bold"><%= @student[:school_belong_to] %></td>
       </tr>
       <tr>
-        <td>学年：</td>
-        <td class="font-medium"><%= @student[:grade] %></td>
+        <td><%= t("student.grade") %>:</td>
+        <td class="font-bold"><%= @student[:grade] %></td>
       </tr>
       <tr>
-        <td>保護者名：</td>
-        <td class="font-medium"><%= @student[:guardian_family_name] + " " + @student[:guardian_given_name] %></td>
+        <td><%= t("student.guardian_name") %>:</td>
+        <td class="font-bold"><%= @student[:guardian_family_name] + " " + @student[:guardian_given_name] %></td>
       </tr>
       <tr>
-        <td>フリガナ：</td>
-        <td class="font-medium"><%= @student[:guardian_family_name_kana] + " " + @student[:guardian_given_name_kana] %></td>
+        <td><%= t("student.kana") %>:</td>
+        <td class="font-bold"><%= @student[:guardian_family_name_kana] + " " + @student[:guardian_given_name_kana] %></td>
       </tr>
     </table>
   </div>
   <div class="p-4">
     <table>
       <tr>
-        <td>電話番号１：</td>
-        <td class="font-medium"><%= @student[:phone1] %></td>
+        <td><%= t("student.phone1") %>:</td>
+        <td class="font-bold"><%= @student[:phone1] %></td>
       </tr>
       <tr>
-        <td>続柄：</td>
-        <td class="font-medium"><%= @student[:phone1_belong_to] %></td>
+        <td><%= t("student.belong") %>:</td>
+        <td class="font-bold"><%= @student[:phone1_belong_to] %></td>
       </tr>
       <tr>
-        <td>電話番号２：</td>
-        <td class="font-medium"><%= @student[:phone2] %></td>
+        <td><%= t("student.phone2") %>:</td>
+        <td class="font-bold"><%= @student[:phone2] %></td>
       </tr>
       <tr>
-        <td>続柄：</td>
-        <td class="font-medium"><%= @student[:phone2_belong_to] %></td>
+        <td><%= t("student.belong") %>:</td>
+        <td class="font-bold"><%= @student[:phone2_belong_to] %></td>
       </tr>
       <tr>
-        <td>郵便番号：</td>
-        <td class="font-medium"><%= @student[:postal_code] %></td>
+        <td><%= t("student.postal_code") %>:</td>
+        <td class="font-bold"><%= @student[:postal_code] %></td>
       </tr>
       <tr>
-        <td>住所：</td>
-        <td class="font-medium"><%= @student[:address] %></td>
+        <td><%= t("student.address") %>:</td>
+        <td class="font-bold"><%= @student[:address] %></td>
       </tr>
       <tr>
-        <td>メールアドレス：</td>
-        <td class="font-medium"><%= @student[:email] %></td>
+        <td><%= t("student.email") %>:</td>
+        <td class="font-bold"><%= @student[:email] %></td>
       </tr>
       <tr>
-        <td>ユーザー名：</td>
-        <td class="font-medium"><%= @student[:user_name] %></td>
+        <td><%= t("student.user_name") %>:</td>
+        <td class="font-bold"><%= @student[:user_name] %></td>
       </tr>
       <tr>
-        <td>パスワード：</td>
-        <td class="font-medium"><%= @student[:password] %></td>
+        <td><%= t("student.password") %>:</td>
+        <td class="font-bold"><%= @student[:password] %></td>
       </tr>
       <tr>
-        <td>備考：</td>
-        <td class="font-medium"><%= @student[:remarks] %></td>
+        <td><%= t("student.remarks") %>:</td>
+        <td class="font-bold"><%= @student[:remarks] %></td>
       </tr>
     </table>
   </div>
 </div>
 
 <% if @siblings %>
-  <div class="mt-4 p-4 bg-white rounded leading-loose">
-    <p>兄弟・姉妹</p>
+  <div class="mt-4 p-4 bg-white">
+    <p><%= t(".siblings") %></p>
     <% @siblings.each do |sibling| %>
-      <% unless sibling[:student_id] == @student[:student_id] %>
+      <% unless sibling[:id] == @student[:id] %>
         <div class="flex">
           <p class="font-bold ml-4 mr-4"><%= sibling[:family_name] + " " + sibling[:given_name] %></p>
           <p class="mr-4"><%= sibling[:family_name_kana] + " " + sibling[:given_name_kana] %></p>
-          <p>所属クラス：</p>
+          <p><%= t("student.class_name") %>:</p>
           <p class="mr-4"><%= sibling[:class_name] %></p>
-          <p>学年：</p>
+          <p><%= t("student.grade") %>:</p>
           <p><%= sibling[:grade] %></p>
         </div>
       <% end %>
