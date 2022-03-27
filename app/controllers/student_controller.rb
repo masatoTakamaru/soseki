@@ -28,9 +28,7 @@ class StudentController < ApplicationController
   def show
     @student = current_user.students.find_by_hashid(params[:id])
     @student_full_name = @student[:family_name] + " " + @student[:given_name]
-    if @student[:sibling_group].present?
-      @siblings = current_user.students.where(sibling_group: @student[:sibling_group])
-    end
+    @siblings = current_user.students.where(sibling_group: @student[:sibling_group])
   end
 
   def edit

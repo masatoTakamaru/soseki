@@ -13,20 +13,20 @@ class SiblingController < ApplicationController
 
   #兄弟姉妹の更新
   def update
-    @student = current_user.students.find_by_hashid(params[:sibling_id])
-    if @student.update(sibling_group: params[:sibling_group])
+    sibling = current_user.students.find_by_hashid(params[:sibling_id])
+    if sibling.update(sibling_group: params[:sibling_group])
       flash[:notice] = t("notice.update_sibling_group")
     end
-    redirect_to sibling_path(params[:hashid])
+    redirect_to sibling_path(params[:id])
   end
 
   #兄弟姉妹設定の消去
   def destroy
-    @sibling = current_user.students.find_by_hashid(params[:sibling_id])
-    if @sibling.update(sibling_group: SecureRandom.uuid)
+    sibling = current_user.students.find_by_hashid(params[:sibling_id])
+    if sibling.update(sibling_group: SecureRandom.uuid)
       flash[:notice] = t("notice.destroy_sibling_group")
     end
-    redirect_to sibling_path(params[:hashid])
+    redirect_to sibling_path(params[:id])
   end
 
 end
