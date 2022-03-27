@@ -32,16 +32,20 @@
   <tbody>
   <% @students.each do |student| %>
     <% unless student.hashid == @student.hashid %>
-      <tr>
+      <% if @student[:sibling_group] == student[:sibling_group] %>
+        <tr class="bg-pink-200">
+      <% else %>
+        <tr>
+      <% end %>
       <td class="px-2"><%= student[:class_name] %></td>
       <td class="text-center">
         <% if @student[:sibling_group] == student[:sibling_group] %>
-          <%= button_to "解除",
+          <%= button_to t(".sibling_destroy"),
             sibling_path, {method: :delete, class: "btn btn-flat-cancel px-1",
             params: {id: @student.hashid, sibling_id: student.hashid}}
           %>
         <% else %>
-          <%= button_to "設定",
+          <%= button_to t(".sibling_create"),
             sibling_path, {method: :patch, class: "btn btn-flat px-1",
             params: {id: @student.hashid, sibling_id: student.hashid, sibling_group: @student[:sibling_group]}}
           %>

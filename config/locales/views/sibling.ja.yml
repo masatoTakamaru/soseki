@@ -2,3 +2,5 @@
 ja:
   sibling:
     show:
+      sibling_create: 設定
+      sibling_destroy: 解除
