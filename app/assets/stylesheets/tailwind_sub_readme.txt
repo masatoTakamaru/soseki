@@ -1,4 +1,4 @@
-## rutti.scss --- personal scss framework
+## tailwind_sub.scss --- tailwindcssのサブセット版
 ***tailwindの省略版
 
 flex関連             tailswindに準じる
@@ -18,6 +18,7 @@ text-100            文字サイズ
                     text-0 から text-500 まで 5 区切り
                     text-100 は 1rem
 opacity-100         透明度 0 から 100 まで 5 区切り
+w-full              幅100%
 
 ## tailwind_color.scss
 

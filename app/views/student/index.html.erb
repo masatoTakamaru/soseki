@@ -13,9 +13,10 @@
 
 <%= render "shared/select_students", link_path: student_index_path %>
 
-<table class="border-2 row-striped w-full bm-4 mb-8">
+<div class="table-frame mb-20 bg-white">
+<table class="row-striped w-full my-4">
 <thead>
-<tr class="pl-2 bg-gray-200">
+<tr class="text-85">
 	<th><%= t("student.class_name") %></th>
 	<th><%= t("student.name") %></th>
 	<th><%= t("student.kana") %></th>
@@ -44,23 +45,24 @@
 <% else %>
 	<% @students.each do |student| %>
 		<tr>
-			<td class="pl-2"><%= student.class_name %></td>
-			<td class="font-bold underline">
+			<td class="px-2"><%= student.class_name %></td>
+			<td class="font-bold underline pr-2">
 				<%= link_to student.family_name + " " + student.given_name, student_path(id: student.hashid), class: "text-blue" %>
 			</td>
-			<td><%= student.family_name_kana + " " + student.given_name_kana %></td>
-			<td><%= student.gender %></td>
-			<td><%= student.grade %></td>
-			<td><%= student.school_belong_to %></td>
-			<td>[未設定]</td>
-			<td><%= student.phone1 %></td>
-			<td><%= student.phone1_belong_to %> </td>
-			<td><%= student.phone2 %></td>
-			<td><%= student.phone2_belong_to %> </td>
+			<td class="pr-2"><%= student.family_name_kana + " " + student.given_name_kana %></td>
+			<td class="pr-2"><%= student.gender %></td>
+			<td class="pr-2"><%= student.grade %></td>
+			<td class="pr-2"><%= student.school_belong_to %></td>
+			<td class="pr-2">[未設定]</td>
+			<td class="pr-2"><%= student.phone1 %></td>
+			<td class="pr-2"><%= student.phone1_belong_to %> </td>
+			<td class="pr-2"><%= student.phone2 %></td>
+			<td class="pr-2"><%= student.phone2_belong_to %> </td>
 		</tr>
 	<% end %>
 <% end %>
 </tbody>
 </table>
+</div>
 
 </div>

@@ -32,9 +32,9 @@ ja:
     other: その他
     password: パスワード
     phone1: 電話番号１
-    phone1_belong_to: 電話番号１の続柄
+    phone1_belong_to: 続柄
     phone2: 電話番号２
-    phone2_belong_to: 電話番号２の続柄
+    phone2_belong_to: 続柄
     postal_code: 郵便番号
     postal_code_example: 例:4620003(半角数字)
     remarks: 備考欄(240字まで)

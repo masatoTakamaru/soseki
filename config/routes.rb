@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get "home/contact", to: "home#contact", as: "contact"
   get "home/help", to: "home#help", as:"help"
 
-  get "sheet/account", to: "sheet#account", as: "account"
+  get "home/account", to: "home#account", as: "account"
 
-  get "search/:postal_code" => "search#postal_code"
+  get "search/:postal_code", to: "search#postal_code"
 
 end

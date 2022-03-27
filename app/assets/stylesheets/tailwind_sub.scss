@@ -1,82 +1,30 @@
 @import "tailwind_color";
-
-/* ボディ */
-
-body {
-  font-family: 'Helvetica','Arial','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'sans-serif;
-  margin: 0px;
-}
-
-/*リンク*/
-
-a {
-  text-decoration:none;
-}
-
-/* コンテナ */
-
+body {font-family: 'Helvetica','Arial','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'sans-serif;margin: 0px;}
+.w-full {width: 100%;}
+a {text-decoration:none;}
+div, p {margin-block-start: 0px;margin-block-end: 0px;}
 .container {
   max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
 }
-
 /*通知*/
-.notice {
+.notice, .alert {
   width: 100%;
   background-color: rgba(254, 235, 200, 0.8);
   border: solid 1px rgba(246, 173, 85, 0.7);
 }
-
-.alert {
-  background-color: rgba(254, 235, 200, 0.8);
-  border: solid 1px rgba(246, 173, 85, 0.7);
+/*table*/
+.table-frame {
+  border: 2px solid $gray-500;
+  border-radius: 12px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
-
-
-/* ドロップダウンメニュー */
-
-#dropdown {display: none;}
-.menu {
-  line-height: 1.5;
-  background-color: $teal-500;
-  position: absolute;
-  top: 2.5rem;
-  right: 1rem;
-  visibility: hidden;
-  opacity: 0.9;
-  z-index: 100;
-}
-.dropdown-label {
-  position: relative;
-  top: 2px;
-}
-#dropdown:checked + .dropdown-label + .menu {visibility: visible;}
-
-
-div {
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-}
-
-p {
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-}
-
-/*table関係*/
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
+table {border-collapse: collapse;}
 /*テーブル偶数行の色を変更*/
-.row-striped tr:nth-child(even) td {
-  background-color: $gray-300;
-}
-
+th, td {border-bottom: dotted 1px $gray-500;}
+/*.row-striped tr:nth-child(even) td {background-color: $gray-300;}*/
 /*ボタン*/
 .btn {
   color: white;
@@ -93,11 +41,10 @@ table {
   border: solid 2px $teal-600;
 
   &:hover {
-  cursor: pointer;
-  box-shadow: 0 0 3px 2px $teal-500;
+    cursor: pointer;
+    box-shadow: 0 0 3px 2px $teal-500;
   }
 }
-
 .btn-flat {
   font-weight: 500;
   font-size: 0.8rem;
@@ -106,12 +53,10 @@ table {
   border: none;
   border-radius: 4px;
 }
-
 .btn-cancel {
   color: $teal-500;
   background-color: white;
 }
-
 .btn-flat-cancel {
   color: $teal-500;
   font-weight: 500;
@@ -122,7 +67,7 @@ table {
   border: solid 1px $teal-500;
   border-radius: 4px;
 }
-
+/*badge*/
 .badge {
   font-size: 0.8rem;
   color: white;
@@ -131,9 +76,7 @@ table {
   padding: 0.1rem 0.4rem;
   border-radius: 3px;
 }
-
 /*入力フィールド*/
-
 input, select, textarea {
   margin: 0.15rem;
   padding: 0.5rem;
@@ -142,7 +85,6 @@ input, select, textarea {
   border: 1px solid $gray-500;
   box-sizing: border-box;
 }
-
 .select-mini select {
   padding: 0.15rem;
   font-size: 0.9rem;
@@ -150,13 +92,8 @@ input, select, textarea {
   border: 1px solid $gray-500;
   box-sizing: border-box;
 }
-
-.field {
-  line-height: 2rem;
-}
-
+.field {line-height: 2rem;}
 /* flex関連 */
-
 .flex {display: flex;}
 .justify-start {justify-content: flex-start;}
 .justify-end {justify-content: flex-end;}
@@ -168,34 +105,22 @@ input, select, textarea {
 .items-center {align-items: center;}
 .items-end {align-items: flex-end;}
 .items-baseline {align-items: baseline;}
-
 /*テキスト関係*/
 .font-bold {font-weight: 700;}
 .text-center {text-align: center;}
 .underline {text-decoration: underline;}
-
 @for $i from 0 through 100 {
   .text-#{$i*5} {font-size: #{$i*0.05}rem;}
 }
-
 /*見出し*/
-
-h1 {
-  font-size: 1.15rem;
-}
-
+h1 {font-size: 1.15rem;}
 h2 {
   font-size: 1.15rem;
   padding-left: 12px;
   border-left: solid 4px $teal-500;
 }
-
-h3 {
-  font-size: 1rem;
-}
-
+h3 {font-size: 1rem;}
 /* padding */
-
 @for $i from 0 through 100 {
   .m-#{$i} {margin: 0.25rem * $i;}
   .my-#{$i} {margin-top: 0.25rem * $i; margin-bottom: 0.25rem * $i;}
@@ -212,9 +137,7 @@ h3 {
   .pb-#{$i} {padding-bottom: 0.25rem * $i;}
   .pl-#{$i} {padding-left: 0.25rem * $i;}
 }
-
 /*opacity*/
-
 @for $i from 0 through 20 {
   .opacity-#{$i*5} {opacity: #{$i*5*0.01}}
 }
