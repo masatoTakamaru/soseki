@@ -20,10 +20,10 @@ div, p {margin-block-start: 0px;margin-block-end: 0px;}
   border: 2px solid $gray-500;
   border-radius: 12px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+  th, tr {border-bottom: dotted 1px $gray-500;}
 }
 table {border-collapse: collapse;}
 /*テーブル偶数行の色を変更*/
-th, tr {border-bottom: dotted 1px $gray-500;}
 /*.row-striped tr:nth-child(even) td {background-color: $gray-300;}*/
 /*ボタン*/
 .btn {
@@ -39,7 +39,6 @@ th, tr {border-bottom: dotted 1px $gray-500;}
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
   font-weight: bold;
   border: solid 2px $teal-600;
-
   &:hover {
     cursor: pointer;
     box-shadow: 0 0 3px 2px $teal-500;

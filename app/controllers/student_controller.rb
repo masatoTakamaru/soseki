@@ -8,7 +8,13 @@ class StudentController < ApplicationController
 
 
   def index
-    student_extraction  #所属クラス・学年による生徒の抽出
+    @students = current_user.students
+    if params.present? && params[:class_name]="asc"
+      @students.order(class_name: :asc)
+    end
+    if params.present? && params[:class_name]="desc"
+      @students.order(class_name: :desc)
+    end
   end
 
   def new
