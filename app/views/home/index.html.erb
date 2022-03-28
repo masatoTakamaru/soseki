@@ -1,19 +1,26 @@
 <div class="home-container">
 <div>
-  <p class="flex items-center font-top-page text-200 text-teal-600 pt-8 pl-8"><img class="mr-2" src="fabicon-64x64.png"/><%= t("app_name") %></p>
-  <p class="font-top-page text-120 text-teal-600 font-bold mt-4 ml-20"><%= t(".catch") %></p>
+  <div class="front-logo">
+    <p class="flex items-center font-top-page text-200 text-teal-700 pt-8 pl-8"><img class="mr-2" src="fabicon-64x64.png"/><%= t("app_name") %></p>
+    <p class="font-top-page text-120 text-teal-700 font-bold pb-8 mt-4 ml-26"><%= t(".catch") %></p>
+  </div>
   <div class="flex justify-start">
     <div class="list-wrapper">
       <ul>
-        <li class="text-110 py-2"><%= t ".item_first" %></li>
-        <li class="text-110 py-2"><%= t ".item_second" %></li>
-        <li class="text-110 py-2"><%= t ".item_third" %></li>
+        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_first" %></li>
+        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_second" %></li>
+        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_third" %></li>
       </ul>
       <div class="flex justify-center">
-        <%= link_to t(".registration"), new_user_registration_path, class: "btn text-center text-teal-500 bg-white py-4 px-4 my-10 opacity-90" %>
+        <%= link_to t(".registration"), new_user_registration_path, class: "btn text-center text-teal-500 bg-white py-4 px-4 mb-8 opacity-90" %>
       </div>
     </div>
   </div>
+</div>
+</div>
+<div class="container">
+<div>
+<p>#contents</p>
 </div>
 
 <div class="home-footer">
@@ -25,5 +32,4 @@
     </ul>
   </div>
 </div>
-
 </div>

@@ -1,0 +1,13 @@
+<div class="flex">
+  <p class="mr-2"><%= t("student.sort") %></p>
+  <% if params[:class_name] == "asc" %>
+    <p class="mx-2"><%= link_to t("student.class_name"), student_index_path(class_name: "desc") %></p>
+  <% elsif params[:class_name] == "desc" || params[:class_name].nil? %>
+    <p class="mx-2"><%= link_to t("student.class_name"), student_index_path(class_name: "asc") %></p>
+  <% end %>
+  <% if params[:grade] == "asc" %>
+    <p class="mx-2"><%= link_to t("student.grade"), student_index_path(grade: "desc") %></p>
+  <% elsif params[:grade] == "desc" || params[:grade].nil? %>
+    <p class="mx-2"><%= link_to t("student.grade"), student_index_path(grade: "asc") %></p>
+  <% end %>
+</div>

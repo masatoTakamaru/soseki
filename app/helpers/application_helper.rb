@@ -10,7 +10,6 @@ module ApplicationHelper
     end
   end
 
-
   def student_extraction  #所属クラス・学年による生徒の抽出
     @students = current_user.students
     #所属クラスのカテゴリ配列の生成

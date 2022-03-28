@@ -15,6 +15,7 @@ ja:
     student_destroy: "生徒が削除されました。"
     update_sibling_group: "兄弟姉妹を設定しました。"
     destroy_sibling_group: "設定を解除しました。"
+    over_limit: "登録できる生徒の上限に達しています。これ以上登録できません。"
   cancel: "キャンセル"
   created_at: "作成日"
   updated_at: "最終更新日"

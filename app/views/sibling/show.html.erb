@@ -10,10 +10,12 @@
   <p><%= t("student.class_name") %>:</p>
   <p class="font-bold pr-6"><%= @student[:class_name] %></p>
   <p><%= t("student.grade") %>:</p>
-  <p class="font-bold pr-6"><%= @student[:grade] %></p>
+  <p class="font-bold pr-6"><%= @grades[@student[:grade]] %></p>
 </div>
 
-<%= render "shared/select_students", link_path: sibling_path %>
+<div class="flex justify-center">
+    <%= render partial: "shared/sibling_sort" %>
+</div>
 
 <div class="table-frame mb-20 bg-white">
 <table class="row-striped w-full my-4">
@@ -56,7 +58,7 @@
       </td>
       <td class="pr-2"><%= student[:family_name_kana] + " " + student[:given_name_kana] %></td>
       <td class="pr-2"><%= student[:gender] %></td>
-      <td class="pr-2"><%= student[:grade] %></td>
+      <td class="pr-2"><%= @grades[student[:grade]] %></td>
       <td class="pr-2"><%= student[:school_belong_to] %></td>
       </tr>
     <% end %>

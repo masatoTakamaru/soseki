@@ -44,6 +44,7 @@ ja:
     search_postal_code: 郵便番号から住所を自動入力
     select: 選択して下さい。
     siblings: 兄弟姉妹
+    sort: 並べ替え
     start_date: 入会日
     telephone_example: 例:03-1234-5678(半角)
     user_name: ユーザー名

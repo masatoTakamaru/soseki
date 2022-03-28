@@ -32,7 +32,6 @@ CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |line|
     )
 end
 
-=begin
 CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
   Postal.create(
     postal_code: line[0],
@@ -41,4 +40,3 @@ CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
     town: line[3],
     )
 end
-=end

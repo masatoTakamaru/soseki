@@ -6,9 +6,13 @@
   transform: rotate(0.04deg);
 }
 
+.front-logo {
+  background-color: rgba(255,255,255,0.8);
+}
+
 .home-container {
-  max-width: 1180px;
-  height: 600px;
+  max-width: 1920px;
+  height: 480px;
   margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +27,7 @@
 }
 
 .list-wrapper {
-  background-color: rgba(254, 235, 200, 0.9);
+  background-color: rgba(30, 160, 200, 0.8);
   margin-top: 3rem;
   margin-left: 5rem;
   border-radius: 12px;

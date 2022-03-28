@@ -6,22 +6,33 @@ class StudentController < ApplicationController
 
   before_action :authenticate_user!
 
-
   def index
-    @students = current_user.students
-    if params.present? && params[:class_name]="asc"
-      @students.order(class_name: :asc)
-    end
-    if params.present? && params[:class_name]="desc"
-      @students.order(class_name: :desc)
+    if params[:class_name]=="asc"
+      @students = current_user.students.order(class_name: :asc)
+    elsif params[:class_name]=="desc"
+      @students = current_user.students.order(class_name: :desc)
+    elsif params[:grade]=="asc"
+      @students = current_user.students.order(grade: :asc)
+    elsif params[:grade]=="desc"
+      @students = current_user.students.order(grade: :desc)
+    else
+      @students = current_user.students
     end
   end
 
   def new
+    if current_user.students.count >= 30
+      flash[:notice] = t("notice.over_limit")
+      redirect_to student_index_path
+    end
     @student = Student.new
   end
 
   def create
+    if current_user.students.count >= 30
+      flash[:notice] = t("notice.over_limit")
+      redirect_to student_index_path
+    end
     @student = current_user.students.new(student_params)
     if @student.save
       flash[:notice] = t("notice.new_student_created")

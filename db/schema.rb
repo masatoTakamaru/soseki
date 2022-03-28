@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_123422) do
+ActiveRecord::Schema.define(version: 2022_03_27_135548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2022_03_23_123422) do
     t.string "gender"
     t.date "birth_date"
     t.string "school_belong_to"
-    t.string "grade"
     t.string "guardian_family_name"
     t.string "guardian_given_name"
     t.string "guardian_family_name_kana"
@@ -77,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_123422) do
     t.string "sibling_group"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "grade"
   end
 
   create_table "users", force: :cascade do |t|
