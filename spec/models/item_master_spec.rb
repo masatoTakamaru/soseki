@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ItemMaster, type: :model do
-  context "教科マスターが正しく登録できる" do
+  context "講座マスターが正しく登録できる" do
 
     before do
       @item_master = FactoryBot.build(:item_master)
     end
 
-    it "教科マスターが登録できる" do
+    it "講座マスターが登録できる" do
       expect(@item_master).to be_valid
     end
 
@@ -26,12 +26,12 @@ RSpec.describe ItemMaster, type: :model do
       expect(@item_master).to be_invalid
     end
 
-    it "教科名が空白はNG" do
+    it "講座名が空白はNG" do
       @item_master.name = ""
       expect(@item_master).to be_invalid
     end
 
-    it "教科名が21字以上はNG" do
+    it "講座名が21字以上はNG" do
       @item_master.name = "１２３４５６７８９０１２３４５６７８９０１"
       expect(@item_master).to be_invalid
     end

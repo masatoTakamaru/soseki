@@ -8,7 +8,7 @@ ja:
       log_in: "ログイン"
       log_out: "ログアウト"
       help: "ヘルプ"
-      item_master: "教科"
+      item_master: "講座"
   notice:
     new_student_created: "新規生徒が登録されました。"
     student_updated: "生徒情報が更新されました。"

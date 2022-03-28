@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Item, type: :model do
 
-  context "教科が正しく登録できる" do
+  context "講座が正しく登録できる" do
 
     before do
       @current_user = FactoryBot.create(:user)
@@ -42,13 +42,13 @@ RSpec.describe Item, type: :model do
       expect(@student.items.first).to be_invalid
     end
 
-    it "教科名が空白はNG" do
+    it "講座名が空白はNG" do
       @item.name = ""
       @student.items << @item
       expect(@student.items.first).to be_invalid
     end
 
-    it "教科名が21字以上はNG" do
+    it "講座名が21字以上はNG" do
       @item.name = "１２３４５６７８９０１２３４５６７８９０１"
       @student.items << @item
       expect(@student.items.first).to be_invalid
@@ -89,26 +89,26 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
     end
 
-    it "教科が登録できる" do
+    it "講座が登録できる" do
       @student.items << @item
       expect(@student.items.first).to be_valid
     end
 
-    it "教科が削除できる" do
+    it "講座が削除できる" do
       @student.items << @item
       item = @student.items.first
       item.destroy
       expect(@student.items.first).to be_nil
     end
 
-    it "生徒を削除すると教科も削除される" do
+    it "生徒を削除すると講座も削除される" do
       @student.items << @item
       id = @item.id
       @student.destroy
       expect(Item.find_by(id: id)).to be_nil
     end
 
-    it "ユーザーを削除すると教科も削除される" do
+    it "ユーザーを削除すると講座も削除される" do
       @student.items << @item
       id = @item.id
       @current_user.destroy
