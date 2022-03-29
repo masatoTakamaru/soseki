@@ -9,7 +9,7 @@
 </div>
 
 <hr class="my-4"/>
-<%= form_with model: @student, url: student_path(@student.hashid), method: "patch" do |f| %>
+<%= form_with model: @student, url: student_path(@student.hashid), method: :patch do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center items-center mt-4 mb-10">
     <%= f.submit t(".update"), class: "btn mr-4 py-2 px-8", data: {confirm: t(".update_confirmation")} %>

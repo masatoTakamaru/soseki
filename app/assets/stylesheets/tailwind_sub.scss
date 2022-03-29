@@ -166,3 +166,4 @@ h3 {font-size: 1rem;}
 @for $i from 0 through 20 {
   .opacity-#{$i*5} {opacity: #{$i*5*0.01}}
 }
+.rounded {border-radius: 0.5rem;}

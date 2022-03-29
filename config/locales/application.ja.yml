@@ -1,21 +1,22 @@
 ---
 ja:
-  app_name: "Soseki"
+  app_name: Soseki
   layouts:
     application:
-      dashboard: "ダッシュボード"
-      students: "生徒"
-      log_in: "ログイン"
-      log_out: "ログアウト"
-      help: "ヘルプ"
-      item_master: "講座"
+      dashboard: ダッシュボード
+      students: 生徒
+      log_in: ログイン
+      log_out: ログアウト
+      help: ヘルプ
+      item_master: 講座
   notice:
-    new_student_created: "新規生徒が登録されました。"
-    student_updated: "生徒情報が更新されました。"
-    student_destroy: "生徒が削除されました。"
-    update_sibling_group: "兄弟姉妹を設定しました。"
-    destroy_sibling_group: "設定を解除しました。"
-    over_limit: "登録できる生徒の上限に達しています。これ以上登録できません。"
-  cancel: "キャンセル"
-  created_at: "作成日"
-  updated_at: "最終更新日"
+    new_student_created: 新規生徒が登録されました。
+    student_updated: 生徒情報が更新されました。
+    student_destroy: 生徒が削除されました。
+    update_sibling_group: 兄弟姉妹を設定しました。
+    destroy_sibling_group: 設定を解除しました。
+    over_limit: 登録できる生徒の上限に達しています。これ以上登録できません。
+  cancel: キャンセル
+  created_at: 作成日
+  updated_at: 最終更新日
+  required: 印の付いた項目は入力必須です。

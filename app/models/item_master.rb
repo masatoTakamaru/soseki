@@ -3,10 +3,12 @@ class ItemMaster < ApplicationRecord
   belongs_to :user
   PRICE_REGEXP = /\A-?\d+.\d+\z/
 
-  validates :class_name,
+  validates :code,
     presence: true,
-    length: {maximum: 10}
-  validates :category, presence: true
+    numericality: {in: 0..9999, message: "は0から9999までの間で入力して下さい。"}
+  validates :category,
+    presence: true,
+    numericality: {in: 0..3, message: "は0から3までの間で入力して下さい。"}
   validates :name,
     presence: true,
     length: {maximum: 20}
@@ -16,6 +18,6 @@ class ItemMaster < ApplicationRecord
     format: {with: PRICE_REGEXP, message: "は正の数か負の数（小数含む）を入力して下さい。"}
   validates :description,
     allow_nil: true,
-    length: {maximum: 80}
+    length: {maximum: 40}
 
 end

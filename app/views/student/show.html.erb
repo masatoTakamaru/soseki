@@ -11,7 +11,7 @@
   </div>
   <%= link_to t(".delete"), student_path(@student.hashid),
               class:"btn py-2 px-4",
-              data: {confirm: t(".delete_confirmation")}, method: "delete" %>
+              data: {confirm: t(".delete_confirmation")}, method: :delete %>
 </div>
 <div class="flex justify-evenly bg-white">
   <div class="p-4">

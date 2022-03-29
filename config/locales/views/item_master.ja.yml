@@ -1,5 +1,18 @@
 ---
 ja:
   item_master:
-    index:
-      new: "新規登録"
+    btn_new: 新規登録
+    code: 講座コード
+    category: 分類
+    name: 講座名
+    price: 価格
+    description: 内容
+    code_description: 0から9999までの半角数字で入力して下さい。
+    category_description: "0:単独課金 1:従量課金 2:諸費 3:割引"
+    name_example: 例:中１数学，中３夏期講習５教科パック，入試直前小論文講座，幼児ベーシックコースなど
+    name_description: 半角数字。割引の場合は-3000など負の数を入力して下さい。
+    description_example: 講座内容に補足の説明が必要な場合に入力して下さい。
+    new:
+      registration: 講座を登録する
+      confirmation: 講座を登録してもよろしいですか？
+      cancel_confirmation: 登録を取り消しますか？

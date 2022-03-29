@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_014632) do
+ActiveRecord::Schema.define(version: 2022_03_29_024928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "item_masters", force: :cascade do |t|
-    t.string "class_name"
     t.integer "category"
     t.string "name"
     t.float "price"
@@ -24,6 +23,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_014632) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "code"
   end
 
   create_table "items", force: :cascade do |t|

@@ -5,11 +5,38 @@
 <h2><%= t("title.item_master.index") %></h2>
 
 <div class="flex justify-end">
-  <%= link_to t(".new"), new_item_master_path, method: "get", class: "btn py-2 px-8" %>
+  <%= link_to t("item_master.btn_new"), new_item_master_path, method: :get, class: "btn py-2 px-8" %>
 </div>
 
 <% if @item_masters.empty? %>
-  <p>講座が登録されていません。「新規登録」をクリックして最初の講座を登録して下さい。</p>
+  <div class="flex notice mt-4 rounded justify-center">
+    <p class="py-4 px-10">講座が登録されていません。「新規登録」をクリックして最初の講座を登録して下さい。</p>
+  <div>
+<% else %>
+  <div class="table-frame mb-20 bg-white">
+    <table class="w-full my-4">
+    <thead>
+    <tr class="text-85">
+      <th><%= t("item_master.code") %></th>
+      <th><%= t("item_master.category") %></th>
+      <th><%= t("item_master.name") %></th>
+      <th><%= t("item_master.price") %></th>
+      <th><%= t("item_master.description") %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @item_masters.each do |item_master| %>
+      <tr>
+        <td class="pr-2"><%= item_master.class_name %></td>
+        <td class="pr-2"><%= item_master.name %></td>
+        <td class="pr-2"><%= item_master.price %></td>
+        <td class="pr-2"><%= item_master.description %></td>
+        <td class="pr-2"><%= item_master.category %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
 <% end %>
 
 
