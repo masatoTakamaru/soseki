@@ -5,39 +5,44 @@
 <table>
 <tbody>
 <tr>
-  <td class="px-2"><%= f.label t("item_master.code") %><span class="text-red-500">*</span></td>
-  <td>
-    <%= f.number_field :code, size: 4, class: "p-1" %>
-    <p class="ml-2 text-gray-700"><%= t("item_master.code_description") %></p>
-  </td>
+  <td class="pr-2"><%= f.label t("item_master.code") %><span class="text-red-500">*</span></td>
+  <td><%= f.telephone_field :code, size: 4, class: "p-1" %></td>
 </tr>
 <tr>
-  <td class="px-2"><%= f.label t("item_master.category") %><span class="text-red-500">*</span></td>
-  <td>
-    <%= f.number_field :category, size: 1, class: "p-1" %>
-    <p class="ml-2 text-gray-700"><%= t("item_master.category_description") %></p>
-  </td>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.code_description") %></p></td>
+</tr>
+<tr>
+  <td class="pr-2"><%= f.label t("item_master.category") %><span class="text-red-500">*</span></td>
+  <td><%= f.telephone_field :category, size: 1, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.category_description") %></p></td>
 </tr>
 <tr>
   <td class="pr-2"><%= t("item_master.name") %><span class="text-red-500">*</span></td>
-  <td>
-    <%= f.text_field :name, size: 20, class: "p-1" %>
-    <p class="ml-2 text-gray-700"><%= t("item_master.name_example") %></p>
-  </td>
+  <td><%= f.text_field :name, size: 20, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.name_example") %></p></td>
 </tr>
 <tr>
   <td class="pr-2"><%= t("item_master.price") %><span class="text-red-500">*</span></td>
-  <td>
-    <%= f.number_field :price, size: 6, class: "p-1" %>
-    <p class="ml-2 text-gray-700"><%= t("item_master.name_description") %></p>
-  </td>
+  <td><%= f.telephone_field :price, size: 6, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+    <td><p class="ml-2 text-gray-700"><%= t("item_master.name_description") %></p></td>
 </tr>
 <tr>
   <td class="pr-2"><%= t("item_master.description") %></td>
-  <td>
-    <%= f.text_field :description, size: 40, class: "p-1" %>
-    <p class="ml-2 text-gray-700"><%= t("item_master.description_example") %></p>
-  </td>
+  <td><%= f.text_field :description, size: 40, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.description_example") %></p></td>
 </tr>
 </tbody>
 </table>

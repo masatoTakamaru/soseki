@@ -5,6 +5,15 @@ class StudentController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
 
+  #学年の定義
+  @@grades = [
+    "未就学",
+    "年少", "年中", "年長", "小学１年", "小学２年",
+    "小学３年", "小学４年", "小学５年", "小学６年", "中学１年",
+    "中学２年", "中学３年", "高校１年", "高校２年", "高校３年",
+    "既卒"
+  ]
+
   def index
     if params[:class_name]=="asc"
       @students = current_user.students.order(class_name: :asc)

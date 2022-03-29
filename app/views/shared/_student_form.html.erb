@@ -67,7 +67,7 @@
 <tr>
   <td class="pr-2"><%= f.label t("student.grade") %><span class="text-red-500">*</span></td>
   <td class="flex items-center">
-    <%= f.select :grade, @grades, include_blank: t("student.select") %>
+    <%= f.select :grade, @@grades, include_blank: t("student.select") %>
   </td>
 </tr>
 <tr>
