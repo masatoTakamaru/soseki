@@ -1,5 +1,6 @@
 class ItemMaster < ApplicationRecord
 
+  belongs_to :user
   PRICE_REGEXP = /\A-?\d+.\d+\z/
 
   validates :class_name,
