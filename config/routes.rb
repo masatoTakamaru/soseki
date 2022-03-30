@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :student
   resources :item
-  resources :item_master
+  resources :item_master, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :sibling, only: [:show, :update, :destroy]
 
   get "home/index"

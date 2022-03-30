@@ -13,25 +13,30 @@
     <p class="py-4 px-10">講座が登録されていません。「新規登録」をクリックして最初の講座を登録して下さい。</p>
   <div>
 <% else %>
-  <div class="table-frame mb-20 bg-white">
-    <table class="w-full my-4">
+  <div class="table-frame mt-4 mb-20 bg-white">
+    <table class="my-4 w-full">
     <thead>
     <tr class="text-85">
-      <th><%= t("item_master.code") %></th>
-      <th><%= t("item_master.category") %></th>
+      <th class="item-code"><%= t("item_master.code") %></th>
       <th><%= t("item_master.name") %></th>
-      <th><%= t("item_master.price") %></th>
+      <th class="item-price"><%= t("item_master.price") %></th>
       <th><%= t("item_master.description") %></th>
+      <th class="item-category"><%= t("item_master.category") %></th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <% @item_masters.each do |item_master| %>
       <tr>
-        <td class="pr-2"><%= item_master.class_name %></td>
-        <td class="pr-2"><%= item_master.name %></td>
-        <td class="pr-2"><%= item_master.price %></td>
+        <td class="pr-2 text-right"><%= item_master.code %></td>
+        <td class="pr-2"><%= link_to item_master.name, edit_item_master_path(id: item_master.hashid), class: "text-blue" %></td>
+        <td class="pr-2 text-right"><%= item_master.price %></td>
         <td class="pr-2"><%= item_master.description %></td>
-        <td class="pr-2"><%= item_master.category %></td>
+        <td class="pr-2 text-center"><%= item_master.category %></td>
+        <td class="pr-2 text-center">
+          <%= link_to t(".delete"), item_master_path(item_master.hashid),
+              class:"btn py-2 px-4",
+              data: {confirm: t(".delete_confirmation")}, method: :delete %>        </td>
       </tr>
     <% end %>
     </tbody>

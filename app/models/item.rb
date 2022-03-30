@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  include Hashid::Rails
   belongs_to :student
 
   PRICE_REGEXP = /\A-?\d+.\d+\z/

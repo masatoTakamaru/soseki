@@ -48,7 +48,10 @@ div, p {margin-block-start: 0px;margin-block-end: 0px;}
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
   th, tr {border-bottom: dotted 1px $gray-500;}
 }
-table {border-collapse: collapse;}
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 /*テーブル偶数行の色を変更*/
 /*.row-striped tr:nth-child(even) td {background-color: $gray-300;}*/
 /*ボタン*/
@@ -132,7 +135,10 @@ input, select, textarea {
 .items-baseline {align-items: baseline;}
 /*テキスト関係*/
 .font-bold {font-weight: 700;}
+.text-left {text-align: left;}
 .text-center {text-align: center;}
+.text-right {text-align: right;}
+.text-justify {text-align: justify;}
 .underline {text-decoration: underline;}
 @for $i from 0 through 100 {
   .text-#{$i*5} {font-size: #{$i*0.05}rem;}

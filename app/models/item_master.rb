@@ -1,4 +1,5 @@
 class ItemMaster < ApplicationRecord
+  include Hashid::Rails
 
   belongs_to :user
   PRICE_REGEXP = /\A-?\d+.\d+\z/

@@ -5,14 +5,18 @@ class StudentController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
 
-  #学年の定義
-  @@grades = [
-    "未就学",
-    "年少", "年中", "年長", "小学１年", "小学２年",
-    "小学３年", "小学４年", "小学５年", "小学６年", "中学１年",
-    "中学２年", "中学３年", "高校１年", "高校２年", "高校３年",
-    "既卒"
-  ]
+  def initialize
+    super
+    #学年の定義
+    @grades = [
+      "未就学",
+      "年少", "年中", "年長", "小学１年", "小学２年",
+      "小学３年", "小学４年", "小学５年", "小学６年", "中学１年",
+      "中学２年", "中学３年", "高校１年", "高校２年", "高校３年",
+      "既卒"]
+    #生徒数の上限
+    @student_limit = 30
+  end
 
   def index
     if params[:class_name]=="asc"
@@ -29,21 +33,18 @@ class StudentController < ApplicationController
   end
 
   def new
-    if current_user.students.count >= 30
-      flash[:notice] = t("notice.over_limit")
+    if current_user.students.count >= @student_limit
+      flash[:notice] = t("notice.student_overlimit")
       redirect_to student_index_path
     end
     @student = Student.new
   end
 
   def create
-    if current_user.students.count >= 30
-      flash[:notice] = t("notice.over_limit")
-      redirect_to student_index_path
-    end
+    redirect_to student_index_path if current_user.students.count >= @student_limit
     @student = current_user.students.new(student_params)
     if @student.save
-      flash[:notice] = t("notice.new_student_created")
+      flash[:notice] = t("notice.new_student_create")
       redirect_to student_index_path
     else
       render new_student_path
@@ -63,7 +64,7 @@ class StudentController < ApplicationController
   def update
     @student = current_user.students.find_by_hashid(params[:id])
     if @student.update(student_params)
-      flash[:notice] = t("notice.student_updated")
+      flash[:notice] = t("notice.student_update")
       redirect_to student_index_path
     else
       render edit_student_path
@@ -71,7 +72,7 @@ class StudentController < ApplicationController
   end
 
   def destroy
-    @student = current_user.students.find(params[:id])
+    @student = current_user.students.find_by_hashid(params[:id])
     @student.destroy
     flash[:notice] = t("notice.student_destroy")
     redirect_to student_index_path
