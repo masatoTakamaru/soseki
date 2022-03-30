@@ -32,7 +32,7 @@ class SiblingController < ApplicationController
   end
 
   def update
-    sibling = current_user.students.find_by_hashid(params[:sibling_id])
+    sibling = current_user.students.find(params[:sib_id])
     if sibling.update(sibling_group: params[:sibling_group])
       flash[:notice] = t("notice.update_sibling_group")
     end
@@ -40,7 +40,7 @@ class SiblingController < ApplicationController
   end
 
   def destroy
-    sibling = current_user.students.find_by_hashid(params[:sibling_id])
+    sibling = current_user.students.find(params[:sib_id])
     if sibling.update(sibling_group: SecureRandom.uuid)
       flash[:notice] = t("notice.destroy_sibling_group")
     end

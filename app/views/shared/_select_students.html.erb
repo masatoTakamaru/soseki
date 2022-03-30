@@ -8,7 +8,7 @@
   <% end %>
   <p class="pr-2">学年</p>
   <%= form_with url: link_path, method: :get, class: "select-mini", local: true do |f| %>
-    <%= f.select :grade, @grades, selected: @grade, include_blank: "選択して下さい" %>
+    <%= f.select :grade, @grade_name, selected: @grade, include_blank: "選択して下さい" %>
     <%= f.submit "選択", class: "mr-2 btn btn-flat" %>
   <% end %>
   <%= link_to "すべて表示", link_path, class: "btn btn-flat" %>

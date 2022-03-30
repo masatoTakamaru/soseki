@@ -3,12 +3,6 @@ class ItemMasterController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
 
-  def initialize
-    super
-    #講座数の上限
-    @item_limit = 50
-  end
-
   def index
     @item_masters = current_user.item_masters
   end

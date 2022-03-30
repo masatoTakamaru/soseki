@@ -5,19 +5,6 @@ class StudentController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
 
-  def initialize
-    super
-    #学年の定義
-    @grades = [
-      "未就学",
-      "年少", "年中", "年長", "小学１年", "小学２年",
-      "小学３年", "小学４年", "小学５年", "小学６年", "中学１年",
-      "中学２年", "中学３年", "高校１年", "高校２年", "高校３年",
-      "既卒"]
-    #生徒数の上限
-    @student_limit = 30
-  end
-
   def index
     if params[:class_name]=="asc"
       @students = current_user.students.order(class_name: :asc)
@@ -67,7 +54,7 @@ class StudentController < ApplicationController
       flash[:notice] = t("notice.student_update")
       redirect_to student_index_path
     else
-      render edit_student_path
+      render action: :edit
     end
   end
 

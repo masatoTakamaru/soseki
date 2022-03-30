@@ -10,7 +10,7 @@
   <p><%= t("student.class_name") %>:</p>
   <p class="font-bold pr-6"><%= @student[:class_name] %></p>
   <p><%= t("student.grade") %>:</p>
-  <p class="font-bold pr-6"><%= @grades[@student[:grade]] %></p>
+  <p class="font-bold pr-6"><%= @grade_name[@student[:grade]] %></p>
 </div>
 
 <div class="flex justify-center">
@@ -44,12 +44,12 @@
         <% if @student[:sibling_group] == student[:sibling_group] %>
           <%= button_to t(".sibling_destroy"),
             sibling_path, {method: :delete, class: "btn btn-flat-cancel px-1",
-            params: {id: @student.hashid, sibling_id: student.hashid}}
+            params: {id: student.hashid, sib_id: student.id}}
           %>
         <% else %>
           <%= button_to t(".sibling_create"),
             sibling_path, {method: :patch, class: "btn btn-flat px-1",
-            params: {id: @student.hashid, sibling_id: student.hashid, sibling_group: @student[:sibling_group]}}
+            params: {id: @student.hashid, sib_id: student.id, sibling_group: @student[:sibling_group]}}
           %>
         <% end %>
       </td>
@@ -58,7 +58,7 @@
       </td>
       <td class="pr-2"><%= student[:family_name_kana] + " " + student[:given_name_kana] %></td>
       <td class="pr-2"><%= student[:gender] %></td>
-      <td class="pr-2"><%= @grades[student[:grade]] %></td>
+      <td class="pr-2"><%= @grade_name[student[:grade]] %></td>
       <td class="pr-2"><%= student[:school_belong_to] %></td>
       </tr>
     <% end %>
