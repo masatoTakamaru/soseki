@@ -13,5 +13,13 @@ services:
       - .:/soseki
     ports:
       - "3000:3000"
+    environment:
+      SELENIUM_REMOTE_URL: http://webdriver_chrome:4444/wd/hub
     depends_on:
       - db
+      - chrome
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - 4444:4444
+

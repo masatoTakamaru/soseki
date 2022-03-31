@@ -7,6 +7,34 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      student:
+        expire_date: 卒・退会日
+        expire_flag: 卒・退会
+        start_date: 入会日
+        class_name: 所属クラス
+        family_name: 生徒の姓
+        given_name: 生徒の名
+        family_name_kana: 生徒の姓のフリガナ
+        given_name_kana: 生徒の名のフリガナ
+        gender: 性別
+        birth_date: 生年月日
+        school_belong_to: 学校名
+        guardian_family_name: 保護者の姓
+        guardian_given_name: 保護者の名
+        guardian_family_name_kana: 保護者の性のフリガナ
+        guardian_given_name_kana: 保護者の名のフリガナ
+        phone1: 電話番号１
+        phone1_belong_to: 電話番号１の続柄
+        phone2: 電話番号２
+        phone2_belong_to: 電話番号２の続柄
+        postal_code: 郵便番号
+        address: 住所
+        email: メールアドレス
+        user_name: ユーザー名
+        password: パスワード 
+        remarks: 備考欄
+        grade: 学年
   date:
     abbr_day_names:
     - 日

@@ -30,6 +30,7 @@ class StudentController < ApplicationController
   def create
     redirect_to student_index_path if current_user.students.count >= @student_limit
     @student = current_user.students.new(student_params)
+    @student[:sibling_group] = SecureRandom.uuid
     if @student.save
       flash[:notice] = t("notice.new_student_create")
       redirect_to student_index_path

@@ -6,10 +6,18 @@ class ItemMaster < ApplicationRecord
 
   validates :code,
     presence: true,
-    numericality: {in: 0..9999, message: "は0から9999までの間で入力して下さい。"}
+    numericality: {
+          only_integer: true,
+          greater_than: 0,
+          less_than: 10000,
+          message: "は0から9999までの間で入力して下さい。"}
   validates :category,
     presence: true,
-    numericality: {in: 0..3, message: "は0から3までの間で入力して下さい。"}
+    numericality: {
+          only_integer: true,
+          greater_than: 0,
+          less_than: 3,
+          message: "は0から3までの間で入力して下さい。"}
   validates :name,
     presence: true,
     length: {maximum: 20}

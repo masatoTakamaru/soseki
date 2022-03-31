@@ -11,8 +11,6 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
-gem 'rspec-rails', '~> 4.0.1'
-gem 'factory_bot_rails', '~> 6.1.0'
 gem 'rails-i18n', '~> 6.0'
 gem "devise"
 gem 'devise-i18n'
@@ -34,8 +32,10 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
+  gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails', '~> 6.1.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

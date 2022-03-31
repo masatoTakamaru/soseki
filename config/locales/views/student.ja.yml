@@ -16,11 +16,11 @@ ja:
     family_name_kana: 生徒の性のフリガナ
     female: 女
     gender: 性別
-    given_name: 生徒の性
+    given_name: 生徒の姓
     given_name_kana: 生徒の名のフリガナ
     grade: 学年
-    guardian_family_name: 保護者の性
-    guardian_family_name_kana: 保護者の性のフリガナ
+    guardian_family_name: 保護者の姓
+    guardian_family_name_kana: 保護者の姓のフリガナ
     guardian_given_name: 保護者の名
     guardian_given_name_kana: 保護者の名のフリガナ
     guardian_name: 保護者名
@@ -64,6 +64,7 @@ ja:
       delete: 生徒の削除
       delete_confirmation: 削除した生徒は元に戻せません。削除してもよろしいですか？
       siblings: 兄弟姉妹
+      back_to_index: 戻る
     edit:
       update: 更新
       update_confirmation: 生徒情報を更新してもよろしいですか？

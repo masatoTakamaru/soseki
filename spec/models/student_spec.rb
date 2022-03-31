@@ -31,19 +31,19 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "生徒性が空白はNG" do
+    it "生徒姓が空白はNG" do
       student.family_name = ""
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "生徒性が21字以上はNG" do
+    it "生徒姓が21字以上はNG" do
       student.family_name = "あいうえおかきくけこあいうえおかきくけこあ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
     
-    it "生徒性が漢字ひらがなカタカナアルファベット以外はNG" do
+    it "生徒姓が漢字ひらがなカタカナアルファベット以外はNG" do
       student.family_name = "tanaka@tanaka"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
@@ -67,25 +67,25 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "生徒性カナが空白はNG" do
+    it "生徒姓カナが空白はNG" do
       student.family_name_kana = ""
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "生徒性カナが21字以上はNG" do
+    it "生徒姓カナが21字以上はNG" do
       student.family_name_kana = "あいうえおかきくけこあいうえおかきくけこあ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
     
-    it "生徒性カナが全角カタカナ以外はNG" do
+    it "生徒姓カナが全角カタカナ以外はNG" do
       student.family_name_kana = "ｱｲｳｴｵ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "生徒性カナが全角カタカナ以外はNG" do
+    it "生徒姓カナが全角カタカナ以外はNG" do
       student.family_name_kana = "あいうえお"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
@@ -115,19 +115,19 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者性が空白はNG" do
+    it "保護者姓が空白はNG" do
       student.guardian_family_name = ""
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者性が21字以上はNG" do
+    it "保護者姓が21字以上はNG" do
       student.guardian_family_name = "あいうえおかきくけこあいうえおかきくけこあ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
     
-    it "保護者性が漢字ひらがなカタカナアルファベット以外はNG" do
+    it "保護者姓が漢字ひらがなカタカナアルファベット以外はNG" do
       student.guardian_family_name = "tanaka@tanaka"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
@@ -151,25 +151,25 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者性カナが空白はNG" do
+    it "保護者姓カナが空白はNG" do
       student.guardian_family_name_kana = ""
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者性カナが21字以上はNG" do
+    it "保護者姓カナが21字以上はNG" do
       student.guardian_family_name_kana = "あいうえおかきくけこあいうえおかきくけこあ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
     
-    it "保護者性カナが全角カタカナ以外はNG" do
+    it "保護者姓カナが全角カタカナ以外はNG" do
       student.guardian_family_name_kana = "ｱｲｳｴｵ"
       current_user.students << student
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者性カナが全角カタカナ以外はNG" do
+    it "保護者姓カナが全角カタカナ以外はNG" do
       student.guardian_family_name_kana = "あいうえお"
       current_user.students << student
       expect(current_user.students.first).to be_invalid

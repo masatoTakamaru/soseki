@@ -1,12 +1,15 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
+require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'capybara/rails'
 require'devise'
+require 'rspec/rails'
 require File.expand_path("spec/support/controller_macros.rb")
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -33,13 +36,40 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.extend ControllerMacros, :type => :controller
 
+  #chrome設定
+  config.include Capybara::DSL
+
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      if example.metadata[:js]
+        driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+      else
+        driven_by :rack_test
+      end
+    end
+  end
 end
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+
+  driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :selenium_chrome_headless

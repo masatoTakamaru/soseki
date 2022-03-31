@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item_master do
-    class_name    {"中3A"}
+    code          {1000}
     category      {1}
     name          {"国語"}
     price         {9800}

@@ -4,14 +4,12 @@
 
 <h2><%= t("title.student.show") %></h2>
 
-<div class="flex justify-between pt-12 pb-4">
+<div class="flex justify-between pt-4 pb-4">
   <div>
     <%= link_to t(".edit"), edit_student_path(@student.hashid), class: "btn py-2 px-4" %>
     <%= link_to t(".edit_siblings"), sibling_path(@student.hashid), class: "btn py-2 px-4" %>
   </div>
-  <%= link_to t(".delete"), student_path(@student.hashid),
-              class:"btn py-2 px-4",
-              data: {confirm: t(".delete_confirmation")}, method: :delete %>
+  <%= link_to t(".back_to_index") , student_index_path, class: "btn btn-cancel py-2 px-8" %>
 </div>
 <div class="flex justify-evenly bg-white">
   <div class="p-4">
@@ -121,5 +119,10 @@
     <% end %>
   </div>
 <% end %>
+<div class="flex justify-end mt-4">
+  <%= link_to t(".delete"), student_path(@student.hashid),
+              class:"btn btn-cancel py-2 px-4",
+              data: {confirm: t(".delete_confirmation")}, method: :delete %>
+</div>
 
 </div>

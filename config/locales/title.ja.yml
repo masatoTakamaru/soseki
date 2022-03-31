@@ -6,6 +6,8 @@ ja:
       contact: お問い合わせ
       help: ヘルプ
       privacy_policy: プライバシーポリシー
+    users:
+      sign_up: アカウント登録
     student:
       index: 生徒
       new: 生徒の新規登録

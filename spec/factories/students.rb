@@ -5,14 +5,14 @@ FactoryBot.define do
      expire_flag                {true}
      start_date                 {"2021-01-01"}
      class_name                 {"中３A"}
-     family_name                {"タナカ"}
+     family_name                {"田中"}
      given_name                 {"太郎"}
      family_name_kana           {"タナカ"}
      given_name_kana            {"タロウ"}
      gender                     {"男"}
      birth_date                 {"2010-01-01"}
      school_belong_to           {"京都中学校"}
-     grade                      {"中学３年"}
+     grade                      {8}
      guardian_family_name       {"田中"}
      guardian_given_name        {"次郎"}
      guardian_family_name_kana  {"タナカ"}

@@ -35,7 +35,7 @@
         <td class="pr-2 text-center"><%= item_master.category %></td>
         <td class="pr-2 text-center">
           <%= link_to t(".delete"), item_master_path(item_master.hashid),
-              class:"btn py-2 px-4",
+              class:"btn btn-cancel py-2 px-4",
               data: {confirm: t(".delete_confirmation")}, method: :delete %>        </td>
       </tr>
     <% end %>
