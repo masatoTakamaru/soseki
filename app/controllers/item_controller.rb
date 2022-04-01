@@ -4,4 +4,7 @@ class ItemController < ApplicationController
     @students = current_user.students
   end
 
+  def dashboard
+  end
+
 end

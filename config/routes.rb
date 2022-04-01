@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :sibling, only: [:show, :update, :destroy]
 
   get "home/index"
+  get "item/dashboard", to: "item#dashboard", as: "dashboard"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
   get "home/contact", to: "home#contact", as: "contact"
   get "home/help", to: "home#help", as:"help"
