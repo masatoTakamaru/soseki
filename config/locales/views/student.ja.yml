@@ -48,12 +48,12 @@ ja:
     telephone_example: 例:03-1234-5678(半角)
     user_name: ユーザー名
     zen_kana: 全角カタカナ
-
     index:
       number_of_students: 生徒数
       people: 人
       students_empty: 生徒は登録されていません。「新規登録」をクリックして生徒を登録して下さい。
       registration: 新規登録
+      expired: 卒・退会者
     new:
       registration: 生徒を登録する
       confirmation: 生徒を登録してもよろしいですか？
@@ -62,10 +62,18 @@ ja:
       edit: 生徒の編集
       edit_siblings: 兄弟姉妹の設定
       delete: 生徒の削除
+      delete_content: 生徒を削除すると関連する過去の月謝の記録も削除されます。月謝の記録を残したい場合は削除ではなく卒・退会を行ってください。
       delete_confirmation: 削除した生徒は元に戻せません。削除してもよろしいですか？
       siblings: 兄弟姉妹
       back_to_index: 戻る
+      expire: 卒・退会
+      expire_confirmation: 卒・退会名簿に移動してもよろしいですか？
+      header_expire: 卒・退会
+      expire_content: 日付を入力して「卒・退会」をクリックすると、生徒一覧から削除され、卒・退会者名簿に移動します。
     edit:
       update: 更新
       update_confirmation: 生徒情報を更新してもよろしいですか？
       cancel_confirmation: 編集を取り消しますか？
+    expired:
+      back_to_index: 戻る
+      students_empty: 卒・退会者は存在しません。

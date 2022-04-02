@@ -1,4 +1,17 @@
-<%= provide :title, t("title.student.index") %>
+<%= provide :title, t("title.item.index") %>
 
 <div class="container">
+
+<h2>ダッシュボード</h2>
+
+<% if @students.empty? %>
+  <p>生徒が登録されていません。メニューの「生徒」をクリックして生徒を登録して下さい。</p>
+<% end %>
+<% if @item_masters.empty? %>
+  <p>講座が登録されていません。メニューの「講座」をクリックして講座を登録して下さい。</p>
+<% end %>
+<% if @students.present? && @item_masters.present? && @items.empty? %>
+  <p>帳簿が存在しません。「新規登録」をクリックして帳簿を作成して下さい。</p>
+<% end %>
+
 </div>

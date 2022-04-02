@@ -30,13 +30,14 @@
       <tr>
         <td class="pr-2 text-right"><%= item_master.code %></td>
         <td class="pr-2"><%= link_to item_master.name, edit_item_master_path(id: item_master.hashid), class: "text-blue" %></td>
-        <td class="pr-2 text-right"><%= item_master.price %></td>
+        <td class="pr-2 text-right"><%= "%.0f" % item_master.price %></td>
         <td class="pr-2"><%= item_master.description %></td>
         <td class="pr-2 text-center"><%= item_master.category %></td>
         <td class="pr-2 text-center">
           <%= link_to t(".delete"), item_master_path(item_master.hashid),
               class:"btn btn-cancel py-2 px-4",
-              data: {confirm: t(".delete_confirmation")}, method: :delete %>        </td>
+              data: {confirm: t(".delete_confirmation")}, method: :delete %>
+        </td>
       </tr>
     <% end %>
     </tbody>

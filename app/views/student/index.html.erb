@@ -7,7 +7,8 @@
     <p class="font-bold"><%= t(".number_of_students") %> : <span><%= @students.count %></span><%= t(".people") %></p>
     <%= render partial: "shared/student_sort" %>
     <div>
-      <%= link_to t(".registration"), new_student_path, class:"btn py-2 px-8" %>
+      <%= link_to t(".registration"), new_student_path, class: "btn py-2 px-8 mr-4" %>
+      <%= link_to t(".expired"), student_expired_path, class: "btn btn-cancel py-2 px-8" %>
     </div>
   <% end %>
 </div>

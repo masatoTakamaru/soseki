@@ -6,16 +6,15 @@ class StudentController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @students = current_user.students.where(expire_flag: false)
     if params[:class_name]=="asc"
-      @students = current_user.students.order(class_name: :asc)
+      @students = @students.order(class_name: :asc)
     elsif params[:class_name]=="desc"
-      @students = current_user.students.order(class_name: :desc)
+      @students = @students.order(class_name: :desc)
     elsif params[:grade]=="asc"
-      @students = current_user.students.order(grade: :asc)
+      @students = @students.order(grade: :asc)
     elsif params[:grade]=="desc"
-      @students = current_user.students.order(grade: :desc)
-    else
-      @students = current_user.students
+      @students = @students.order(grade: :desc)
     end
   end
 
@@ -30,6 +29,7 @@ class StudentController < ApplicationController
   def create
     redirect_to student_index_path if current_user.students.count >= @student_limit
     @student = current_user.students.new(student_params)
+    @student[:expire_flag] = false
     @student[:sibling_group] = SecureRandom.uuid
     if @student.save
       flash[:notice] = t("notice.new_student_create")
@@ -66,6 +66,22 @@ class StudentController < ApplicationController
     redirect_to student_index_path
   end
 
+  #卒・退会処理
+  def expire
+    @student = current_user.students.find_by_hashid(params[:id])
+    @student[:expire_date] = params[:expire_date]
+    @student[:expire_flag] = true
+    if @student.save
+      flash[:notice] = t("notice.student_expire")
+    else
+      flash[:notice] = t("notice.failure")
+    end
+    redirect_to student_index_path
+  end
+
+  def expired
+    @students = current_user.students.where(expire_flag: true).order(expire_date: :desc)
+  end
 
   #前月の名簿の引き継ぎ
   def copy_prev_month

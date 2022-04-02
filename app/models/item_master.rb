@@ -8,15 +8,15 @@ class ItemMaster < ApplicationRecord
     presence: true,
     numericality: {
           only_integer: true,
-          greater_than: 0,
-          less_than: 10000,
+          greater_than_or_equal_to: 0,
+          less_than_or_equal_to: 9999,
           message: "は0から9999までの間で入力して下さい。"}
   validates :category,
     presence: true,
     numericality: {
           only_integer: true,
-          greater_than: 0,
-          less_than: 3,
+          greater_than_or_equal_to: 0,
+          less_than_or_equal_to: 3,
           message: "は0から3までの間で入力して下さい。"}
   validates :name,
     presence: true,
@@ -28,5 +28,4 @@ class ItemMaster < ApplicationRecord
   validates :description,
     allow_nil: true,
     length: {maximum: 40}
-
 end

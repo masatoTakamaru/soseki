@@ -14,10 +14,11 @@ ja:
       show: 生徒の情報
       edit: 生徒の編集
       advance_grade_confirm: 生徒の進級
+      expired: 卒・退会者
     sibling:
       show: 兄弟姉妹の設定
     item:
-      dashboard: ダッシュボード
+      index: ダッシュボード
     item_master:
       index: 講座管理
       new: 講座の新規登録

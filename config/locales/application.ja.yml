@@ -20,6 +20,8 @@ ja:
     new_itemmaster_create: 新規講座が登録されました。
     itemmaster_update: 講座が更新されました。
     itemmaster_destroy: 講座が削除されました。
+    student_expire: 卒・退会名簿に移動しました。
+    failure: 処理に失敗しました。
   cancel: キャンセル
   created_at: 作成日
   updated_at: 最終更新日

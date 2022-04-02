@@ -1,9 +1,25 @@
 require "csv"
 require "date"
 
+=begin
+CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
+  Postal.create(
+    postal_code: line[0],
+    prefecture: line[1],
+    city: line[2],
+    town: line[3],
+    )
+end
+=end
+
+user = User.create(
+  username: "城南ゼミナール",
+  email: "1@gmail.com",
+  password: "111111"
+)
 
 CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |line|
-  Student.create!(
+  student = user.students.build(
     user_id: line[0],
     start_date: line[1],
     class_name: line[2],
@@ -28,15 +44,20 @@ CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |line|
     email: line[21],
     user_name: line[22],
     password_digest: line[23],
-    sibling_group: line[24]
+    sibling_group: line[24],
+    expire_flag: false
     )
+    student.save
 end
 
-CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
-  Postal.create(
-    postal_code: line[0],
-    prefecture: line[1],
-    city: line[2],
-    town: line[3],
-    )
+CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
+  item_master = user.item_masters.build(
+    user_id: line[0],
+    code: line[1],
+    category: line[2],
+    name: line[3],
+    price: line[4],
+    description: line[5]
+  )
+  item_master.save
 end
