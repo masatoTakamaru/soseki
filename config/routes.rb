@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
 
   patch "student/:id/expire", to: "student#expire", as: "student_expire"
+  patch "student/:id/expire_cancel", to: "student#expire_cancel", as: "student_expire_cancel"
   get "student/expired", to: "student#expired", as: "student_expired"
   resources :student
 

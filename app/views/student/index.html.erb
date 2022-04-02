@@ -4,7 +4,7 @@
 
 <div class="flex justify-between items-center mb-2">
   <% unless @students.count == 0 %>
-    <p class="font-bold"><%= t(".number_of_students") %> : <span><%= @students.count %></span><%= t(".people") %></p>
+    <p class="font-bold"><%= t(".students_amount") %> : <span><%= @students.count %></span><%= t(".people") %></p>
     <%= render partial: "shared/student_sort" %>
     <div>
       <%= link_to t(".registration"), new_student_path, class: "btn py-2 px-8 mr-4" %>

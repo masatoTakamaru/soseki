@@ -49,7 +49,7 @@ ja:
     user_name: ユーザー名
     zen_kana: 全角カタカナ
     index:
-      number_of_students: 生徒数
+      students_amount: 生徒数
       people: 人
       students_empty: 生徒は登録されていません。「新規登録」をクリックして生徒を登録して下さい。
       registration: 新規登録
@@ -70,10 +70,14 @@ ja:
       expire_confirmation: 卒・退会名簿に移動してもよろしいですか？
       header_expire: 卒・退会
       expire_content: 日付を入力して「卒・退会」をクリックすると、生徒一覧から削除され、卒・退会者名簿に移動します。
+      header_expire_cancel: 卒・退会の取り消し
+      expire_cancel_content: 卒・退会を取り消して生徒一覧に戻す
+      expire_cancel: 取り消し
     edit:
       update: 更新
       update_confirmation: 生徒情報を更新してもよろしいですか？
       cancel_confirmation: 編集を取り消しますか？
     expired:
+      students_amount: 卒・退会者
       back_to_index: 戻る
       students_empty: 卒・退会者は存在しません。

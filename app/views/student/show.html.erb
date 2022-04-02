@@ -9,7 +9,11 @@
     <%= link_to t(".edit"), edit_student_path(@student.hashid), class: "btn py-2 px-4" %>
     <%= link_to t(".edit_siblings"), sibling_path(@student.hashid), class: "btn py-2 px-4" %>
   </div>
-  <%= link_to t(".back_to_index") , student_index_path, class: "btn btn-cancel py-2 px-8" %>
+  <% if @student[:expired_flag] %>
+    <%= link_to t(".back_to_index") , student_expired_path, class: "btn btn-cancel py-2 px-8" %>
+  <% else %>
+    <%= link_to t(".back_to_index") , student_index_path, class: "btn btn-cancel py-2 px-8" %>
+  <% end %>
 </div>
 <div class="table-frame flex justify-evenly bg-white">
   <div class="p-4">
@@ -120,15 +124,23 @@
   </div>
 <% end %>
 
-<h2><%= t(".header_expire") %></h2>
-<p><%= t(".expire_content") %></p>
-<%= form_with model: @student, url: student_expire_path(@student.hashid), method: :patch do |f| %>
-  <div class="flex justify-end items-center mt-4 mb-10">
-    <%= f.label t("student.expire_date") %>
-    <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4" %>
-    <p class="text-gray-600"><%= t("student.date_example") %></p>
-    <%= f.submit t(".expire"), class: "btn btn-cancel ml-8 py-2 px-8", data: {confirm: t(".expire_confirmation")} %>
+<% if @student[:expire_flag] %>
+  <h2><%= t(".header_expire_cancel") %></h2>
+  <div class="flex justify-between items-center">
+    <p><%= t(".expire_cancel_content") %></p>
+    <%= link_to t(".expire_cancel"), student_expire_cancel_path, method: :patch, class: "btn btn-cancel py-2 px-8" %>
   </div>
+<% else %>
+  <h2><%= t(".header_expire") %></h2>
+  <p><%= t(".expire_content") %></p>
+  <%= form_with model: @student, url: student_expire_path(@student.hashid), method: :patch do |f| %>
+    <div class="flex justify-end items-center mt-4 mb-10">
+      <%= f.label t("student.expire_date") %>
+      <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4" %>
+      <p class="text-gray-600"><%= t("student.date_example") %></p>
+      <%= f.submit t(".expire"), class: "btn btn-cancel ml-8 py-2 px-8", data: {confirm: t(".expire_confirmation")} %>
+    </div>
+  <% end %>
 <% end %>
 <h2><%= t(".delete") %></h2>
 <p><%= t(".delete_content") %></p>

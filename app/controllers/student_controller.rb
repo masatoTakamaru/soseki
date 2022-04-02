@@ -69,9 +69,7 @@ class StudentController < ApplicationController
   #卒・退会処理
   def expire
     @student = current_user.students.find_by_hashid(params[:id])
-    @student[:expire_date] = params[:expire_date]
-    @student[:expire_flag] = true
-    if @student.save
+    if @student.update(expire_date: params["student"][:expire_date], expire_flag: true)
       flash[:notice] = t("notice.student_expire")
     else
       flash[:notice] = t("notice.failure")
@@ -81,6 +79,16 @@ class StudentController < ApplicationController
 
   def expired
     @students = current_user.students.where(expire_flag: true).order(expire_date: :desc)
+  end
+
+  def expire_cancel
+    @student = current_user.students.find_by_hashid(params[:id])
+    if @student.update(expire_date: nil, expire_flag: false)
+      flash[:notice] = t("notice.student_expire_cancel")
+    else
+      flash[:notice] = t("notice.failure")
+    end
+    redirect_to student_index_path
   end
 
   #前月の名簿の引き継ぎ

@@ -21,6 +21,7 @@ ja:
     itemmaster_update: 講座が更新されました。
     itemmaster_destroy: 講座が削除されました。
     student_expire: 卒・退会名簿に移動しました。
+    student_expire_cancel: 卒・退会を取り消しました。
     failure: 処理に失敗しました。
   cancel: キャンセル
   created_at: 作成日
