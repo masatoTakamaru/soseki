@@ -8,7 +8,7 @@ class ItemMaster < ApplicationRecord
     presence: true,
     numericality: {
           only_integer: true,
-          greater_than_or_equal_to: 0,
+          greater_than_or_equal_to: 1,
           less_than_or_equal_to: 9999,
           message: "は0から9999までの間で入力して下さい。"}
   validates :category,

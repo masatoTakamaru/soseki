@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
     @grade_name = @grades.keys
     #生徒数の上限
     @student_limit = 30
+    #卒・退会者を含む上限
+    @whole_student_limit = 200
     #講座数の上限
     @item_limit = 50
   end

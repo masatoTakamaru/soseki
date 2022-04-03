@@ -19,8 +19,11 @@ class StudentController < ApplicationController
   end
 
   def new
-    if current_user.students.count >= @student_limit
-      flash[:notice] = t("notice.student_overlimit")
+    if current_user.students.count => @whole_student_limit
+      errors[:base]
+    end
+    if current_user.students.where(expire_flag: true).count >= @student_limit
+      errors[:base] << t("notice.student_overlimit")
       redirect_to student_index_path
     end
     @student = Student.new
@@ -42,7 +45,7 @@ class StudentController < ApplicationController
   def show
     @student = current_user.students.find_by_hashid(params[:id])
     @student_full_name = @student[:family_name] + " " + @student[:given_name]
-    @siblings = current_user.students.where(sibling_group: @student[:sibling_group])
+    @siblings = current_user.students.where.not(id: @student[:id]).where(sibling_group: @student[:sibling_group])
   end
 
   def edit

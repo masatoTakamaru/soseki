@@ -39,33 +39,33 @@
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label t("student.birth_date") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.birth_date") %></td>
   <td class="flex items-center">
     <%= f.telephone_field :birth_date, size:10, class: "p-1" %>
     <p class="text-gray-600 pl-2"><%= t("student.date_example") %></p>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label t("student.school_belong_to") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.school_belong_to") %></td>
   <td class="flex items-center">
     <%= f.text_field :school_belong_to, size:60, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= f.label t("student.grade") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= f.label t("student.grade") %></td>
   <td class="flex items-center">
     <%= f.select :grade, @grades, include_blank: t("student.select") %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.guardian_name") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.guardian_name") %></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name, class: "p-1" %>
     <%= f.text_field :guardian_given_name, class: "p-1" %>
   </td>
 </tr>
 <tr>
-  <td class="pr-2"><%= t("student.kana") %><span class="text-red-500">*</span></td>
+  <td class="pr-2"><%= t("student.kana") %></td>
   <td class="flex items-center">
     <%= f.text_field :guardian_family_name_kana, class: "p-1" %>
     <%= f.text_field :guardian_given_name_kana, class: "p-1" %>

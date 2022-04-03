@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 feature "ホーム画面", type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  before do
+    user_seed
+  end
+
   scenario "ホームページが表示される" do
     visit root_path
     expect(page).to have_content "Soseki"
@@ -36,9 +39,9 @@ feature "ホーム画面", type: :feature do
   scenario "ログインができる" do
     visit "users/sign_in"
     # emailを入力する
-    fill_in 'user_email', with: user.email
+    fill_in 'user_email', with: @user.email
     # パスワードを入力する
-    fill_in 'user_password', with: user.password
+    fill_in 'user_password', with: @user.password
     # ログインボタンをおす
     find('input[name="commit"]').click
     expect(page).to have_content('ログインしました。')

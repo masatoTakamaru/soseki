@@ -19,11 +19,11 @@
   <th><%= t("student.gender") %></th>
   <th><%= t("student.grade") %></th>
   <th><%= t("student.school_belong_to") %></th>
-  <th><%= t("student.items") %></th>
   <th><%= t("student.phone1") %></th>
   <th><%= t("student.phone1_belong_to") %></th>
   <th><%= t("student.phone2") %></th>
-  <th class="pr-2"><%= t("student.phone2_belong_to") %></th>
+  <th><%= t("student.phone2_belong_to") %></th>
+  <th class="pr-2"><%= t("student.expire_date") %></th>
 </tr>
 </thead>
 <tbody>
@@ -48,11 +48,11 @@
       <td class="pr-2"><%= student.gender %></td>
       <td class="pr-2"><%= @grade_name[student.grade] %></td>
       <td class="pr-2"><%= student.school_belong_to %></td>
-      <td class="pr-2">[未設定]</td>
       <td class="pr-2"><%= student.phone1 %></td>
       <td class="pr-2"><%= student.phone1_belong_to %> </td>
       <td class="pr-2"><%= student.phone2 %></td>
       <td class="pr-2"><%= student.phone2_belong_to %> </td>
+      <td class="pr-2"><%= student.expire_date %> </td>
     </tr>
   <% end %>
 <% end %>

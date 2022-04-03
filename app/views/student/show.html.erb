@@ -106,18 +106,16 @@
   </div>
 </div>
 
-<% unless @siblings.count == 1 %>
-  <div class="mt-4 p-4 bg-white">
+<% if @siblings.any? %>
+  <div class="mt-4 p-4 bg-white table-frame">
     <p><%= t(".siblings") %></p>
     <% @siblings.each do |sibling| %>
       <% unless sibling.hashid == @student.hashid %>
         <div class="flex">
           <p class="font-bold ml-4 mr-4"><%= sibling[:family_name] + " " + sibling[:given_name] %></p>
           <p class="mr-4"><%= sibling[:family_name_kana] + " " + sibling[:given_name_kana] %></p>
-          <p><%= t("student.class_name") %>:</p>
           <p class="mr-4"><%= sibling[:class_name] %></p>
-          <p><%= t("student.grade") %>:</p>
-          <p><%= sibling[:grade] %></p>
+          <p><%= @grade_name[sibling[:grade].to_i] %></p>
         </div>
       <% end %>
     <% end %>
@@ -136,7 +134,7 @@
   <%= form_with model: @student, url: student_expire_path(@student.hashid), method: :patch do |f| %>
     <div class="flex justify-end items-center mt-4 mb-10">
       <%= f.label t("student.expire_date") %>
-      <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4" %>
+      <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4",value: Date.today %>
       <p class="text-gray-600"><%= t("student.date_example") %></p>
       <%= f.submit t(".expire"), class: "btn btn-cancel ml-8 py-2 px-8", data: {confirm: t(".expire_confirmation")} %>
     </div>

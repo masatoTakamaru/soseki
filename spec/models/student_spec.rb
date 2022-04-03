@@ -115,10 +115,10 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者姓が空白はNG" do
+    it "保護者姓が空白はOK" do
       student.guardian_family_name = ""
       current_user.students << student
-      expect(current_user.students.first).to be_invalid
+      expect(current_user.students.first).to be_valid
     end
 
     it "保護者姓が21字以上はNG" do
@@ -133,10 +133,10 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者名が空白はNG" do
+    it "保護者名が空白はOK" do
       student.guardian_given_name = ""
       current_user.students << student
-      expect(current_user.students.first).to be_invalid
+      expect(current_user.students.first).to be_valid
     end
 
     it "保護者名が21字以上はNG" do
@@ -151,10 +151,10 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者姓カナが空白はNG" do
+    it "保護者姓カナが空白はOK" do
       student.guardian_family_name_kana = ""
       current_user.students << student
-      expect(current_user.students.first).to be_invalid
+      expect(current_user.students.first).to be_valid
     end
 
     it "保護者姓カナが21字以上はNG" do
@@ -175,10 +175,10 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "保護者名カナが空白はNG" do
+    it "保護者名カナが空白はOK" do
       student.guardian_given_name_kana = ""
       current_user.students << student
-      expect(current_user.students.first).to be_invalid
+      expect(current_user.students.first).to be_valid
     end
 
     it "保護者名カナが21字以上はNG" do
@@ -217,10 +217,10 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "学年が空白はNG" do
+    it "学年が空白はOK" do
       student.grade = ""
       current_user.students << student
-      expect(current_user.students.first).to be_invalid
+      expect(current_user.students.first).to be_valid
     end
 
     it "電話番号１が空白はNG" do

@@ -29,22 +29,24 @@ class Student < ApplicationRecord
   validates :family_name_kana, :given_name_kana,
     presence: true,
     length: {maximum: 20},
-    format: {with: KATAKANA_REGEXP, message: "はカタカナで入力して下さい。"}
+    format: {with: KATAKANA_REGEXP, message: "は全角カタカナで入力して下さい。"}
   validates :gender, presence: true
-  validates :birth_date,
-    presence: {message: "に誤りがあります。正しい日付を入力して下さい。"}
   validates :school_belong_to,
-    allow_nil: true,
     length: {maximum: 40}
-  validates :grade, presence: true
+  validates :grade,
+    allow_nil: true,
+    numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 16}
   validates :guardian_family_name, :guardian_given_name,
-    presence: true,
+    allow_blank: true,
     length: {maximum: 20},
     format: {with: HUMAN_NAME_REGEXP, message: "は漢字、ひらがな、カタカナ、アルファベットのいずれかを入力して下さい。"}
   validates :guardian_family_name_kana, :guardian_given_name_kana,
-    presence: true,
+    allow_blank: true,
     length: {maximum: 20},
-    format: {with: KATAKANA_REGEXP, message: "はカタカナで入力して下さい。"}
+    format: {with: KATAKANA_REGEXP, message: "は全角入力して下さい。"}
   validates :phone1,
     presence: true,
     format: {with: PHONE_NUMBER_REGEXP, message: "に誤りがあります。"}
