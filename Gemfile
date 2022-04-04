@@ -15,6 +15,7 @@ gem 'rails-i18n', '~> 6.0'
 gem "devise"
 gem 'devise-i18n'
 gem 'hashid-rails'
+gem 'kaminari'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -31,11 +32,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 3.26'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
-  gem 'rspec-rails', '~> 4.0.1'
-  gem 'factory_bot_rails', '~> 6.1.0'
+  gem 'webdrivers'
+  gem 'rspec-rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

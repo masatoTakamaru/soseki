@@ -59,4 +59,28 @@ feature "生徒の情報", type: :feature do
     expect(page).not_to have_content("沼田 寧花")
   end
 
+  scenario "卒・退会者一覧にページネーションが表示される" do
+    200.times do
+      students_seed
+      student = @students.first
+      student[:expire_flag] = true
+      @user.students << student
+    end
+    click_link "戻る"
+    click_link "卒・退会者"
+    expect(page).to have_content("卒・退会者:200人")
+    expect(page).to have_content("次")
+    expect(page).to have_content("最後")
+  end
+
+  scenario "卒・退会者の上限を超えた場合エラーが表示される" do
+    200.times do
+      students_seed
+      student = @students.first
+      student[:expire_flag] = true
+      @user.students << student
+    end
+    click_button "卒・退会"
+    expect(page).to have_content("卒・退会者が上限に達しています。不要な卒・退会者を削除して下さい。")
+  end
 end

@@ -19,11 +19,8 @@ class StudentController < ApplicationController
   end
 
   def new
-    if current_user.students.count => @whole_student_limit
-      errors[:base]
-    end
-    if current_user.students.where(expire_flag: true).count >= @student_limit
-      errors[:base] << t("notice.student_overlimit")
+    if current_user.students.where(expire_flag: false).count >= @student_limit
+      flash[:notice] = t("notice.student_overlimit")
       redirect_to student_index_path
     end
     @student = Student.new
@@ -64,24 +61,36 @@ class StudentController < ApplicationController
 
   def destroy
     @student = current_user.students.find_by_hashid(params[:id])
-    @student.destroy
-    flash[:notice] = t("notice.student_destroy")
-    redirect_to student_index_path
+    if @student[:expire_flag]
+      @student.destroy
+      flash[:notice] = t("notice.student_destroy")
+      redirect_to student_expired_path
+    else
+      @student.destroy
+      flash[:notice] = t("notice.student_destroy")
+      redirect_to student_index_path
+    end
   end
 
   #卒・退会処理
   def expire
-    @student = current_user.students.find_by_hashid(params[:id])
-    if @student.update(expire_date: params["student"][:expire_date], expire_flag: true)
-      flash[:notice] = t("notice.student_expire")
+    if current_user.students.where(expire_flag: true).count >= @expire_student_limit
+      flash[:notice] = t("notice.expire_student_overlimit")
+      redirect_to student_path(params[:id])
     else
-      flash[:notice] = t("notice.failure")
+      @student = current_user.students.find_by_hashid(params[:id])
+      if @student.update(expire_date: params["student"][:expire_date], expire_flag: true)
+        flash[:notice] = t("notice.student_expire")
+      else
+        flash[:notice] = t("notice.failure")
+      end
+      redirect_to student_index_path
     end
-    redirect_to student_index_path
   end
 
   def expired
-    @students = current_user.students.where(expire_flag: true).order(expire_date: :desc)
+    @students_count = current_user.students.where(expire_flag: true).count
+    @students = current_user.students.where(expire_flag: true).order(expire_date: :desc).page(params[:page])
   end
 
   def expire_cancel

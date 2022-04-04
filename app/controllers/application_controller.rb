@@ -16,11 +16,10 @@ class ApplicationController < ActionController::Base
     #生徒数の上限
     @student_limit = 30
     #卒・退会者を含む上限
-    @whole_student_limit = 200
+    @expire_student_limit = 200
     #講座数の上限
     @item_limit = 50
   end
-
 
   def after_sign_in_path_for(resource)
     student_index_path # ログイン後に遷移するpathを設定
@@ -29,7 +28,6 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     root_path # ログアウト後に遷移するpathを設定
   end
-
 
   protected
 

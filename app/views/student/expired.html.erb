@@ -5,7 +5,7 @@
 <h2><%= t("title.student.expired") %></h2>
 
 <div class="flex justify-between items-center">
-  <p><%= t(".students_amount") %>:<%= @students.count %>人</p>
+  <p><%= t(".students_amount") %>:<%= @students_count %>人</p>
   <%= link_to t(".back_to_index"), student_index_path, class: "btn btn-cancel py-2 px-8" %>
 </div>
 
@@ -21,13 +21,12 @@
   <th><%= t("student.school_belong_to") %></th>
   <th><%= t("student.phone1") %></th>
   <th><%= t("student.phone1_belong_to") %></th>
-  <th><%= t("student.phone2") %></th>
-  <th><%= t("student.phone2_belong_to") %></th>
   <th class="pr-2"><%= t("student.expire_date") %></th>
+  <th></th>
 </tr>
 </thead>
 <tbody>
-<% if @students.count == 0 %>
+<% if @students_count == 0 %>
   <tr>
     <td colspan="11">
       <div class="flex justify-center my-4">
@@ -50,14 +49,20 @@
       <td class="pr-2"><%= student.school_belong_to %></td>
       <td class="pr-2"><%= student.phone1 %></td>
       <td class="pr-2"><%= student.phone1_belong_to %> </td>
-      <td class="pr-2"><%= student.phone2 %></td>
-      <td class="pr-2"><%= student.phone2_belong_to %> </td>
       <td class="pr-2"><%= student.expire_date %> </td>
+      <td class="pr-2">
+        <%= link_to t(".delete"), student_path(student.hashid),
+              class:"btn btn-cancel py-2 px-4",
+              data: {confirm: t("student.show.delete_confirmation")}, method: :delete %>
+      </td>
     </tr>
   <% end %>
 <% end %>
 </tbody>
 </table>
+
+<%= paginate @students %>
+
 </div>
 
 </div>

@@ -41,6 +41,14 @@
   padding: 1rem 0;
 }
 
-.form-item-textarea {
-  resize: none;
+.form-item-textarea {resize: none;}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  span {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
 }

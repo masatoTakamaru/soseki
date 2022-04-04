@@ -95,11 +95,6 @@ GEM
       devise (>= 4.8.0)
     diff-lcs (1.5.0)
     erubi (1.10.0)
-    factory_bot (6.1.0)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.1.0)
-      factory_bot (~> 6.1.0)
-      railties (>= 5.0.0)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -112,6 +107,18 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -259,19 +266,19 @@ DEPENDENCIES
   better_errors
   bootsnap (>= 1.4.4)
   byebug
-  capybara (>= 3.26)
+  capybara
   devise
   devise-i18n
-  factory_bot_rails (~> 6.1.0)
   hashid-rails
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.5)
   rails-i18n (~> 6.0)
-  rspec-rails (~> 4.0.1)
+  rspec-rails
   sass-rails (>= 6)
   selenium-webdriver
   spring
