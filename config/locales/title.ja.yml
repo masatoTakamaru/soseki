@@ -18,7 +18,9 @@ ja:
     sibling:
       show: 兄弟姉妹の設定
     item:
-      index: ダッシュボード
+      dashboard: ダッシュボード
+      index: 帳簿の新規登録
+      new: 月謝の登録
     item_master:
       index: 講座管理
       new: 講座の新規登録

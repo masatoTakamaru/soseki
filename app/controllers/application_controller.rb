@@ -29,6 +29,19 @@ class ApplicationController < ActionController::Base
     root_path # ログアウト後に遷移するpathを設定
   end
 
+  def student_sort
+    @students = current_user.students.where(expire_flag: false)
+    if params[:class_name]=="asc"
+      @students = @students.order(class_name: :asc)
+    elsif params[:class_name]=="desc"
+      @students = @students.order(class_name: :desc)
+    elsif params[:grade]=="asc"
+      @students = @students.order(grade: :asc)
+    elsif params[:grade]=="desc"
+      @students = @students.order(grade: :desc)
+    end
+  end
+
   protected
 
     def configure_permitted_parameters

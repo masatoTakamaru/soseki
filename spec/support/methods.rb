@@ -88,3 +88,14 @@ def student_registration(student)
   click_button "生徒を登録する"
 end
 
+def items_master_registration(item_master)
+  visit root_path
+  click_link "講座"
+  click_link "新規登録"
+  fill_in "item_master_code", with: item_master.code
+  fill_in "item_master_category", with: item_master.category
+  fill_in "item_master_name", with: item_master.name
+  fill_in "item_master_price", with: item_master.price
+  fill_in "item_master_description", with: item_master.description
+  click_button "講座を登録する"
+end

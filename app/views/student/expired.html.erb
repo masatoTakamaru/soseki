@@ -41,7 +41,7 @@
     <tr>
       <td class="px-2"><%= student.class_name %></td>
       <td class="font-bold underline pr-2">
-        <%= link_to student.family_name + " " + student.given_name, student_path(id: student.hashid), class: "text-blue" %>
+        <%= link_to student.family_name + " " + student.given_name, student_path(id: student.hashid), class: "text-blue-500" %>
       </td>
       <td class="pr-2"><%= student.family_name_kana + " " + student.given_name_kana %></td>
       <td class="pr-2"><%= student.gender %></td>

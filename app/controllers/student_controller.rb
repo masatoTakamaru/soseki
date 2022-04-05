@@ -6,16 +6,7 @@ class StudentController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @students = current_user.students.where(expire_flag: false)
-    if params[:class_name]=="asc"
-      @students = @students.order(class_name: :asc)
-    elsif params[:class_name]=="desc"
-      @students = @students.order(class_name: :desc)
-    elsif params[:grade]=="asc"
-      @students = @students.order(grade: :asc)
-    elsif params[:grade]=="desc"
-      @students = @students.order(grade: :desc)
-    end
+    student_sort
   end
 
   def new

@@ -1,0 +1,13 @@
+---
+ja:
+  item:
+    date: 日付
+    student_amount: 生徒数
+    item_total: 月謝計
+    dashboard:
+      book: 帳簿
+      new: 新規登録
+      student_empty: 生徒が登録されていません。メニューの「生徒」をクリックして生徒を登録して下さい。
+      item_master_empty: 講座が登録されていません。メニューの「講座」をクリックして講座を登録して下さい。
+      item_empty: 帳簿が存在しません。「新規登録」をクリックして帳簿を作成して下さい。
+      
