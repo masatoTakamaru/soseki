@@ -2,9 +2,98 @@
 
 <div class="container">
 
-<h2><%= t("title.item.new") %></h2>
-
-<p><%= @student[:family_name] %> <%= @student[:given_name] %></p>
-
+<h2>
+  <div class="flex">
+    <%= t("title.item.new") %>
+    <p class="ml-8"><%= @student[:family_name] %> <%= @student[:given_name] %></p>
+    <p class="ml-4"><%= params[:year] %></p>
+    <p class="mx-2"><%= t("datetime.prompts.year")%></p>
+    <p><%= params[:month] %></p>
+    <p class="mx-2"><%= t("datetime.prompts.month")%></p>
+  </div>
+</h2>
+<div class="flex justify-end">
+  <%= button_to "戻る", item_index_path(params[:year], params[:month]), method: :get, class: "btn btn-cancel py-2 px-4" %>
+</div>
+<!--search form-->
+<%= form_with url: new_item_path(id: @student.hashid), method: :get, local: true do |f| %>
+  <h3>講座の検索</h3>
+  <div class="flex items-center mb-4">
+    <p class="mx-4">講座コードで検索</p>
+    <%= f.telephone_field :code, {size: 4} %>
+    <%= f.submit t(".search"), class: "btn btn-flat ml-2 py-2 px-4" %>
+  </div>
+<% end %>
+<!--search result-->
+<% unless @new_item.nil? %>
+  <p>検索結果</p>
+  <div class="mt-4 mb-20">
+  <table class="my-4 w-full">
+  <thead>
+  <tr class="text-85">
+    <th class="item-code"><%= t("item_master.code") %></th>
+    <th><%= t("item_master.name") %></th>
+    <th class="item-price"><%= t("item_master.price") %></th>
+    <th><%= t("item_master.description") %></th>
+    <th class="item-category"><%= t("item_master.category") %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="pr-2 text-right"><%= @new_item[:code] %></td>
+      <td class="pr-2"><%= @new_item[:name] %></td>
+      <td class="pr-2 text-right"><%= "%.0f" % @new_item[:price] %></td>
+      <td class="pr-2"><%= @new_item[:description] %></td>
+      <td class="pr-2 text-center"><%= @new_item[:category] %></td>
+      <td class="pr-2 text-center">
+        <%= button_to "追加", create_item_path, method: :post, params: {student_id: @student.hashid, code: @new_item[:code], year: params[:year], month: params[:month]}, class: "btn py-2 px-4" %>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+  </div>
+<% end %>
+<!--registered item-->
+<% if @items.empty? %>
+  <div class="flex notice mt-4 rounded justify-center">
+    <p class="py-4 px-10">講座が登録されていません。</p>
+  </div>
+<% else %>
+  <h3>登録講座</h3>
+  <div class="table-frame mt-4 mb-20 bg-white">
+    <table class="my-4 w-full">
+    <thead>
+    <tr class="text-85">
+      <th class="item-code"><%= t("item_master.code") %></th>
+      <th><%= t("item_master.name") %></th>
+      <th class="item-price"><%= t("item_master.price") %></th>
+      <th><%= t("item_master.description") %></th>
+      <th class="item-category"><%= t("item_master.category") %></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td class="pr-2 text-right"><%= item[:code] %></td>
+        <td class="pr-2"><%= item[:name] %></td>
+        <td class="pr-2 text-right"><%= item[:price].to_i.to_s(:delimited) %></td>
+        <td class="pr-2"><%= item[:description] %></td>
+        <td class="pr-2 text-center"><%= item[:category] %></td>
+        <td class="pr-2 text-center">
+          <%= button_to "削除", destroy_item_path(item[:id]), method: :delete, class: "btn btn-cancel py-2 px-4", params: {student_id: @student.hashid, year: params[:year], month: params[:month]}, data: {confirm: "削除してもよろしいですか？"} %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+    <div class="flex justify-end mb-4 mr-8 font-bold">
+      <p class="mr-4">合計</p>
+      <%= @total_price.to_i.to_s(:delimited) %>
+      <p class="ml-2">円</p>
+    </div>
+  </div>
+<% end %>
 
 </div>

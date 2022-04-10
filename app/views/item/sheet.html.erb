@@ -2,14 +2,15 @@
 
 <div class="container">
 
-<h2><%= t("title.item.index") %></h2>
-
-<div class="flex items-center">
-  <p class="ml-4"><%= @year %></p>
-  <p class="mx-2"><%= t("datetime.prompts.year")%></p>
-  <p><%= @month %></p>
-  <p class="mx-2"><%= t("datetime.prompts.month")%></p>
-</div>
+<h2>
+  <div class="flex items-center">
+    <%= t("title.item.index") %>
+    <p class="ml-4"><%= params[:year] %></p>
+    <p class="mx-2"><%= t("datetime.prompts.year")%></p>
+    <p><%= params[:month] %></p>
+    <p class="mx-2"><%= t("datetime.prompts.month")%></p>
+  </div>
+</h2>
 
 <div class="flex justify-between items-center mb-2">
   <% unless @students.count == 0 %>
@@ -39,7 +40,7 @@
   <th><%= t("student.name") %></th>
   <th><%= t("student.kana") %></th>
   <th><%= t("student.grade") %></th>
-  <th><%= t("student.items") %></th>
+  <th><%= t("item.price_total") %></th>
 </tr>
 </thead>
 <tbody>
@@ -47,11 +48,13 @@
   <tr>
     <td class="px-2"><%= student.class_name %></td>
     <td class="font-bold underline pr-2">
-      <%= link_to student.family_name + " " + student.given_name, new_item_path(id: student.hashid), class: "text-blue-500" %>
+      <%= link_to "#{student[:family_name]} #{student[:given_name]}", new_item_path(student_id: student.hashid), class: "text-blue-500" %>
     </td>
-    <td class="pr-2"><%= student.family_name_kana + " " + student.given_name_kana %></td>
+    <td class="pr-2"><%= student[:family_name_kana] + " " + student[:given_name_kana] %></td>
     <td class="pr-2"><%= @grade_name[student.grade] %></td>
-    <td class="pr-2">[未設定]</td>
+    <td class="pr-4 text-right">
+      <%= student.items.where(period: @period).all.sum(:price).to_i.to_s(:delimited) %>
+    </td>
   </tr>
 <% end %>
 </tbody>

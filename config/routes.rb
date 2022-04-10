@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   get "home/index"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
 
+  get "item", to: "item#dashboard"
+  delete "item/:id/destroy", to: "item#destroy", as: "destroy_item"
   get "item/dashboard", to: "item#dashboard", as: "dashboard"
-  get "item/index", to: "item#index", as: "item_index"
-  get "item/:id/new", to: "item#new", as: "new_item"
+  get "item/before_sheet", to: "item#before_sheet", as: "item_before_sheet"
+  get "item/:year/:month/sheet", to: "item#sheet", as: "item_sheet"
+  get "item/:student_id/:year/:month/new", to: "item#new", as: "new_item"
+  post "item/create", to: "item#create", as: "create_item"
 
   patch "student/:id/expire", to: "student#expire", as: "student_expire"
   patch "student/:id/expire_cancel", to: "student#expire_cancel", as: "student_expire_cancel"

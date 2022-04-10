@@ -1,41 +1,54 @@
 <%= provide :title, t("title.item.dashboard") %>
 
 <div class="container">
-
-<h2><%= t(".book") %></h2>
-
-<% if @students.empty? %>
-  <p><%= t(".student_empty") %></p>
-<% end %>
-<% if @item_masters.empty? %>
-  <p><%= t(".item_master_empty") %></p>
-<% end %>
-<div class="table-frame">
+<h2><%= t("title.item.dashboard") %></h2>
+<h3><%= t(".book") %></h3>
+<div class="table-frame bg-white p-4">
 <table class="w-full">
 <thead>
 <tr>
   <th><%= t("item.date") %></th>
   <th><%= t("item.student_amount") %></th>
-  <th><%= t("item.item_total") %></th>
+  <th><%= t("item.price_total") %></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<% if @students.present? && @item_masters.present? && @items.empty? %>
-  <td colspan="3">
-    <p class="pl-2 py-2"><%= t(".item_empty") %></p>
-    <%= form_with url: item_index_path, method: :get do |f| %>
-      <div class="flex justify-center items-center pb-4">
-        <%= f.telephone_field :year, {size: 4, value: Date.current.strftime("%Y")} %>
-        <p class="mx-2"><%= t("datetime.prompts.year")%></p>
-        <%= f.telephone_field :month, {size: 2, value: Date.current.strftime("%m")} %>
-        <p class="mx-2"><%= t("datetime.prompts.month")%></p>
-        <%= f.submit t(".new"), class: "btn ml-8 py-2 px-8" %>
-      </div>
-    <% end %>
-  </td>
+<% if @students.present? && @item_masters.present? %>
+  <tr>
+    <td colspan="3">
+      <% if @sheets.empty? %>
+        <p class="pl-2 py-2"><%= t(".item_empty") %></p>
+      <% end %>
+      <%= form_with url: item_before_sheet_path, method: :get do |f| %>
+        <div class="flex justify-center items-center py-4">
+          <p class="mx-2"><%= t(".yearmonth")%></p>
+          <%= f.telephone_field :year, {size: 4, value: Date.current.strftime("%Y")} %>
+          <p class="px-2">/</p>
+          <%= f.telephone_field :month, {size: 2, value: Date.current.strftime("%m")} %>
+          <%= f.submit t(".new"), class: "btn ml-8 py-2 px-8" %>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+  <% @sheets.each do |sheet| %>
+    <tr>
+      <td class="pl-2 text-center">
+        <%= link_to sheet[:path], class: "underline text-blue-500" do %>
+          <%= sheet[:text] %>
+        <% end %>
+      </td>
+      <td class="text-center">
+        <%= sheet[:belongs] %>
+        <%= t("student.index.people") %>
+      </td>
+      <td class="text-right pr-4">
+        <%= sheet[:total].to_i.to_s(:delimited) %>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <p><%= t(".error_empty") %></p>
 <% end %>
-</tr>
 </tbody>
 </table>
 </div>
