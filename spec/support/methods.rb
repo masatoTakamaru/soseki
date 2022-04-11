@@ -2,7 +2,7 @@ require "csv"
 require "date"
 
 def user_seed
-  @user = User.create(
+  User.create(
     username: "城南ゼミナール",
     email: "1@gmail.com",
     password: "111111"
@@ -10,10 +10,9 @@ def user_seed
 end
 
 def students_seed
-  @students = []
+  students = []
   CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |line|
-    @students << @user.students.build(
-      user_id: line[0],
+    students << Student.new(
       start_date: line[1],
       class_name: line[2],
       family_name: line[3],
@@ -42,12 +41,13 @@ def students_seed
       expire_flag: false
       )
   end
+  students
 end
 
 def item_master_seed
-  @item_masters = []
+  item_masters = []
   CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
-    @item_masters << @user.item_masters.build(
+    item_masters << ItemMaster.new(
       user_id: line[0],
       code: line[1],
       category: line[2],
@@ -56,6 +56,19 @@ def item_master_seed
       description: line[5]
     )
   end
+  item_masters.first
+end
+
+def item_seed
+  Item.new(
+    period: "2022-4-1",
+    class_name: "中1A",
+    category: 1,
+    name: "中1国語",
+    price: 10000,
+    description: "中1国語通期講座",
+    code: 1021
+  )
 end
 
 def student_registration(student)
@@ -99,3 +112,4 @@ def items_master_registration(item_master)
   fill_in "item_master_description", with: item_master.description
   click_button "講座を登録する"
 end
+

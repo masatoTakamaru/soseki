@@ -6,7 +6,7 @@ class StudentController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    student_sort
+    @students = student_sort(current_user.students.where(expire_flag: false))
   end
 
   def new

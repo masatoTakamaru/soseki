@@ -27,7 +27,7 @@ feature "アカウント登録", type: :feature do
     fill_in "user_password", with: "123456"
     fill_in "user_password_confirmation", with: "123456"
     click_button "アカウント登録"
-    expect(current_path).to eq student_index_path
+    expect(current_path).to eq dashboard_path
   end
 
   scenario "アカウントページのタイトルが正しく表示される" do

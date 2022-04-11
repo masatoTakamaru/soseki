@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "item/dashboard", to: "item#dashboard", as: "dashboard"
   get "item/before_sheet", to: "item#before_sheet", as: "item_before_sheet"
   get "item/:year/:month/sheet", to: "item#sheet", as: "item_sheet"
-  get "item/:student_id/:year/:month/new", to: "item#new", as: "new_item"
+  get "item/:student_id/:year/:month/bill", to: "item#bill", as: "item_bill"
   post "item/create", to: "item#create", as: "create_item"
 
   patch "student/:id/expire", to: "student#expire", as: "student_expire"

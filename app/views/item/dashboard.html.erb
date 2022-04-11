@@ -3,7 +3,7 @@
 <div class="container">
 <h2><%= t("title.item.dashboard") %></h2>
 <h3><%= t(".book") %></h3>
-<div class="table-frame bg-white p-4">
+<div class="table-frame bg-white p-4 mb-20">
 <table class="w-full">
 <thead>
 <tr>
@@ -13,10 +13,10 @@
 </tr>
 </thead>
 <tbody>
-<% if @students.present? && @item_masters.present? %>
+<% if @students.present? && @item_master.present? %>
   <tr>
     <td colspan="3">
-      <% if @sheets.empty? %>
+      <% if @book.empty? %>
         <p class="pl-2 py-2"><%= t(".item_empty") %></p>
       <% end %>
       <%= form_with url: item_before_sheet_path, method: :get do |f| %>
@@ -30,7 +30,7 @@
       <% end %>
     </td>
   </tr>
-  <% @sheets.each do |sheet| %>
+  <% @book.each do |sheet| %>
     <tr>
       <td class="pl-2 text-center">
         <%= link_to sheet[:path], class: "underline text-blue-500" do %>

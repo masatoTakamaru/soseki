@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe ItemMaster, type: :model do
   context "講座マスターが正しく登録できる" do
 
-    let(:current_user) {FactoryBot.build(:user)}
-    let(:item_master) {FactoryBot.build(:item_master)}
+    let(:current_user) {user_seed}
+    let(:item_master) {item_master_seed}
 
     it "講座マスターが登録できる" do
       current_user.item_masters << item_master

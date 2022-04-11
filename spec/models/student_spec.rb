@@ -4,8 +4,8 @@ RSpec.describe Student, type: :model do
 
   context "生徒登録のvalidationが正しく機能しているか" do
 
-    let(:current_user) {FactoryBot.build(:user)}
-    let(:student) {FactoryBot.build(:student)}
+    let(:current_user) {user_seed}
+    let(:student) {students_seed.first}
 
     it "退会日が不正な日付はNG" do
       student.expire_date = "2021-13-20"
@@ -448,8 +448,8 @@ RSpec.describe Student, type: :model do
 
   context "ユーザーとの関連付けが正しく機能しているか" do
 
-    let(:current_user) {FactoryBot.create(:user)}
-    let(:student) {FactoryBot.build(:student)}
+    let(:current_user) {user_seed}
+    let(:student) {students_seed.first}
 
     it "生徒が登録できればOK" do
       current_user.students << student

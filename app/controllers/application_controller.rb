@@ -22,24 +22,24 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    student_index_path # ログイン後に遷移するpathを設定
+    dashboard_path # ログイン後に遷移するpathを設定
   end
 
   def after_sign_out_path_for(resource)
     root_path # ログアウト後に遷移するpathを設定
   end
 
-  def student_sort
-    @students = current_user.students.where(expire_flag: false)
+  def student_sort(students)
     if params[:class_name]=="asc"
-      @students = @students.order(class_name: :asc)
+      students = students.order(class_name: :asc)
     elsif params[:class_name]=="desc"
-      @students = @students.order(class_name: :desc)
+      students = students.order(class_name: :desc)
     elsif params[:grade]=="asc"
-      @students = @students.order(grade: :asc)
+      students = students.order(grade: :asc)
     elsif params[:grade]=="desc"
-      @students = @students.order(grade: :desc)
+      students = students.order(grade: :desc)
     end
+    students
   end
 
   protected

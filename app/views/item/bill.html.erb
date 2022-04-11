@@ -1,22 +1,19 @@
-<%= provide :title, t("title.item.new") %>
+<%= provide :title, t("title.item.bill") %>
 
 <div class="container">
 
 <h2>
   <div class="flex">
-    <%= t("title.item.new") %>
-    <p class="ml-8"><%= @student[:family_name] %> <%= @student[:given_name] %></p>
-    <p class="ml-4"><%= params[:year] %></p>
-    <p class="mx-2"><%= t("datetime.prompts.year")%></p>
-    <p><%= params[:month] %></p>
-    <p class="mx-2"><%= t("datetime.prompts.month")%></p>
+    <%= t("title.item.bill") %>
+    <p class="ml-8"><%= @bill[:name] %></p>
+    <p class="ml-4"><%= @bill[:period_text] %></p>
   </div>
 </h2>
 <div class="flex justify-end">
-  <%= button_to "戻る", item_index_path(params[:year], params[:month]), method: :get, class: "btn btn-cancel py-2 px-4" %>
+  <%= button_to "戻る", item_sheet_path(params[:year], params[:month]), method: :get, class: "btn btn-cancel py-2 px-4" %>
 </div>
 <!--search form-->
-<%= form_with url: new_item_path(id: @student.hashid), method: :get, local: true do |f| %>
+<%= form_with url: item_bill_path(student_id: params[:student_id], year: params[:year], month: params[:month]), method: :get, local: true do |f| %>
   <h3>講座の検索</h3>
   <div class="flex items-center mb-4">
     <p class="mx-4">講座コードで検索</p>
@@ -47,7 +44,7 @@
       <td class="pr-2"><%= @new_item[:description] %></td>
       <td class="pr-2 text-center"><%= @new_item[:category] %></td>
       <td class="pr-2 text-center">
-        <%= button_to "追加", create_item_path, method: :post, params: {student_id: @student.hashid, code: @new_item[:code], year: params[:year], month: params[:month]}, class: "btn py-2 px-4" %>
+        <%= button_to "追加", create_item_path, method: :post, params: {student_id: params[:student_id], code: @new_item[:code], year: params[:year], month: params[:month]}, class: "btn py-2 px-4" %>
       </td>
     </tr>
   </tbody>
@@ -82,7 +79,7 @@
         <td class="pr-2"><%= item[:description] %></td>
         <td class="pr-2 text-center"><%= item[:category] %></td>
         <td class="pr-2 text-center">
-          <%= button_to "削除", destroy_item_path(item[:id]), method: :delete, class: "btn btn-cancel py-2 px-4", params: {student_id: @student.hashid, year: params[:year], month: params[:month]}, data: {confirm: "削除してもよろしいですか？"} %>
+          <%= button_to "削除", destroy_item_path(item[:id]), method: :delete, class: "btn btn-cancel py-2 px-4", params: {student_id: params[:student_id], year: params[:year], month: params[:month]}, data: {confirm: "削除してもよろしいですか？"} %>
         </td>
       </tr>
     <% end %>
@@ -90,7 +87,7 @@
     </table>
     <div class="flex justify-end mb-4 mr-8 font-bold">
       <p class="mr-4">合計</p>
-      <%= @total_price.to_i.to_s(:delimited) %>
+      <%= @bill[:total] %>
       <p class="ml-2">円</p>
     </div>
   </div>

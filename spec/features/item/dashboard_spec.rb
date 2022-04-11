@@ -1,69 +1,62 @@
 require "rails_helper"
 feature "ダッシュボード", type: :feature do
+
+  let(:current_user) {user_seed}
+  let(:item_master) {item_master_seed}
+  let(:students) {students_seed}
+  let(:item) {item_seed}
+  let(:student) {students_seed.first}
+
   before do
-    user_seed
-    students_seed
-    item_master_seed
     visit "users/sign_in"
-    fill_in 'user_email', with: @user.email
-    fill_in 'user_password', with: @user.password
-    find('input[name="commit"]').click
+    # emailを入力する
+    fill_in "user_email", with: current_user.email
+    # パスワードを入力する
+    fill_in "user_password", with: current_user.password
+    # ログインボタンをおす
+    find("input[name='commit']").click
+    expect(page).to have_content("ログインしました。")
+  end
+
+  scenario "ログイン後にダッシュボードに移動する" do
+    expect(page).to have_content("ログインしました。")
+    expect(current_path).to eq dashboard_path
   end
 
   scenario "タイトルが正しく表示される" do
-    click_link "ダッシュボード"
     expect(page).to have_title("ダッシュボード")
   end
 
-  scenario "生徒が存在しない場合メッセージが表示される" do
-    click_link "ダッシュボード"
-    expect(page).to have_content("生徒が登録されていません。")
+  scenario "生徒も講座も存在しない場合メッセージが表示される" do
+    expect(page).to have_content("生徒または講座が登録されていません。")
   end
 
-  scenario "講座が存在しない場合メッセージが表示される" do
+  scenario "生徒が存在し講座が存在しない場合メッセージが表示される" do
+    current_user.students << student
     click_link "ダッシュボード"
-    expect(page).to have_content("講座が登録されていません。")
-  end
-
-  scenario "生徒が存在する場合エラーメッセージが表示されない" do
-    student = @students.first
-    student_registration(student)
-    click_link "ダッシュボード"
-    expect(page).not_to have_content("生徒が登録されていません。")
+    expect(page).to have_content("生徒または講座が登録されていません。")
   end
 
   scenario "講座が存在する場合エラーメッセージが表示されない" do
-    item_master = @item_masters.first
-    click_link "講座"
-    click_link "新規登録"
-    fill_in "item_master_code", with: item_master.code 
-    fill_in "item_master_category", with: item_master.category
-    fill_in "item_master_name", with: item_master.name
-    fill_in "item_master_price", with: item_master.price
-    fill_in "item_master_description", with: item_master.description
-    click_button "講座を登録する"
-    expect(page).to have_content("新規講座が登録されました。")
+    current_user.students << student
+    current_user.item_masters << item_master
     click_link "ダッシュボード"
-    expect(page).not_to have_content("講座が登録されていません。")
+    expect(page).not_to have_content("生徒または講座が登録されていません。")
   end
 
   scenario "帳簿が存在しない場合メッセージが表示される" do
-    student = @students.first
-    student_registration(student)
-    item_master = @item_masters.first
-    items_master_registration(item_master)
+    current_user.students << student
+    current_user.item_masters << item_master
     click_link "ダッシュボード"
     expect(page).to have_content("帳簿が存在しません。「新規登録」をクリックして帳簿を作成して下さい。")
   end
 
-  scenario "帳簿登録のタイトルが正しく表示される" do
-    student = @students.first
-    student_registration(student)
-    item_master = @item_masters.first
-    items_master_registration(item_master)
+  scenario "台帳のタイトルが正しく表示される" do
+    current_user.students << student
+    current_user.item_masters << item_master
     click_link "ダッシュボード"
     click_button "新規登録"
-    expect(page).to have_title("帳簿の新規登録")
+    expect(page).to have_title("台帳")
   end
 
 end

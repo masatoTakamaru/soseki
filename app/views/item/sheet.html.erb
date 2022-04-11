@@ -5,27 +5,24 @@
 <h2>
   <div class="flex items-center">
     <%= t("title.item.index") %>
-    <p class="ml-4"><%= params[:year] %></p>
-    <p class="mx-2"><%= t("datetime.prompts.year")%></p>
-    <p><%= params[:month] %></p>
-    <p class="mx-2"><%= t("datetime.prompts.month")%></p>
+    <%= @sheet[:period_text] %>
   </div>
 </h2>
 
 <div class="flex justify-between items-center mb-2">
-  <% unless @students.count == 0 %>
-    <p class="font-bold"><%= t("student.index.students_amount") %> : <span><%= @students.count %></span><%= t("student.index.people") %></p>
+  <% unless @sheet[:belongs] == 0 %>
+    <p class="font-bold"><%= t("student.index.students_amount") %> : <span><%= @sheet[:belongs] %></span><%= t("student.index.people") %></p>
     <div class="flex">
       <p class="mr-2"><%= t("student.sort") %></p>
       <% if params[:class_name] == "asc" %>
-        <p class="mx-2"><%= link_to t("student.class_name"), item_index_path(class_name: "desc") %></p>
+        <p class="mx-2"><%= link_to t("student.class_name"), item_sheet_path(class_name: "desc") %></p>
       <% elsif params[:class_name] == "desc" || params[:class_name].nil? %>
-        <p class="mx-2"><%= link_to t("student.class_name"), item_index_path(class_name: "asc") %></p>
+        <p class="mx-2"><%= link_to t("student.class_name"), item_sheet_path(class_name: "asc") %></p>
       <% end %>
       <% if params[:grade] == "asc" %>
-        <p class="mx-2"><%= link_to t("student.grade"), item_index_path(grade: "desc") %></p>
+        <p class="mx-2"><%= link_to t("student.grade"), item_sheet_path(grade: "desc") %></p>
       <% elsif params[:grade] == "desc" || params[:grade].nil? %>
-        <p class="mx-2"><%= link_to t("student.grade"), item_index_path(grade: "asc") %></p>
+        <p class="mx-2"><%= link_to t("student.grade"), item_sheet_path(grade: "asc") %></p>
       <% end %>
     </div>
   <% end %>
@@ -44,21 +41,24 @@
 </tr>
 </thead>
 <tbody>
-<% @students.each do |student| %>
+<% @sheet[:students].each do |student| %>
   <tr>
-    <td class="px-2"><%= student.class_name %></td>
+    <td class="pl-8"><%= student[:class_name] %></td>
     <td class="font-bold underline pr-2">
-      <%= link_to "#{student[:family_name]} #{student[:given_name]}", new_item_path(student_id: student.hashid), class: "text-blue-500" %>
+      <%= link_to student[:name], item_bill_path(student_id: student[:student_id]), class: "text-blue-500" %>
     </td>
-    <td class="pr-2"><%= student[:family_name_kana] + " " + student[:given_name_kana] %></td>
-    <td class="pr-2"><%= @grade_name[student.grade] %></td>
-    <td class="pr-4 text-right">
-      <%= student.items.where(period: @period).all.sum(:price).to_i.to_s(:delimited) %>
+    <td class="pr-2"><%= student[:kana] %></td>
+    <td class="pr-2"><%= student[:grade_name] %></td>
+    <td class="pr-8 text-right">
+      <%= student[:total] %>
     </td>
   </tr>
 <% end %>
 </tbody>
 </table>
+<div class="flex justify-end pr-8 mb-4">
+  <p>計 <%= @sheet[:total] %></p>
+</div>
 </div>
 
 </div>

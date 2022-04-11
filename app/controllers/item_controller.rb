@@ -7,17 +7,14 @@ class ItemController < ApplicationController
 
   def dashboard
     @students = current_user.students
-    @item_masters = current_user.item_masters
-    periods = current_user.items.select(:period).distinct.pluck(:period)
-    @sheets = []
+    @item_master = current_user.item_masters
+    periods = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
+    @book = []
     periods.each do |period|
       #月ごとの概要を配列として返す
-      #period: 2022-04-01
-      #text: "2022年4月"
-      #belongs: 当月の生徒数
-      #total: 当月請求額
-      #path: 生徒別明細ページへのパス
-      @sheets << {
+      #period:2022-04-01, text:"2022年4月", belongs:当月の生徒数
+      #total:当月請求額, path:生徒別明細ページへのパス
+      @book << {
         period: period,
         text: "#{period.year} #{t('datetime.prompts.year')} #{period.month} #{t('datetime.prompts.month')}",
         belongs: current_user.items.where(period: period).select(:student_id).distinct.pluck(:student_id).count,
@@ -35,24 +32,51 @@ class ItemController < ApplicationController
       flash[:notice] = "正しい年月を入力して下さい。"
       redirect_to dashboard_path and return
     end
-    redirect_to item_index_path(year: year, month: month)
+    redirect_to item_sheet_path(year: year, month: month)
   end
 
   def sheet
-    student_sort
-    @period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    students = student_sort(current_user.students.where(expire_flag: false))
+    @sheet = {
+      period: period,
+      period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
+      belongs: students.count,
+      total: current_user.items.where(period: period).pluck(:price).sum.to_i.to_s(:delimited),
+      students: [],
+      item_masters: current_user.item_masters,
+    }
+    students.each do |student|
+      @sheet[:students] << {
+        student_id: student.hashid,
+        name: "#{student[:family_name]} #{student[:given_name]}",
+        kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
+        class_name: student[:class_name],
+        grade_name: @grade_name[student[:grade]],
+        total: current_user.items.where(student_id: student[:id], period: period).pluck(:price).sum.to_i.to_s(:delimited)
+      }
+    end
   end
 
-  def new
-    @student = current_user.students.find_by_hashid(params[:student_id])
-    @item_masters = current_user.item_masters
+  def bill
     period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    @items = @student.items.where(student_id: @student[:id], period: period).order(code: :asc)
-    @total_price = @items.all.sum(:price)
+    student = current_user.students.find_by_hashid(params[:student_id])
+    @item_master = current_user.item_masters
+    @items = student.items.where(period: period).order(code: :asc)
+    @bill = {
+      student_id: student.hashid,
+      period: period,
+      period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
+      name: "#{student[:family_name]} #{student[:given_name]}",
+      kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
+      class_name: student[:class_name],
+      grade_name: @grade_name[student[:grade]],
+      total: @items.pluck(:price).sum.to_i.to_s(:delimited)
+    }
     #コードによる講座検索
     if params[:code].present?
-      if @item_masters.find_by(code: params[:code])
-        @new_item = @item_masters.find_by(code: params[:code])
+      if @item_master.find_by(code: params[:code])
+        @new_item = @item_master.find_by(code: params[:code])
         flash[:notice] = nil
       else
         @new_item = nil
@@ -82,7 +106,7 @@ class ItemController < ApplicationController
     else
       flash[:notice] = "講座の追加に失敗しました。"
     end
-    redirect_to new_item_url(params[:student_id], params[:year], params[:month])
+    redirect_to item_bill_path(params[:student_id], params[:year], params[:month])
   end
 
   def destroy
@@ -92,7 +116,7 @@ class ItemController < ApplicationController
     else
       flash[:notice] = "登録講座の削除に失敗しました。"
     end
-    redirect_to new_item_url(params[:student_id], params[:year], params[:month])
+    redirect_to item_bill_url(params[:student_id], params[:year], params[:month])
   end
 
 end

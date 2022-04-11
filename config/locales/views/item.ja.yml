@@ -10,6 +10,6 @@ ja:
       new: 新規登録
       error_empty: 生徒または講座が登録されていません。
       item_empty: 帳簿が存在しません。「新規登録」をクリックして帳簿を作成して下さい。
-    new:
+    bill:
       search: 検索
       

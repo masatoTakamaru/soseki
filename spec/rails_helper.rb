@@ -4,7 +4,6 @@ require 'selenium-webdriver'
 require 'capybara/rails'
 require'devise'
 require 'rspec/rails'
-require File.expand_path("spec/support/controller_macros.rb")
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -40,7 +39,8 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.extend ControllerMacros, :type => :controller
+  #config.extend ControllerMacros, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 
   #chrome設定
   config.include Capybara::DSL

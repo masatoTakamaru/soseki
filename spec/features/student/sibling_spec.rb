@@ -1,20 +1,22 @@
 require 'rails_helper'
 
 feature "兄弟姉妹の設定", type: :feature do
+  let(:current_user) {user_seed}
+  let(:item_master) {item_master_seed}
+  let(:students) {students_seed}
+  let(:item) {item_seed}
+  let(:student) {students_seed.first}
+  let(:student2) {students_seed.second}
 
   before do
-    #ユーザーを作成してログイン
-    user_seed
     visit "users/sign_in"
-    fill_in 'user_email', with: @user.email
-    fill_in 'user_password', with: @user.password
-    find('input[name="commit"]').click
-    students_seed
-    student = @students.first
+    fill_in "user_email", with: current_user.email
+    fill_in "user_password", with: current_user.password
+    find("input[name='commit']").click
+    click_link "生徒"
     student_registration(student)
-    students_seed
-    student = @students.second
-    student_registration(student)
+    student_registration(student2)
+    click_link "生徒"
     click_link "沼田 寧花"
     click_link "兄弟姉妹の設定"
   end
