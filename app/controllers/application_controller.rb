@@ -19,6 +19,15 @@ class ApplicationController < ActionController::Base
     @expire_student_limit = 200
     #講座数の上限
     @item_limit = 50
+    @item_cats = [
+      "単独", "従量", "諸費", "割引"
+    ]
+    @item_cat_colors = [
+      "text-indigo-500",
+      "text-teal-500",
+      "text-yellow-500",
+      "text-pink-500"
+    ]
   end
 
   def after_sign_in_path_for(resource)

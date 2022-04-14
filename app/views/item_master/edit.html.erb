@@ -6,10 +6,18 @@
 
 <hr class="my-4"/>
 <%= form_with model: @item_master, url: item_master_path, method: :patch, local:true do |f| %>
-  <%= render "shared/item_master_form", f: f %>
+  <% if @item_master[:category] == 0 %>
+    <%= render "shared/item_master_form_single", f: f %>
+  <% elsif @item_master[:category] == 1 %>
+    <%= render "shared/item_master_form_qty_price", f: f %>
+  <% elsif @item_master[:category] == 2 %>
+    <%= render "shared/item_master_form_admin", f: f %>
+  <% elsif @item_master[:category] == 3 %>
+    <%= render "shared/item_master_form_discount", f: f %>
+  <% end %>
   <div class="flex justify-center my-4">
     <%= f.submit t(".update"), class: "btn py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
-    <%= link_to t("cancel"), item_master_index_path, class: "btn btn-cancel pt-3 pb-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
+    <%= link_to t("cancel"), item_master_index_path, class: "btn btn-cancel pt-3 pb-2 px-4" %>
   </div>
 <% end %>
 

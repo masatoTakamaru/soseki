@@ -1,16 +1,7 @@
 require "csv"
 require "date"
 
-=begin
-CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
-  Postal.create(
-    postal_code: line[0],
-    prefecture: line[1],
-    city: line[2],
-    town: line[3],
-    )
-end
-=end
+
 
 user = User.create(
   username: "城南ゼミナール",
@@ -92,4 +83,20 @@ CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
     description: line[5]
   )
   item_master.save
+end
+
+1.upto(12){|qty|
+  user.qty_prices.create(
+    qty: qty,
+    price: (11000*(1-0.95**qty))/(1-0.95) - (11000*(1-0.95**qty))/(1-0.95) % 100
+  )
+}
+
+CSV.foreach("db/seed-ken-all.csv", encoding: 'UTF-8') do |line|
+  Postal.create(
+    postal_code: line[0],
+    prefecture: line[1],
+    city: line[2],
+    town: line[3],
+    )
 end

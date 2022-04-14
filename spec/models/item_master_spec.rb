@@ -59,7 +59,6 @@ RSpec.describe ItemMaster, type: :model do
       expect(current_user.item_masters.first).to be_invalid
     end
 
-
     it "カテゴリが空白はNG" do
       item_master.category = ""
       current_user.item_masters << item_master
@@ -90,8 +89,14 @@ RSpec.describe ItemMaster, type: :model do
       expect(current_user.item_masters.first).to be_invalid
     end
 
-    it "講座名が21字以上はNG" do
-      item_master.name = "１２３４５６７８９０１２３４５６７８９０１"
+    it "講座名が30字はOK" do
+      item_master.name = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０"
+      current_user.item_masters << item_master
+      expect(current_user.item_masters.first).to be_valid
+    end
+
+    it "講座名が31字以上はNG" do
+      item_master.name = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１"
       current_user.item_masters << item_master
       expect(current_user.item_masters.first).to be_invalid
     end
@@ -102,10 +107,10 @@ RSpec.describe ItemMaster, type: :model do
       expect(current_user.item_masters.first).to be_invalid
     end
 
-    it "価格が負の値はOK" do
+    it "価格が負の値はNG" do
       item_master.price = "-1.5"
       current_user.item_masters << item_master
-      expect(current_user.item_masters.first).to be_valid
+      expect(current_user.item_masters.first).to be_invalid
     end
 
     it "価格が数式はNG" do
@@ -116,6 +121,24 @@ RSpec.describe ItemMaster, type: :model do
 
     it "価格が全角文字はNG" do
       item_master.price = "１２３"
+      current_user.item_masters << item_master
+      expect(current_user.item_masters.first).to be_invalid
+    end
+
+    it "内容が空白はOK" do
+      item_master.description = ""
+      current_user.item_masters << item_master
+      expect(current_user.item_masters.first).to be_valid
+    end
+
+    it "内容が40文字はOK" do
+      item_master.description = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０"
+      current_user.item_masters << item_master
+      expect(current_user.item_masters.first).to be_valid
+    end
+
+    it "内容が41文字以上はNG" do
+      item_master.description = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１"
       current_user.item_masters << item_master
       expect(current_user.item_masters.first).to be_invalid
     end

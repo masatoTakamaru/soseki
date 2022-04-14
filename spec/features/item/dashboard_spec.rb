@@ -28,20 +28,20 @@ feature "ダッシュボード", type: :feature do
   end
 
   scenario "生徒も講座も存在しない場合メッセージが表示される" do
-    expect(page).to have_content("生徒または講座が登録されていません。")
+    expect(page).to have_content("生徒または項目が登録されていません。")
   end
 
   scenario "生徒が存在し講座が存在しない場合メッセージが表示される" do
     current_user.students << student
     click_link "ダッシュボード"
-    expect(page).to have_content("生徒または講座が登録されていません。")
+    expect(page).to have_content("生徒または項目が登録されていません。")
   end
 
   scenario "講座が存在する場合エラーメッセージが表示されない" do
     current_user.students << student
     current_user.item_masters << item_master
     click_link "ダッシュボード"
-    expect(page).not_to have_content("生徒または講座が登録されていません。")
+    expect(page).not_to have_content("生徒または項目が登録されていません。")
   end
 
   scenario "帳簿が存在しない場合メッセージが表示される" do

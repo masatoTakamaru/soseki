@@ -8,17 +8,17 @@ ja:
       log_in: ログイン
       log_out: ログアウト
       help: ヘルプ
-      item_master: 講座
+      item_master: 講座と費用
   notice:
     new_student_create: 新規生徒が登録されました。
     student_update: 生徒情報が更新されました。
     student_destroy: 生徒が削除されました。
     update_sibling_group: 兄弟姉妹を設定しました。
     destroy_sibling_group: 設定を解除しました。
-    item_overlimit: 登録できる講座の上限に達しています。これ以上登録できません。
-    new_itemmaster_create: 新規講座が登録されました。
-    itemmaster_update: 講座が更新されました。
-    itemmaster_destroy: 講座が削除されました。
+    item_overlimit: 登録できる項目の上限に達しています。これ以上登録できません。
+    new_itemmaster_create: 項目が登録されました。
+    itemmaster_update: 項目が更新されました。
+    itemmaster_destroy: 項目が削除されました。
     student_expire: 卒・退会名簿に移動しました。
     student_expire_cancel: 卒・退会を取り消しました。
     failure: 処理に失敗しました。

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :students, dependent: :destroy
   has_many :item_masters, dependent: :destroy
   has_many :items, through: :students
-
+  has_many :qty_prices, dependent: :destroy
   
   validates :username,
     presence: true,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_003306) do
+ActiveRecord::Schema.define(version: 2022_04_14_030506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2022_04_08_003306) do
     t.string "prefecture"
     t.string "city"
     t.string "town"
+  end
+
+  create_table "qty_prices", force: :cascade do |t|
+    t.float "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "qty"
   end
 
   create_table "students", force: :cascade do |t|

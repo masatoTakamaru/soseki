@@ -6,10 +6,10 @@ ja:
     price_total: 請求額
     dashboard:
       yearmonth: 年・月
-      book: 帳簿
+      book: 月別台帳
       new: 新規登録
-      error_empty: 生徒または講座が登録されていません。
-      item_empty: 帳簿が存在しません。「新規登録」をクリックして帳簿を作成して下さい。
+      error_empty: 生徒または項目が登録されていません。
+      item_empty: 台帳が存在しません。「新規登録」をクリックして台帳を作成して下さい。
     bill:
       search: 検索
       

@@ -32,6 +32,11 @@ class ItemController < ApplicationController
       flash[:notice] = "正しい年月を入力して下さい。"
       redirect_to dashboard_path and return
     end
+    period = Date.new(year, month, 1)
+    if current_user.items.find_by(period: period).present?
+      flash[:notice] = "台帳はすでに存在しています。"
+      redirect_to dashboard_path and return
+    end
     redirect_to item_sheet_path(year: year, month: month)
   end
 

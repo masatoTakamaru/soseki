@@ -5,12 +5,13 @@
 <h2><%= t("title.item_master.index") %></h2>
 
 <div class="flex justify-end">
-  <%= link_to t("item_master.btn_new"), new_item_master_path, method: :get, class: "btn py-2 px-8" %>
+  <%= link_to t("item_master.btn_new"), new_item_master_path, method: :get, class: "btn py-2 px-8 mr-2" %>
+  <%= link_to "設定", qty_price_edit_path, method: :get, class: "btn py-2 px-8" %>
 </div>
 
 <% if @item_master.empty? %>
   <div class="flex notice mt-4 rounded justify-center">
-    <p class="py-4 px-10">講座が登録されていません。「新規登録」をクリックして最初の講座を登録して下さい。</p>
+    <p class="py-4 px-10">項目が登録されていません。「新規登録」をクリックして最初の項目を登録して下さい。</p>
   </div>
 <% else %>
   <div class="table-frame mt-4 mb-20 bg-white">
@@ -29,10 +30,18 @@
     <% @item_master.each do |item_master| %>
       <tr>
         <td class="pr-2 text-right"><%= item_master.code %></td>
-        <td class="pr-2"><%= link_to item_master[:name], edit_item_master_path(id: item_master.hashid), class: "text-blue-500" %></td>
-        <td class="pr-2 text-right"><%= item_master[:price].to_i.to_s(:delimited) %></td>
+        <td class="pr-2"><%= link_to item_master[:name], edit_item_master_path(id: item_master.hashid), class: "text-blue-500 underline font-bold" %></td>
+        <td class="pr-2">
+          <% if item_master[:category] == 1 %>
+            <p class="text-center">-</p>
+          <% else %>
+            <p class="text-right"><%= item_master[:price].to_i.to_s(:delimited) %></p>
+          <% end %>
+        </td>
         <td class="pr-2"><%= item_master[:description] %></td>
-        <td class="pr-2 text-center"><%= item_master[:category] %></td>
+        <td class="pr-2 text-center">
+          <p class=<%= "#{@item_cat_colors[item_master[:category]]}" %>><%= @item_cats[item_master[:category]] %></p>
+        </td>
         <td class="pr-2 text-center">
           <%= link_to t(".delete"), item_master_path(item_master.hashid),
               class:"btn btn-cancel py-2 px-4",

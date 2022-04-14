@@ -29,13 +29,13 @@ feature "帳簿の新規登録", type: :feature do
     expect(page).to have_content("月謝の登録")
   end
 
-  scenario "講座の検索が表示される" do
-    expect(page).to have_content("講座の検索")
-    expect(page).to have_content("講座コードで検索")
+  scenario "項目の検索が表示される" do
+    expect(page).to have_content("項目の検索")
+    expect(page).to have_content("項目コードで検索")
   end
 
   scenario "登録講座がない場合メッセージが表示される" do
-    expect(page).to have_content("講座が登録されていません。")
+    expect(page).to have_content("項目が登録されていません。")
   end
 
   scenario "講座の検索結果が正しく表示される" do
@@ -62,7 +62,7 @@ feature "帳簿の新規登録", type: :feature do
     click_button "検索"
     click_button "追加"
     click_button "削除"
-    expect(page).to have_content("講座が登録されていません。")
+    expect(page).to have_content("項目が登録されていません。")
   end
 
   scenario "合計の計算が正しく行われる" do

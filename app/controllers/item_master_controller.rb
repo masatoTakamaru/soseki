@@ -4,7 +4,7 @@ class ItemMasterController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @item_master = current_user.item_masters
+    @item_master = current_user.item_masters.order(code: :asc)
   end
 
   def new
@@ -43,7 +43,7 @@ class ItemMasterController < ApplicationController
   def destroy
     @item_master = current_user.item_masters.find_by_hashid(params[:id])
     @item_master.destroy
-    flash[:notice] = t("notice.student_destroy")
+    flash[:notice] = t("notice.itemmaster_destroy")
     redirect_to item_master_index_path
   end
 

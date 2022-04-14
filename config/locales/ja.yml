@@ -35,6 +35,11 @@ ja:
         password: パスワード 
         remarks: 備考欄
         grade: 学年
+      item_master:
+        code: コード
+        name: 項目名
+        price: 価格
+        description: 内容
   date:
     abbr_day_names:
     - 日

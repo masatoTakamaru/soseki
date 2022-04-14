@@ -1,0 +1,35 @@
+<h3><%= @item_cats[1] %></h3>
+<%= f.hidden_field :category, value: 1 %>
+<%= f.hidden_field :price, value: 0 %>
+<div class="flex justify-end">
+  <p><span class="text-red-500">*</span><%= t("required") %></p>
+</div>
+<table>
+<tbody>
+<tr>
+  <td class="pr-2"><%= f.label t("item_master.code") %><span class="text-red-500">*</span></td>
+  <td><%= f.telephone_field :code, size: 4, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.code_description") %></p></td>
+</tr>
+<tr>
+  <td class="pr-2"><%= t("item_master.name") %><span class="text-red-500">*</span></td>
+  <td><%= f.text_field :name, size: 30, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.name_example") %></p></td>
+</tr>
+<tr>
+  <td class="pr-2"><%= t("item_master.description") %></td>
+  <td><%= f.text_field :description, size: 40, class: "p-1" %></td>
+</tr>
+<tr>
+  <td></td>
+  <td><p class="ml-2 text-gray-700"><%= t("item_master.description_example") %></p></td>
+</tr>
+</tbody>
+</table>
+

@@ -2,10 +2,10 @@ class ItemMaster < ApplicationRecord
   include Hashid::Rails
 
   belongs_to :user
-  PRICE_REGEXP = /\A-?\d+.\d+\z/
 
   validates :code,
     presence: true,
+    uniqueness: {message:"はすでに存在しています。"},
     numericality: {
           only_integer: true,
           greater_than_or_equal_to: 1,
@@ -20,11 +20,12 @@ class ItemMaster < ApplicationRecord
           message: "は0から3までの間で入力して下さい。"}
   validates :name,
     presence: true,
-    length: {maximum: 20}
+    length: {maximum: 30}
   validates :price,
     presence: true,
-    numericality: true,
-    format: {with: PRICE_REGEXP, message: "は正の数か負の数（小数含む）を入力して下さい。"}
+    numericality: {
+      greater_than_or_equal_to: 0,
+      message: "は正の数を入力して下さい。"}
   validates :description,
     allow_nil: true,
     length: {maximum: 40}

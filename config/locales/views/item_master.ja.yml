@@ -2,24 +2,23 @@
 ja:
   item_master:
     btn_new: 新規登録
-    code: 講座コード
+    code: コード
     category: 分類
-    name: 講座名
+    name: 項目名
     price: 価格
     description: 内容
     code_description: 0から9999までの半角数字で入力して下さい。
-    category_description: "0:単独課金 1:従量課金 2:諸費 3:割引"
-    name_example: 例:中１数学，中３夏期講習５教科パック，入試直前小論文講座，幼児ベーシックコースなど
-    name_description: 半角数字。割引の場合は-3000など負の数を入力して下さい。
+    name_example: 例:中１数学，中３夏期講習５教科パック，入試直前小論文項目，幼児ベーシックコースなど
+    name_description: 半角数字
     description_example: 補足の説明が必要な場合に入力して下さい。
     index:
       delete: 削除
-      delete_confirmation: 講座を削除してもよろしいですか？
+      delete_confirmation: 項目を削除してもよろしいですか？
     new:
-      registration: 講座を登録する
-      confirmation: 講座を登録してもよろしいですか？
+      registration: 項目を登録する
+      confirmation: 項目を登録してもよろしいですか？
       cancel_confirmation: 登録を取り消しますか？
     edit:
       update: 内容を更新する
-      confirmation: 講座の内容を更新しますか？
+      confirmation: 項目の内容を更新しますか？
       cancel_confirmation: 編集を取り消しますか？

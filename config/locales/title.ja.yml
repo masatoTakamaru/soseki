@@ -22,6 +22,7 @@ ja:
       index: 台帳
       bill: 月謝の登録
     item_master:
-      index: 講座管理
-      new: 講座の新規登録
-      edit: 講座の編集
+      index: 講座と費用
+      new: 項目の新規登録
+      edit: 項目の編集
+      setting: 設定
