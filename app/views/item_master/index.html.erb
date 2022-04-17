@@ -17,7 +17,7 @@
   <div class="table-frame mt-4 mb-20 bg-white">
     <table class="my-4 w-full">
     <thead>
-    <tr class="text-85">
+    <tr class="text-85 dotted-bottom">
       <th class="item-code"><%= t("item_master.code") %></th>
       <th><%= t("item_master.name") %></th>
       <th class="item-price"><%= t("item_master.price") %></th>
@@ -28,7 +28,7 @@
     </thead>
     <tbody>
     <% @item_master.each do |item_master| %>
-      <tr>
+      <tr class="dotted-bottom">
         <td class="pr-2 text-right"><%= item_master.code %></td>
         <td class="pr-2"><%= link_to item_master[:name], edit_item_master_path(id: item_master.hashid), class: "text-blue-500 underline font-bold" %></td>
         <td class="pr-2">

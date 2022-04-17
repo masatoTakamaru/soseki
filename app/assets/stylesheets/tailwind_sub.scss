@@ -21,7 +21,7 @@
   https://tailwindcss.jp/docs/text-color
   $red-500            scss内で変数として使える。
   text-orange-500     文字色
-  bg-teal-500         背景色
+  bg-green-500         背景色
 */
 
 @import "tailwind_color";
@@ -31,13 +31,14 @@ body {
   margin: 0px;
   font-weight: 400;
   line-height: 1.5;
+  background-image: url("bg.gif");
 }
 
 .w-full {width: 100%;}
 a {text-decoration:none;}
 div, p {margin-block-start: 0px;margin-block-end: 0px;}
 .container {
-  max-width: 1180px;
+  max-width: 1020px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
@@ -50,21 +51,23 @@ div, p {margin-block-start: 0px;margin-block-end: 0px;}
 }
 /*table*/
 .table-frame {
-  border: 2px solid $gray-500;
+  border: 2px solid map_get($color_set, gray-500);
   border-radius: 12px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
-  th, tr {border-bottom: dotted 1px $gray-500;}
 }
 table {
   table-layout: fixed;
   border-collapse: collapse;
 }
+.dotted-bottom > th, .dotted-bottom > td {border-bottom: dotted 1px map_get($color_set, gray-500);}
+.solid-top > td {border-top: solid 1px black;}
+
 /*ボタン*/
 .btn {
   color: white;
   font-size: 1rem;
   line-height: 1rem;
-  background-color: $teal-500;
+  background-color: map_get($color_set, green-500);
   position: relative;
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -72,10 +75,10 @@ table {
   border-radius: 6px;
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
   font-weight: bold;
-  border: solid 2px $teal-600;
+  border: solid 2px map_get($color_set, green-600);
   &:hover {
     cursor: pointer;
-    box-shadow: 0 0 3px 2px $teal-500;
+    box-shadow: 0 0 3px 2px map_get($color_set, green-500);
   }
 }
 .btn-flat {
@@ -87,24 +90,24 @@ table {
   border-radius: 4px;
 }
 .btn-cancel {
-  color: $teal-500;
+  color: map_get($color_set, green-500);
   background-color: white;
 }
 .btn-flat-cancel {
-  color: $teal-500;
+  color: map_get($color_set, green-500);
   font-weight: 500;
   font-size: 0.8rem;
   background-color: white;
   padding: 0.1rem 0.75rem;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-  border: solid 1px $teal-500;
+  border: solid 1px map_get($color_set, green-500);
   border-radius: 4px;
 }
 /*badge*/
 .badge {
   font-size: 0.8rem;
   color: white;
-  background-color: $teal-500;
+  background-color: map_get($color_set, green-500);
   margin-right: 0.5rem;
   padding: 0.1rem 0.4rem;
   border-radius: 3px;
@@ -115,14 +118,14 @@ input, select, textarea {
   padding: 0.5rem;
   font-size: 1.15rem;
   border-radius: 4px;
-  border: 1px solid $gray-500;
+  border: 1px solid map_get($color_set, green-500);
   box-sizing: border-box;
 }
 .select-mini select {
   padding: 0.15rem;
   font-size: 0.9rem;
   border-radius: 4px;
-  border: 1px solid $gray-500;
+  border: 1px solid map_get($color_set, green-500);
   box-sizing: border-box;
 }
 .field {line-height: 2rem;}
@@ -153,7 +156,7 @@ h1 {font-size: 1.15rem;}
 h2 {
   font-size: 1.15rem;
   padding-left: 12px;
-  border-left: solid 4px $teal-500;
+  border-left: solid 4px map_get($color_set, green-500);
 }
 h3 {font-size: 1rem;}
 /* padding */

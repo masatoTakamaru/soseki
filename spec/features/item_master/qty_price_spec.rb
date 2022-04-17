@@ -47,7 +47,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("講座数に応じた料金設定")
     fill_in "price1", with: -11000
     click_button "更新"
-    expect(page).to have_content("更新が失敗しました。価格は0以上の整数で入力して下さい。")
+    expect(page).to have_content("更新が失敗しました。価格は0以上の値を入力して下さい。")
   end
 
   scenario "価格が小数はOK" do
@@ -69,7 +69,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("講座数に応じた料金設定")
     fill_in "price1", with: "+1.5"
     click_button "更新"
-    expect(page).to have_content("価格を更新しました。")
+    expect(page).to have_content("更新が失敗しました。価格は0以上の値を入力して下さい。")
   end
 
   scenario "キャンセルをクリックしたら費用と講座に戻る" do

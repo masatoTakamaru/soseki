@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   patch "qty_price/update", to: "qty_price#update", as: "qty_price_update"
 
   get "item", to: "item#dashboard"
-  delete "item/:id/destroy", to: "item#destroy", as: "destroy_item"
+  delete "item/:id/destroy_item", to: "item#destroy_item", as: "destroy_item"
+  delete "item/destroy_bill", to: "item#destroy_bill", as: "destroy_bill"
   get "item/dashboard", to: "item#dashboard", as: "dashboard"
   get "item/before_sheet", to: "item#before_sheet", as: "item_before_sheet"
   get "item/:year/:month/sheet", to: "item#sheet", as: "item_sheet"

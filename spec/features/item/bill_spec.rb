@@ -31,14 +31,14 @@ feature "帳簿の新規登録", type: :feature do
 
   scenario "項目の検索が表示される" do
     expect(page).to have_content("項目の検索")
-    expect(page).to have_content("項目コードで検索")
+    expect(page).to have_content("コードで検索")
   end
 
-  scenario "登録講座がない場合メッセージが表示される" do
+  scenario "登録項目がない場合メッセージが表示される" do
     expect(page).to have_content("項目が登録されていません。")
   end
 
-  scenario "講座の検索結果が正しく表示される" do
+  scenario "項目の検索結果が正しく表示される" do
     fill_in "code", with: 1011
     click_button "検索"
     expect(page).to have_content("中１国語")
@@ -47,17 +47,17 @@ feature "帳簿の新規登録", type: :feature do
   scenario "コードによる検索に該当しないコードを入力するとエラーが表示される" do
     fill_in "code", with: 9000
     click_button "検索"
-    expect(page).to have_content("講座が見つかりません。")
+    expect(page).to have_content("項目が見つかりません。")
   end
 
-  scenario "追加をクリックすると講座が登録される" do
+  scenario "追加をクリックすると項目が登録される" do
     fill_in "code", with: 1011
     click_button "検索"
     click_button "追加"
     expect(current_user.items.first).not_to eq be_empty
   end
 
-  scenario "削除をクリックすると講座が削除される" do
+  scenario "削除をクリックすると項目が削除される" do
     fill_in "code", with: 1011
     click_button "検索"
     click_button "追加"

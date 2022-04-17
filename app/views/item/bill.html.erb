@@ -14,9 +14,9 @@
 </div>
 <!--search form-->
 <%= form_with url: item_bill_path(student_id: params[:student_id], year: params[:year], month: params[:month]), method: :get, local: true do |f| %>
-  <h3>講座の検索</h3>
+  <h3>項目の検索</h3>
   <div class="flex items-center mb-4">
-    <p class="mx-4">講座コードで検索</p>
+    <p class="mx-4">コードで検索</p>
     <%= f.telephone_field :code, {size: 4} %>
     <%= f.submit t(".search"), class: "btn btn-flat ml-2 py-2 px-4" %>
   </div>
@@ -52,44 +52,156 @@
   </div>
 <% end %>
 <!--registered item-->
-<% if @items.empty? %>
+<% if @student.items.where(period: @period).empty? %>
   <div class="flex notice mt-4 rounded justify-center">
     <p class="py-4 px-10">項目が登録されていません。</p>
   </div>
 <% else %>
-  <h3>登録講座</h3>
+  <h3>登録</h3>
   <div class="table-frame mt-4 mb-20 bg-white">
     <table class="my-4 w-full">
     <thead>
-    <tr class="text-85">
+    <tr class="text-85 dotted-bottom">
       <th class="item-code"><%= t("item_master.code") %></th>
       <th><%= t("item_master.name") %></th>
-      <th class="item-price"><%= t("item_master.price") %></th>
       <th><%= t("item_master.description") %></th>
       <th class="item-category"><%= t("item_master.category") %></th>
+      <th class="item-price"><%= t("item_master.price") %></th>
       <th></th>
     </tr>
     </thead>
     <tbody>
-    <% @items.each do |item| %>
-      <tr>
+    <% @qty_items.each do |item| %>
+      <tr class="dotted-bottom">
         <td class="pr-2 text-right"><%= item[:code] %></td>
         <td class="pr-2"><%= item[:name] %></td>
-        <td class="pr-2 text-right"><%= item[:price].to_i.to_s(:delimited) %></td>
         <td class="pr-2"><%= item[:description] %></td>
-        <td class="pr-2 text-center"><%= item[:category] %></td>
         <td class="pr-2 text-center">
-          <%= button_to "削除", destroy_item_path(item[:id]), method: :delete, class: "btn btn-cancel py-2 px-4", params: {student_id: params[:student_id], year: params[:year], month: params[:month]}, data: {confirm: "削除してもよろしいですか？"} %>
+          <p class=<%= "#{@item_cat_colors[item[:category]]}" %>><%= @item_cats[item[:category]] %></p>
+        </td>
+        <td class="pr-2 text-right">-</td>
+        <td class="pr-2 text-center">
+          <%= button_to "削除",
+            destroy_item_path(item[:id]),
+            method: :delete,
+            class: "btn btn-cancel py-2 px-4",
+            params: {
+              student_id: params[:student_id],
+              year: params[:year],
+              month: params[:month]},
+              data: {confirm: "削除してもよろしいですか？"}
+          %>
         </td>
       </tr>
     <% end %>
+    <tr class="dotted-bottom">
+      <td></td>
+      <td class="pr-2 py-2"><%= @qty_items.count %>講座</td>
+      <td></td>
+      <td></td>
+      <td class="pr-2 py-2 text-right"><%= @bill[:qty_total] %></td>
+      <td></td>
+    </tr>
+    <% @single_items.each do |item| %>
+      <tr class="dotted-bottom">
+        <td class="pr-2 text-right"><%= item[:code] %></td>
+        <td class="pr-2"><%= item[:name] %></td>
+        <td class="pr-2"><%= item[:description] %></td>
+        <td class="pr-2 text-center">
+          <p class=<%= "#{@item_cat_colors[item[:category]]}" %>><%= @item_cats[item[:category]] %></p>
+        </td>
+        <td class="pr-2 text-right"><%= item[:price].to_s(:delimited) %></td>
+        <td class="pr-2 text-center">
+          <%= button_to "削除",
+            destroy_item_path(item[:id]),
+            method: :delete,
+            class: "btn btn-cancel py-2 px-4",
+            params: {
+              student_id: params[:student_id],
+              year: params[:year],
+              month: params[:month]},
+              data: {confirm: "削除してもよろしいですか？"}
+          %>
+        </td>
+      </tr>
+    <% end %>
+    <% @admin_items.each do |item| %>
+      <tr class="dotted-bottom">
+        <td class="pr-2 text-right"><%= item[:code] %></td>
+        <td class="pr-2"><%= item[:name] %></td>
+        <td class="pr-2"><%= item[:description] %></td>
+        <td class="pr-2 text-center">
+          <p class=<%= "#{@item_cat_colors[item[:category]]}" %>><%= @item_cats[item[:category]] %></p>
+        </td>
+        <td class="pr-2 text-right"><%= item[:price].to_s(:delimited) %></td>
+        <td class="pr-2 text-center">
+          <%= button_to "削除",
+            destroy_item_path(item[:id]),
+            method: :delete,
+            class: "btn btn-cancel py-2 px-4",
+            params: {
+              student_id: params[:student_id],
+              year: params[:year],
+              month: params[:month]},
+              data: {confirm: "削除してもよろしいですか？"}
+          %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="pr-2 pt-2 pb-6 text-center">小計</td>
+      <td class="pr-2 pt-2 pb-6 text-right"><%= @bill[:subtotal] %></td>
+      <td></td>
+    </tr>
+    <% unless @discounts.empty? %>
+      <thead>
+      <tr class="text-85 dotted-bottom">
+        <th class="item-code"><%= t("item_master.code") %></th>
+        <th><%= t("item_master.name") %></th>
+        <th><%= t("item_master.description") %></th>
+        <th class="item-category"><%= t("item_master.category") %></th>
+        <th class="item-price"><%= t("item_master.price") %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @discounts.each do |discount| %>
+        <tr class="dotted-bottom">
+          <td class="pr-2 text-right"><%= discount[:code] %></td>
+          <td class="pr-2"><%= discount[:name] %></td>
+          <td class="pr-2"><%= discount[:description] %></td>
+          <td class="pr-2 text-center">
+            <p class=<%= "#{@item_cat_colors[discount[:category]]}" %>><%= @item_cats[discount[:category]] %></p>
+          </td>
+          <td class="pr-2 text-right"><%= discount[:price].to_s(:delimited) %></td>
+          <td class="pr-2 text-center">
+            <%= button_to "削除", destroy_item_path(discount[:id]), method: :delete, class: "btn btn-cancel py-2 px-4", params: {student_id: params[:student_id], year: params[:year], month: params[:month]}, data: {confirm: "削除してもよろしいですか？"} %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="pr-2 pt-2 pb-6 text-center">小計</td>
+          <td class="pr-2 pt-2 pb-6 text-right"><%= @bill[:discount] %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <tbody>
+    <tr class="solid-top">
+      <td class="item-code"></td>
+      <td></td>
+      <td></td>
+      <td class="pr-2 pt-2 pb-6 text-center font-bold">合計</td>
+      <td class="pr-2 pt-2 pb-6 text-right font-bold"><%= @bill[:total] %></td>
+      <td></td>
+    </tr>
     </tbody>
     </table>
-    <div class="flex justify-end mb-4 mr-8 font-bold">
-      <p class="mr-4">合計</p>
-      <%= @bill[:total] %>
-      <p class="ml-2">円</p>
-    </div>
   </div>
 <% end %>
 

@@ -94,36 +94,6 @@ class StudentController < ApplicationController
     redirect_to student_index_path
   end
 
-  #前月の名簿の引き継ぎ
-  def copy_prev_month
-    @students = Student.where(fiscal_date: params[:fiscal_date])
-    @students.destroy_all
-    fiscal_prev = Date.parse(params[:fiscal_date]).prev_month
-    @students = Student.where(fiscal_date: fiscal_prev)
-    save_flag = true
-    @students.each do |student|
-      student_next = student.dup
-      student_next[:fiscal_date] = params[:fiscal_date]
-      unless student_next.save
-        save_flag = false
-      end
-    end
-    if save_flag
-      flash[:notice] = "名簿が転記されました。"
-    else
-      flash[:notice] = "名簿の転記が失敗しました。"
-    end
-    redirect_to student_index_path
-  end
-
-  #進級処理の確認画面
-  def advance_grade_confirm
-  end
-
-  #進級処理の実行
-  def advance_grade_run
-  end
-
   private
 
     def student_params

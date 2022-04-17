@@ -1,33 +1,29 @@
 <div class="home-container">
 <div>
   <div class="front-logo">
-    <p class="flex items-center font-top-page text-200 text-teal-700 pt-8 pl-10 app-name"><img class="mr-4" src="fabicon-64x64.png"/><%= t("app_name") %></p>
-    <p class="font-top-page text-120 text-teal-700 font-bold pb-8 mt-4 ml-26"><%= t(".catch") %></p>
+    <p class="flex items-center font-top-page text-200 text-green-800 pt-8 pl-10 app-name"><img class="mr-4" src="fabicon-64x64.png"/><%= t("app_name") %></p>
+    <p class="font-top-page text-120 text-green-800 font-bold pb-8 mt-4 ml-26"><%= t(".catch") %></p>
   </div>
-  <div class="flex justify-start">
-    <div class="list-wrapper">
-      <ul>
-        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_first" %></li>
-        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_second" %></li>
-        <li class="text-110 text-gray-300 py-1 mr-4"><%= t ".item_third" %></li>
-      </ul>
-      <div class="flex justify-center">
-        <%= link_to t(".registration"), new_user_registration_path, class: "btn text-center text-teal-500 bg-white py-4 px-4 mb-8 opacity-90" %>
-      </div>
-    </div>
+  <div class="flex justify-center mt-30">
+    <%= link_to t(".registration"), new_user_registration_path, class: "btn text-center text-green-500 bg-white py-4 px-4 mb-8 opacity-90" %>
   </div>
 </div>
 </div>
 <div class="container">
 <div>
+  <ul>
+    <li class="text-110 text-black py-1 mr-4"><%= t ".item_first" %></li>
+    <li class="text-110 text-black py-1 mr-4"><%= t ".item_second" %></li>
+    <li class="text-110 text-black py-1 mr-4"><%= t ".item_third" %></li>
+  </ul>
 <p>#contents</p>
 </div>
 
 <div class="home-footer">
   <div class="flex justify-end">
     <ul class="footer-list mr-4">
-      <li><%= link_to t(".privacy_policy"), privacy_policy_path, class: "text-teal-500" %></li>
-      <li><%= link_to t(".contact"), contact_path, class: "text-teal-500" %></li>
+      <li><%= link_to t(".privacy_policy"), privacy_policy_path, class: "text-green-500" %></li>
+      <li><%= link_to t(".contact"), contact_path, class: "text-green-500" %></li>
       <li class="pt-2">powered by mmsankosho 2022</li>
     </ul>
   </div>

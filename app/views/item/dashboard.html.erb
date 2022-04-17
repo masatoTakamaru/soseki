@@ -13,8 +13,7 @@
 </tr>
 </thead>
 <tbody>
-<% if @students.present? && @item_master.present? %>
-  <tr>
+  <tr class="dotted-bottom">
     <td colspan="3">
       <% if @book.empty? %>
         <p class="pl-2 py-2"><%= t(".item_empty") %></p>
@@ -30,10 +29,13 @@
       <% end %>
     </td>
   </tr>
+  <tr>
+    <td>
+  </tr>
   <% @book.each do |sheet| %>
-    <tr>
+    <tr class="dotted-bottom">
       <td class="pl-2 text-center">
-        <%= link_to sheet[:path], class: "underline text-blue-500" do %>
+        <%= link_to sheet[:path], class: "underline text-blue-500 font-bold" do %>
           <%= sheet[:text] %>
         <% end %>
       </td>
@@ -41,14 +43,11 @@
         <%= sheet[:belongs] %>
         <%= t("student.index.people") %>
       </td>
-      <td class="text-right pr-4">
+      <td class="text-right pr-4 font-bold">
         <%= sheet[:total].to_i.to_s(:delimited) %>
       </td>
     </tr>
   <% end %>
-<% else %>
-  <p><%= t(".error_empty") %></p>
-<% end %>
 </tbody>
 </table>
 </div>

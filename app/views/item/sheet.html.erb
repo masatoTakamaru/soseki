@@ -12,19 +12,6 @@
 <div class="flex justify-between items-center mb-2">
   <% unless @sheet[:belongs] == 0 %>
     <p class="font-bold"><%= t("student.index.students_amount") %> : <span><%= @sheet[:belongs] %></span><%= t("student.index.people") %></p>
-    <div class="flex">
-      <p class="mr-2"><%= t("student.sort") %></p>
-      <% if params[:class_name] == "asc" %>
-        <p class="mx-2"><%= link_to t("student.class_name"), item_sheet_path(class_name: "desc") %></p>
-      <% elsif params[:class_name] == "desc" || params[:class_name].nil? %>
-        <p class="mx-2"><%= link_to t("student.class_name"), item_sheet_path(class_name: "asc") %></p>
-      <% end %>
-      <% if params[:grade] == "asc" %>
-        <p class="mx-2"><%= link_to t("student.grade"), item_sheet_path(grade: "desc") %></p>
-      <% elsif params[:grade] == "desc" || params[:grade].nil? %>
-        <p class="mx-2"><%= link_to t("student.grade"), item_sheet_path(grade: "asc") %></p>
-      <% end %>
-    </div>
   <% end %>
   <%= link_to "戻る", dashboard_path, class: "btn btn-cancel py-2 px-4" %>
 </div>
@@ -32,33 +19,56 @@
 <div class="table-frame mb-20 bg-white">
 <table class="w-full my-4">
 <thead>
-<tr class="text-85">
+<tr class="text-85 dotted-bottom">
   <th><%= t("student.class_name") %></th>
   <th><%= t("student.name") %></th>
   <th><%= t("student.kana") %></th>
   <th><%= t("student.grade") %></th>
   <th><%= t("item.price_total") %></th>
+  <th></th>
 </tr>
 </thead>
 <tbody>
 <% @sheet[:students].each do |student| %>
-  <tr>
+  <tr class="dotted-bottom">
     <td class="pl-8"><%= student[:class_name] %></td>
     <td class="font-bold underline pr-2">
       <%= link_to student[:name], item_bill_path(student_id: student[:student_id]), class: "text-blue-500" %>
     </td>
     <td class="pr-2"><%= student[:kana] %></td>
     <td class="pr-2"><%= student[:grade_name] %></td>
-    <td class="pr-8 text-right">
-      <%= student[:total] %>
+    <td class="pr-2 text-right">
+      <% if student[:items_present] %>
+        <%= student[:total] %>
+      <% else %>
+        <p>-</p>
+      <% end %>
+    </td>
+    <td class="pr-8 text-center">
+      <% if student[:items_present] %>
+        <%= button_to "削除",
+          destroy_bill_path,
+          method: :delete,
+          class: "btn btn-cancel py-2 px-4",
+          params: {
+            student_id: student[:student_id],
+            year: params[:year],
+            month: params[:month]},
+          data: {confirm: "削除してもよろしいですか？"}
+        %>
+      <% end %>
     </td>
   </tr>
 <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><p class="text-right mr-2 mt-4 font-bold">合計</p></td>
+    <td><p class="text-right pr-2 mt-4 font-bold"><%= @sheet[:total].to_s(:delimited) %></p></td>
+  </tr>
 </tbody>
 </table>
-<div class="flex justify-end pr-8 mb-4">
-  <p>計 <%= @sheet[:total] %></p>
-</div>
 </div>
 
 </div>

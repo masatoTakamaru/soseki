@@ -25,19 +25,18 @@
   height: 10rem;
   padding: 1rem;
   background-color: white;
-  border: solid 1px $gray-500;
+  border: solid 1px map_get($color_set, gray-500);
   overflow-y: scroll;
 }
 
-
 .form-box {
   background-color: rgba(254, 235, 200, 0.8);
-  border: solid 1px $orange-400;
+  border: solid 1px map_get($color_set, orange-400);
   border-radius: 12px;
 }
 
 .form-item {
-  border-top: solid 1px $gray-500;
+  border-top: solid 1px map_get($color_set, gray-500);
   padding: 1rem 0;
 }
 

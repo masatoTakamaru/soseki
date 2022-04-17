@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     ]
     @item_cat_colors = [
       "text-indigo-500",
-      "text-teal-500",
+      "text-green-500",
       "text-yellow-500",
       "text-pink-500"
     ]
