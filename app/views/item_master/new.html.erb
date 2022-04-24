@@ -13,7 +13,7 @@
 </div>
 
 <hr class="my-4"/>
-<%= form_with model: @item_master, url: item_master_index_path, method: :post, local:true do |f| %>
+<%= form_with model: @item_master, url: item_master_index_path, method: :post, local: true do |f| %>
   <% if params[:category] == "single" || params[:category].nil? %>
     <%= render "shared/item_master_form_single", f: f %>
   <% elsif params[:category] == "qty_price" %>

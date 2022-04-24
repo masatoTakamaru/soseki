@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get "home/index"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
 
-  get "qty_price/edit", to: "qty_price#edit", as: "qty_price_edit"
-  patch "qty_price/update", to: "qty_price#update", as: "qty_price_update"
+  get "qty_price/before_edit", to: "qty_price#before_edit", as: "qty_price_before_edit"
+  get "qty_price/:grade/edit", to: "qty_price#edit", as: "qty_price_edit"
+  patch "qty_price/:grade/update", to: "qty_price#update", as: "qty_price_update"
 
   get "item", to: "item#dashboard"
   delete "item/:id/destroy_item", to: "item#destroy_item", as: "destroy_item"

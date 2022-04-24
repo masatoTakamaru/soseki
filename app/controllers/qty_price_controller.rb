@@ -3,14 +3,23 @@ class QtyPriceController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
 
+  def before_edit
+    redirect_to qty_price_edit(grade: params[:grade])
+  end
+
   def edit
     #価格が登録されていない場合初期化
     if current_user.qty_prices.empty?
-      1.upto(12){|num|
-        current_user.qty_prices.create(qty: num, price: 0)
+      0.upto(16){|grade|
+        1.upto(12){|qty|
+          price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100
+          price = price.to_i * 100
+          qty_price = user.qty_prices.build(grade: grade, qty: qty, price: price)
+          qty_price.save
+        }
       }
     end
-    @prices = current_user.qty_prices.order(qty: :asc).pluck(:price)
+    @qtys = current_user.qty_prices.where(grade: params[:grade]).order(qty: :asc).pluck(:price)
   end
 
   def update
