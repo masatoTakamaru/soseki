@@ -83,6 +83,19 @@ CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
   item_master.save
 end
 
+CSV.foreach("db/seed_item.csv", encoding: 'UTF-8') do |line|
+  student = user.students.find_by(id: line[0])
+  item = student.items.build(
+    period: line[1],
+    code: line[2],
+    category: line[3],
+    name: line[4],
+    price: line[5],
+    description: line[6]
+  )
+  item.save
+end
+
 0.upto(16){|grade|
   1.upto(12){|qty|
     price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100

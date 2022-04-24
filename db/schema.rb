@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_24_092132) do
+ActiveRecord::Schema.define(version: 2022_04_24_111312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2022_04_24_092132) do
   create_table "items", force: :cascade do |t|
     t.integer "student_id"
     t.date "period"
-    t.string "class_name"
     t.integer "category"
     t.string "name"
     t.float "price"

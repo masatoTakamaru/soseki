@@ -4,7 +4,7 @@ class QtyPriceController < ApplicationController
   before_action :authenticate_user!
 
   def before_edit
-    redirect_to qty_price_edit(grade: params[:grade])
+    redirect_to qty_price_edit_path(grade: params[:grade])
   end
 
   def edit
@@ -12,9 +12,7 @@ class QtyPriceController < ApplicationController
     if current_user.qty_prices.empty?
       0.upto(16){|grade|
         1.upto(12){|qty|
-          price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100
-          price = price.to_i * 100
-          qty_price = user.qty_prices.build(grade: grade, qty: qty, price: price)
+          qty_price = current_user.qty_prices.build(grade: grade, qty: qty, price: 0)
           qty_price.save
         }
       }

@@ -6,8 +6,11 @@
 <h3>従量課金</h3>
 <p>講座数に応じた料金設定</p>
 
-<%= form_with url: qty_price_before_edit_path, method: :get, local: true, do |f| %>
-
+<%= form_with url: qty_price_before_edit_path, method: :get, local: true do |f| %>
+  <div class="flex items-center">
+    <%= f.select :grade, @grades, {selected: params[:grade]} %>
+    <%= f.submit "選択", class: "btn btn-flat py-2 px-4" %>
+  </div>
 <% end %>
 
 
@@ -21,10 +24,10 @@
     <th>4講座</th>
   </tr>
   <tr>
-    <td><%= f.telephone_field nil, size: 8, id: "price1", class: "p-1", value: @prices[0] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price2", class: "p-1", value: @prices[1] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price3", class: "p-1", value: @prices[2] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price4", class: "p-1", value: @prices[3] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price1", class: "p-1", value: @qtys[0] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price2", class: "p-1", value: @qtys[1] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price3", class: "p-1", value: @qtys[2] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price4", class: "p-1", value: @qtys[3] %></td>
   </tr>
   <tr>
     <th>5講座</th>
@@ -33,10 +36,10 @@
     <th>8講座</th>
   </tr>
   <tr>
-    <td><%= f.telephone_field nil, size: 8, id: "price5", class: "p-1", value: @prices[4] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price6", class: "p-1", value: @prices[5] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price7", class: "p-1", value: @prices[6] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price8", class: "p-1", value: @prices[7] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price5", class: "p-1", value: @qtys[4] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price6", class: "p-1", value: @qtys[5] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price7", class: "p-1", value: @qtys[6] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price8", class: "p-1", value: @qtys[7] %></td>
   </tr>
   <tr>
     <th>9講座</th>
@@ -45,15 +48,15 @@
     <th>12講座</th>
   </tr>
   <tr>
-    <td><%= f.telephone_field nil, size: 8, id: "price9", class: "p-1", value: @prices[8] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price10", class: "p-1", value: @prices[9] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price11", class: "p-1", value: @prices[10] %></td>
-    <td><%= f.telephone_field nil, size: 8, id: "price12", class: "p-1", value: @prices[11] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price9", class: "p-1", value: @qtys[8] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price10", class: "p-1", value: @qtys[9] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price11", class: "p-1", value: @qtys[10] %></td>
+    <td><%= f.telephone_field nil, size: 8, id: "price12", class: "p-1", value: @qtys[11] %></td>
   </tr>
   </table>
   </div>
   <div class="flex justify-center items-center mt-8">
-  <%= f.submit "更新", class: "btn mr-4 py-2 px-8", data: {confirm: "価格を更新してもよろしいですか？"} %>
+  <%= f.submit "更新", class: "btn mr-4 py-2 px-8" %>
   <%= link_to "キャンセル", item_master_index_path, class: "btn btn-cancel py-2 px-4" %>
 <% end %>
 

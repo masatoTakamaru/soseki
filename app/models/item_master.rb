@@ -16,7 +16,7 @@ class ItemMaster < ApplicationRecord
     numericality: {
           only_integer: true,
           greater_than_or_equal_to: 0,
-          less_than_or_equal_to: 3,
+          less_than_or_equal_to: 4,
           message: "は0から3までの間で入力して下さい。"}
   validates :name,
     presence: true,

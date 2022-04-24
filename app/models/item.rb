@@ -5,9 +5,6 @@ class Item < ApplicationRecord
   PRICE_REGEXP = /\A-?\d+.\d+\z/
 
   validates :period, presence: true
-  validates :class_name,
-    presence: true,
-    length: {maximum: 10}
   validates :category, presence: true
   validates :name,
     presence: true,
