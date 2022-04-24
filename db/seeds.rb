@@ -1,8 +1,6 @@
 require "csv"
 require "date"
 
-
-
 user = User.create(
   username: "城南ゼミナール",
   email: "1@gmail.com",
@@ -85,11 +83,17 @@ CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
   item_master.save
 end
 
-1.upto(12){|qty|
-  user.qty_prices.create(
-    qty: qty,
-    price: (11000*(1-0.95**qty))/(1-0.95) - (11000*(1-0.95**qty))/(1-0.95) % 100
-  )
+0.upto(16){|grade|
+  1.upto(12){|qty|
+    price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100
+    price = price.to_i
+    price = price * 100
+    qty_price = user.qty_prices.build(
+      grade: grade,
+      qty: qty,
+      price: price)
+    qty_price.save
+  }
 }
 
 =begin
