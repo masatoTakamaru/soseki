@@ -33,23 +33,23 @@
   <tr class="dotted-bottom">
     <td class="pl-8"><%= student[:class_name] %></td>
     <td class="font-bold underline pr-2">
-      <%= link_to student[:name], item_bill_path(student_id: student[:student_id]), class: "text-blue-500" %>
+      <%= link_to student[:name], item_bill_path(student_id: student[:student_id], year: params[:year], month: params[:month]), class: "text-blue-500" %>
     </td>
     <td class="pr-2"><%= student[:kana] %></td>
     <td class="pr-2"><%= student[:grade_name] %></td>
     <td class="pr-2 text-right">
-      <% if student[:items_present] %>
-        <%= student[:total] %>
+      <% if student[:item_present] %>
+        <%= number_to_currency(student[:total]) %>
       <% else %>
         <p>-</p>
       <% end %>
     </td>
     <td class="pr-8 text-center">
-      <% if student[:items_present] %>
+      <% if student[:item_present] %>
         <%= button_to "削除",
           destroy_bill_path,
           method: :delete,
-          class: "btn btn-cancel py-2 px-4",
+          class: "btn btn-cancel py-1 px-3",
           params: {
             student_id: student[:student_id],
             year: params[:year],
@@ -65,7 +65,7 @@
     <td></td>
     <td></td>
     <td><p class="text-right mr-2 mt-4 font-bold">合計</p></td>
-    <td><p class="text-right pr-2 mt-4 font-bold"><%= @sheet[:total].to_s(:delimited) %></p></td>
+    <td><p class="text-right pr-2 mt-4 font-bold"><%= number_to_currency(@sheet[:total]) %></p></td>
   </tr>
 </tbody>
 </table>

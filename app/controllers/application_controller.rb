@@ -20,11 +20,12 @@ class ApplicationController < ActionController::Base
     #講座数の上限
     @item_limit = 50
     @item_cats = [
-      "単独", "従量", "諸費", "割引"
+      "", "従量", "単独", "諸費", "割引"
     ]
     @item_cat_colors = [
-      "text-indigo-500",
+      "",
       "text-green-500",
+      "text-indigo-500",
       "text-yellow-500",
       "text-pink-500"
     ]

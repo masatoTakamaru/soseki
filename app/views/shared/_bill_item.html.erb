@@ -1,0 +1,26 @@
+<tr class="dotted-bottom">
+    <td class="pr-2 text-right"><%= item[:code] %></td>
+    <td class="pr-2"><%= item[:name] %></td>
+    <td class="pr-2"><%= item[:description] %></td>
+    <td class="pr-2 text-center">
+    <p class=<%= "#{@item_cat_colors[item[:category]]}" %>><%= @item_cats[item[:category]] %></p>
+    </td>
+    <td class="pr-2 text-right">
+      <% if item[:category] == 1 %>
+        <p>-</p>
+      <% else %>
+        <%= number_to_currency(item[:price]) %>
+      <% end %>
+    </td>
+    <td class="pr-2 text-center">
+    <%= button_to "削除",
+        destroy_item_path(item[:id]),
+        method: :delete,
+        class: "btn btn-cancel py-1 px-3",
+        params: {
+        student_id: params[:student_id],
+        year: params[:year],
+        month: params[:month]}
+    %>
+    </td>
+</tr>

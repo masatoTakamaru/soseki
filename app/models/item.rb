@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :category, presence: true
   validates :name,
     presence: true,
-    length: {maximum: 20}
+    length: {maximum: 40}
   validates :price,
     presence: true,
     numericality: true,

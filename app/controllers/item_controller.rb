@@ -43,9 +43,7 @@ class ItemController < ApplicationController
 
   def sheet
     period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    qty_prices = QtyPrice.all.order(qty: :asc).pluck(:price)
-    qty_prices.unshift(0)
-    students = student_sort(current_user.students.where(expire_flag: false))
+    students = current_user.students.where(expire_flag: false)
     @sheet = {
       period: period,
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
@@ -55,52 +53,71 @@ class ItemController < ApplicationController
       item_masters: current_user.item_masters,
     }
     students.each do |student|
-      current_user.items.where(student_id: student[:id], period: period).present? ? items_present = true : items_present = false
-      qty_items = current_user.items.where(category: 1).where(student_id: student[:id], period: period)
-      qty_total = qty_prices[qty_items.count]
-      subtotal = current_user.items.where(category: 0).where(student_id: student[:id], period: period).pluck(:price).sum + qty_total + current_user.items.where(category: 2).where(student_id: student[:id], period: period).pluck(:price).sum
-      discount = current_user.items.where(category: 3).where(student_id: student[:id], period: period).pluck(:price).sum
-      total = subtotal - discount
+      items = student.items.where(period: period)
+      if items.find_by(category: 0)
+        qty_price = items.find_by(category: 0).price
+        qty = items.where(period: period, category: 1).order(code: :asc)
+      else
+        qty_price = 0
+      end
+      single = items.where(period: period, category: 2).order(code: :asc)
+      admin = items.where(period: period, category: 3).order(code: :asc)
+      discounts = items.where(period: period, category: 4).order(code: :asc)
+      subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
+      dtotal = discounts.pluck(:price).sum
+      total = subtotal - dtotal
       @sheet[:total] += total
       @sheet[:students] << {
-        items_present: items_present,
+        item_present: student.items.present?,
         student_id: student.hashid,
         name: "#{student[:family_name]} #{student[:given_name]}",
         kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
         class_name: student[:class_name],
         grade_name: @grade_name[student[:grade]],
-        total: total.to_s(:delimited)
+        total: total
       }
     end
   end
 
   def bill
-    @period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    @student = current_user.students.find_by_hashid(params[:student_id])
-    @item_master = current_user.item_masters
-    @single_items = @student.items.where(period: @period, category: 0).order(code: :asc)
-    @qty_items = @student.items.where(period: @period, category: 1).order(code: :asc)
-    @admin_items = @student.items.where(period: @period, category: 2).order(code: :asc)
-    @discounts = @student.items.where(period: @period, category: 3).order(code: :asc)
-    qty_prices = QtyPrice.all.order(qty: :asc).pluck(:price)
-    qty_prices.unshift(0)
+    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    student = current_user.students.find_by_hashid(params[:student_id])
+    items = student.items.where(period: period)
+    item_master = current_user.item_masters
+    if items.find_by(category: 0)
+      qty_price = items.find_by(category: 0).price
+      qty = items.where(category: 1).order(code: :asc)
+    else
+      qty_price = 0
+    end
+    single = items.where(category: 2).order(code: :asc)
+    admin = items.where(category: 3).order(code: :asc)
+    discount = items.where(category: 4).order(code: :asc)
+    subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
+    dtotal = discount.pluck(:price).sum
+    total = subtotal - dtotal
     @bill = {
-      student_id: @student.hashid,
-      period: @period,
+      item_present: items.present?,
+      student_id: student.hashid,
+      period: period,
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
-      name: "#{@student[:family_name]} #{@student[:given_name]}",
-      kana: "#{@student[:family_name_kana]} #{@student[:given_name_kana]}",
-      class_name: @student[:class_name],
-      grade_name: @grade_name[@student[:grade]],
-      qty_total: qty_prices[@qty_items.count].to_f.to_s(:delimited),
-      subtotal: (@single_items.pluck(:price).sum + qty_prices[@qty_items.count].to_f + @admin_items.pluck(:price).sum).to_s(:delimited),
-      discount: @discounts.pluck(:price).sum.to_s(:delimited),
-      total: (@single_items.pluck(:price).sum + qty_prices[@qty_items.count].to_f + @admin_items.pluck(:price).sum - @discounts.pluck(:price).sum).to_s(:delimited)
+      name: "#{student[:family_name]} #{student[:given_name]}",
+      kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
+      class_name: student[:class_name],
+      grade_name: @grade_name[student[:grade]],
+      qty: qty,
+      single: single,
+      admin: admin,
+      discount: discount,
+      qty_price: qty_price,
+      subtotal: subtotal,
+      dtotal: dtotal,
+      total: total
     }
     #コードによる講座検索
     if params[:code].present?
-      if @item_master.find_by(code: params[:code])
-        @new_item = @item_master.find_by(code: params[:code])
+      if item_master.find_by(code: params[:code])
+        @new_item = item_master.find_by(code: params[:code])
         flash[:notice] = nil
       else
         @new_item = nil
@@ -114,12 +131,16 @@ class ItemController < ApplicationController
   def create
     item_master = current_user.item_masters.find_by(code: params[:code])
     student = current_user.students.find_by_hashid(params[:student_id])
-    date = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    qty_items = student.items.where(period: period, category: 1)
+    if qty_items.count == 12
+      flash[:notice] = "従量型項目の上限に達しました。これ以上登録できません。"
+      redirect_to item_bill_path(params[:student_id], params[:year], params[:month]) and return
+    end
     item = student.items.new(
       student_id: student[:id],
       code: item_master[:code],
-      period: date,
-      class_name: student[:class_name],
+      period: period,
       category: item_master[:category],
       name: item_master[:name],
       price: item_master[:price],
@@ -130,15 +151,46 @@ class ItemController < ApplicationController
     else
       flash[:notice] = "項目の追加に失敗しました。"
     end
+    if item[:category] == 1
+      qty_items = student.items.where(period: period, category: 1)
+      qty_price = current_user.qty_prices.find_by(grade: student[:grade], qty: qty_items.count)
+      qty = student.items.find_by(period: period, category: 0)
+      if qty.present?
+        qty.update(price: qty_price[:price])
+      else
+        qty = student.items.new(
+          code: 0,
+          period: period,
+          category: 0,
+          name: "[qty]",
+          price: qty_price[:price],
+          description: "[qty]"
+        )
+        qty.save
+      end
+    end
     redirect_to item_bill_path(params[:student_id], params[:year], params[:month])
   end
 
   def destroy_item
-    item = current_user.items.find_by(id: params[:id])
+    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    student = current_user.students.find_by_hashid(params[:student_id])
+    item = student.items.find_by(id: params[:id])
+    item[:category] == 1 ? qty_flag = true : qty_flag = false
     if item.destroy
       flash[:notice] = "登録項目を削除しました。"
     else
       flash[:notice] = "登録項目の削除に失敗しました。"
+    end
+    if qty_flag
+      qty_items = student.items.where(period: period, category: 1)
+      qty = student.items.find_by(period: period, category: 0)
+      if qty_items.count == 0
+        qty.destroy
+      else
+        qty_price = current_user.qty_prices.find_by(grade: student[:grade], qty: qty_items.count)
+        qty.update(price: qty_price[:price])
+      end
     end
     redirect_to item_bill_url(params[:student_id], params[:year], params[:month])
   end

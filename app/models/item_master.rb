@@ -10,14 +10,14 @@ class ItemMaster < ApplicationRecord
           only_integer: true,
           greater_than_or_equal_to: 1,
           less_than_or_equal_to: 9999,
-          message: "は0から9999までの間で入力して下さい。"}
+          message: "は1から9999までの間で入力して下さい。"}
   validates :category,
     presence: true,
     numericality: {
           only_integer: true,
           greater_than_or_equal_to: 0,
           less_than_or_equal_to: 4,
-          message: "は0から3までの間で入力して下さい。"}
+          message: "は0から4までの間で入力して下さい。"}
   validates :name,
     presence: true,
     length: {maximum: 30}
