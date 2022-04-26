@@ -49,34 +49,39 @@ class ItemController < ApplicationController
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
       belongs: students.count,
       total: 0,
-      students: [],
-      item_masters: current_user.item_masters,
+      item_masters: current_user.item_masters
     }
-    students.each do |student|
-      items = student.items.where(period: period)
-      if items.find_by(category: 0)
-        qty_price = items.find_by(category: 0).price
-        qty = items.where(period: period, category: 1).order(code: :asc)
-      else
-        qty_price = 0
+    @siblings = []
+    students.select(:sibling_group).distinct.pluck(:sibling_group).each do |sibling_group|
+      sibling = []
+      students.where(sibling_group: sibling_group).each do |student|
+        items = student.items.where(period: period)
+        if items.find_by(category: 0)
+          qty_price = items.find_by(category: 0).price
+          qty = items.where(period: period, category: 1).order(code: :asc)
+        else
+          qty_price = 0
+        end
+        single = items.where(period: period, category: 2).order(code: :asc)
+        admin = items.where(period: period, category: 3).order(code: :asc)
+        discount = items.where(period: period, category: 4).order(code: :asc)
+        subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
+        dtotal = discount.pluck(:price).sum
+        total = subtotal - dtotal
+        @sheet[:total] += total
+        sibling << {
+          item_present: student.items.present?,
+          student_id: student.hashid,
+          name: "#{student[:family_name]} #{student[:given_name]}",
+          kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
+          class_name: student[:class_name],
+          grade_name: @grade_name[student[:grade]],
+          total: total
+        }
       end
-      single = items.where(period: period, category: 2).order(code: :asc)
-      admin = items.where(period: period, category: 3).order(code: :asc)
-      discounts = items.where(period: period, category: 4).order(code: :asc)
-      subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
-      dtotal = discounts.pluck(:price).sum
-      total = subtotal - dtotal
-      @sheet[:total] += total
-      @sheet[:students] << {
-        item_present: student.items.present?,
-        student_id: student.hashid,
-        name: "#{student[:family_name]} #{student[:given_name]}",
-        kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
-        class_name: student[:class_name],
-        grade_name: @grade_name[student[:grade]],
-        total: total
-      }
+      @siblings << sibling
     end
+
   end
 
   def bill

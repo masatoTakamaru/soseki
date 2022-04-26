@@ -29,44 +29,60 @@
 </tr>
 </thead>
 <tbody>
-<% @sheet[:students].each do |student| %>
-  <tr class="dotted-bottom">
-    <td class="pl-8"><%= student[:class_name] %></td>
-    <td class="font-bold underline pr-2">
-      <%= link_to student[:name], item_bill_path(student_id: student[:student_id], year: params[:year], month: params[:month]), class: "text-blue-500" %>
-    </td>
-    <td class="pr-2"><%= student[:kana] %></td>
-    <td class="pr-2"><%= student[:grade_name] %></td>
-    <td class="pr-2 text-right">
-      <% if student[:item_present] %>
-        <%= number_to_currency(student[:total]) %>
+<% @siblings.each do |sibling| %>
+  <% sibling.each do |student| %>
+    <tr class="dotted-bottom">
+      <td class="pl-8"><%= student[:class_name] %></td>
+      <td class="font-bold underline pr-2">
+        <%= link_to student[:name], item_bill_path(student_id: student[:student_id], year: params[:year], month: params[:month]), class: "text-blue-500" %>
+      </td>
+      <td class="pr-2"><%= student[:kana] %></td>
+      <td class="pr-2"><%= student[:grade_name] %></td>
+      <% if sibling.count > 1 %>
+        <td class="pr-2 text-right text-gray-600">
       <% else %>
-        <p>-</p>
+        <td class="pr-2 text-right font-bold">
       <% end %>
-    </td>
-    <td class="pr-8 text-center">
-      <% if student[:item_present] %>
-        <%= button_to "削除",
-          destroy_bill_path,
-          method: :delete,
-          class: "btn btn-cancel py-1 px-3",
-          params: {
-            student_id: student[:student_id],
-            year: params[:year],
-            month: params[:month]},
-          data: {confirm: "削除してもよろしいですか？"}
-        %>
-      <% end %>
-    </td>
-  </tr>
+        <% if student[:item_present] %>
+          <%= number_to_currency(student[:total]) %>
+        <% else %>
+          <p>-</p>
+        <% end %>
+      </td>
+      <td class="pr-8 text-center">
+        <% if student[:item_present] %>
+          <%= button_to "削除",
+            destroy_bill_path,
+            method: :delete,
+            class: "btn btn-cancel py-1 px-3",
+            params: {
+              student_id: student[:student_id],
+              year: params[:year],
+              month: params[:month]},
+            data: {confirm: "削除してもよろしいですか？"}
+          %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if sibling.count > 1 %>
+    <tr class="dotted-bottom">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><p class="pr-2 text-right">小計</p></td>
+      <td><p class="pr-2 text-right font-bold"><%= number_to_currency(sibling.pluck(:total).sum) %></p></td>
+      <td></td>
+    </tr>
+  <% end %>
 <% end %>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><p class="text-right mr-2 mt-4 font-bold">合計</p></td>
-    <td><p class="text-right pr-2 mt-4 font-bold"><%= number_to_currency(@sheet[:total]) %></p></td>
-  </tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td><p class="text-right pr-2 mt-4 font-bold">合計</p></td>
+  <td><p class="text-right pr-2 mt-4 font-bold"><%= number_to_currency(@sheet[:total]) %></p></td>
+</tr>
 </tbody>
 </table>
 </div>
