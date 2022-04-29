@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature "生徒の情報", type: :feature do
+describe "生徒の情報", type: :system do
   let(:current_user) {user_seed}
   let(:item_master) {item_master_seed}
-  let(:students) {students_seed}
+  let(:students) {student_seed}
   let(:item) {item_seed}
-  let(:student) {students_seed.first}
-  let(:student2) {students_seed.second}
+  let(:student) {student_seed.first}
+  let(:student2) {student_seed.second}
 
   before do
     visit "users/sign_in"
@@ -14,16 +14,16 @@ feature "生徒の情報", type: :feature do
     fill_in "user_password", with: current_user.password
     find("input[name='commit']").click
     click_link "生徒"
-    student_registration(student)
-    student_registration(student2)
+    reg_student(student)
+    reg_student(student2)
   end
 
-  scenario "卒・退会者ページのタイトルが正しく表示される" do
+  it "卒・退会者ページのタイトルが正しく表示される" do
     click_link "卒・退会者"
     expect(page).to have_title("卒・退会者")
   end
 
-  scenario "卒・退会ができる" do
+  it "卒・退会ができる" do
     click_link "沼田 寧花"
     expect(page).to have_content("生徒の編集")
     fill_in "student_expire_date", with: "2022-4-1"
@@ -33,7 +33,7 @@ feature "生徒の情報", type: :feature do
     expect(page).not_to have_content("沼田 寧花")
   end
 
-  scenario "卒・退会日が入力できる" do
+  it "卒・退会日が入力できる" do
     click_link "沼田 寧花"
     expect(page).to have_content("生徒の編集")
     fill_in "student_expire_date", with: "2010-4-1"
@@ -45,7 +45,7 @@ feature "生徒の情報", type: :feature do
     expect(page).to have_content("2010-04-01")
   end
 
-  scenario "卒・退会の取り消しができる" do
+  it "卒・退会の取り消しができる" do
     click_link "沼田 寧花"
     expect(page).to have_content("生徒の編集")
     fill_in "student_expire_date", with: "2010-4-1"
@@ -58,7 +58,7 @@ feature "生徒の情報", type: :feature do
     expect(page).to have_content("沼田 寧花")
   end
 
-  scenario "生徒の削除ができる" do
+  it "生徒の削除ができる" do
     click_link "沼田 寧花"
     expect(page).to have_content("生徒の編集")
     click_link "生徒の削除"
@@ -70,9 +70,9 @@ end
 feature "卒・退会者", type: :feature do
   let(:current_user) {user_seed}
   let(:item_master) {item_master_seed}
-  let(:students) {students_seed}
+  let(:students) {student_seed}
   let(:item) {item_seed}
-  let(:student2) {students_seed.second}
+  let(:student2) {student_seed.second}
 
   before do
     visit "users/sign_in"
@@ -80,12 +80,12 @@ feature "卒・退会者", type: :feature do
     fill_in "user_password", with: current_user.password
     find("input[name='commit']").click
     click_link "生徒"
-    student_registration(student2)
+    reg_student(student2)
   end
 
-  scenario "卒・退会者一覧にページネーションが表示される" do
+  it "卒・退会者一覧にページネーションが表示される" do
     100.times do
-      student = students_seed.first
+      student = student_seed.first
       student[:expire_flag] = true
       current_user.students << student
     end
@@ -96,9 +96,9 @@ feature "卒・退会者", type: :feature do
     expect(page).to have_content("最後")
   end
 
-  scenario "卒・退会者の上限を超えた場合エラーが表示される" do
+  it "卒・退会者の上限を超えた場合エラーが表示される" do
     200.times do
-      student = students_seed.first
+      student = student_seed.first
       student[:expire_flag] = true
       current_user.students << student
     end

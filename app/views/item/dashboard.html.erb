@@ -13,6 +13,7 @@
 </tr>
 </thead>
 <tbody>
+<% if current_user.students.present? && current_user.item_masters.present? %>
   <tr class="dotted-bottom">
     <td colspan="3">
       <% if @book.empty? %>
@@ -44,10 +45,15 @@
         <%= t("student.index.people") %>
       </td>
       <td class="text-right pr-4 font-bold">
-        <%= sheet[:total].to_i.to_s(:delimited) %>
+        <%= number_to_currency(sheet[:total]) %>
       </td>
     </tr>
   <% end %>
+<% else %>
+  <tr>
+    <td>生徒または項目が登録されていません。</td>
+  </tr>
+<% end %>
 </tbody>
 </table>
 </div>

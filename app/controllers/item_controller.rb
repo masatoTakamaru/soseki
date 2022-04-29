@@ -6,12 +6,15 @@ class ItemController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
-    periods = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
     @book = []
+    periods = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
     periods.each do |period|
-      subtotal = current_user.items.where.not(category: 3).where(period: period).pluck(:price).sum
-      discount = current_user.items.where(category: 3).where(period: period).pluck(:price).sum
-      total = subtotal - discount
+      items = current_user.items.where(period: period)
+      qty = items.where(category: 0).pluck(:price).sum
+      single = items.where(category: 2).pluck(:price).sum
+      admin = items.where(category: 3).pluck(:price).sum
+      dtotal = items.where(category: 4).pluck(:price).sum
+      total = qty + single + admin - dtotal
       #月ごとの概要を配列として返す
       #period:2022-04-01, text:"2022年4月", belongs:当月の生徒数
       #total:当月請求額, path:生徒別明細ページへのパス

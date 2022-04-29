@@ -65,7 +65,7 @@
       </td>
     </tr>
   <% end %>
-  <% if sibling.count > 1 %>
+  <% if sibling.pluck(:item_present).include?(true) && sibling.count > 1 %>
     <tr class="dotted-bottom">
       <td></td>
       <td></td>

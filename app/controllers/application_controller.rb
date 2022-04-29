@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     #卒・退会者を含む上限
     @expire_student_limit = 200
     #講座数の上限
-    @item_limit = 50
+    @item_limit = 200
     @item_cats = [
       "", "従量", "単独", "諸費", "割引"
     ]

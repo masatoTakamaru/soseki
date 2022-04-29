@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature "従量課金の設定", type: :feature do
+describe "従量課金の設定", type: :system do
 
   let(:current_user) {user_seed}
   let(:item_master) {item_master_seed}
-  let(:students) {students_seed}
+  let(:students) {student_seed}
   let(:item) {item_seed}
-  let(:student) {students_seed.first}
+  let(:student) {student_seed.first}
 
   before do
     visit "users/sign_in"
@@ -17,7 +17,7 @@ feature "従量課金の設定", type: :feature do
     click_link "講座と費用"
   end
 
-  scenario "従量課金が設定できる" do
+  it "従量課金が設定できる" do
     click_link "設定"
     expect(page).to have_title("設定")
     expect(page).to have_content("設定")
@@ -39,7 +39,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("価格を更新しました。")
   end
 
-  scenario "価格が負の数はNG" do
+  it "価格が負の数はNG" do
     click_link "設定"
     expect(page).to have_title("設定")
     expect(page).to have_content("設定")
@@ -50,7 +50,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("更新が失敗しました。価格は0以上の値を入力して下さい。")
   end
 
-  scenario "価格が小数はOK" do
+  it "価格が小数はOK" do
     click_link "設定"
     expect(page).to have_title("設定")
     expect(page).to have_content("設定")
@@ -61,7 +61,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("価格を更新しました。")
   end
 
-  scenario "価格が数値以外はNG" do
+  it "価格が数値以外はNG" do
     click_link "設定"
     expect(page).to have_title("設定")
     expect(page).to have_content("設定")
@@ -72,7 +72,7 @@ feature "従量課金の設定", type: :feature do
     expect(page).to have_content("更新が失敗しました。価格は0以上の値を入力して下さい。")
   end
 
-  scenario "キャンセルをクリックしたら費用と講座に戻る" do
+  it "キャンセルをクリックしたら費用と講座に戻る" do
     click_link "設定"
     click_link "キャンセル"
     expect(current_path).to eq item_master_index_path

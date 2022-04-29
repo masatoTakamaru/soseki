@@ -3,21 +3,21 @@
 
 <div class="container">
 
-<h2><%= t("title.item_master.new") %>  </h2>
+<h2><%= t("title.item_master.new") %></h2>
 <div class="flex">
   <p class="mr-8">種類を選択</p>
-  <%= link_to @item_cats[0], new_item_master_path(category: "single"), class: "mr-4 font-bold underline" %>
   <%= link_to @item_cats[1], new_item_master_path(category: "qty_price"), class: "mr-4 font-bold underline" %>
-  <%= link_to @item_cats[2], new_item_master_path(category: "admin"), class: "mr-4 font-bold underline" %>
-  <%= link_to @item_cats[3], new_item_master_path(category: "discount"), class: "font-bold underline" %>
+  <%= link_to @item_cats[2], new_item_master_path(category: "single"), class: "mr-4 font-bold underline" %>
+  <%= link_to @item_cats[3], new_item_master_path(category: "admin"), class: "mr-4 font-bold underline" %>
+  <%= link_to @item_cats[4], new_item_master_path(category: "discount"), class: "font-bold underline" %>
 </div>
 
 <hr class="my-4"/>
 <%= form_with model: @item_master, url: item_master_index_path, method: :post, local: true do |f| %>
-  <% if params[:category] == "single" || params[:category].nil? %>
-    <%= render "shared/item_master_form_single", f: f %>
-  <% elsif params[:category] == "qty_price" %>
+  <% if params[:category] == "qty_price" || params[:category].nil? %>
     <%= render "shared/item_master_form_qty_price", f: f %>
+  <% elsif params[:category] == "single"%>
+    <%= render "shared/item_master_form_single", f: f %>
   <% elsif params[:category] == "admin" %>
     <%= render "shared/item_master_form_admin", f: f %>
   <% elsif params[:category] == "discount" %>

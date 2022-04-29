@@ -48,13 +48,28 @@
       <td class="text-center">
         <% if @student[:sibling_group] == student[:sibling_group] %>
           <%= button_to t(".sibling_destroy"),
-            sibling_path, {method: :delete, class: "btn btn-flat-cancel px-1",
-            params: {id: student.hashid, sib_id: student.id}}
+            sibling_path, {
+              method: :delete,
+              class: "btn btn-flat-cancel px-1",
+              id: student.hashid,
+              params: {
+                id: student.hashid,
+                sib_id: student.id
+              }
+            }
           %>
         <% else %>
           <%= button_to t(".sibling_create"),
-            sibling_path, {method: :patch, class: "btn btn-flat px-1",
-            params: {id: @student.hashid, sib_id: student.id, sibling_group: @student[:sibling_group]}}
+            sibling_path, {
+              method: :patch,
+              class: "btn btn-flat px-1",
+              id: student.hashid,
+              params: {
+                id: @student.hashid,
+                sib_id: student.id,
+                sibling_group: @student[:sibling_group]
+              }
+            }
           %>
         <% end %>
       </td>

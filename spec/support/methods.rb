@@ -9,7 +9,7 @@ def user_seed
   )
 end
 
-def students_seed
+def student_seed
   students = []
   CSV.foreach("db/seed_student.csv", encoding: 'UTF-8') do |line|
     students << Student.new(
@@ -48,7 +48,6 @@ def item_master_seed
   item_masters = []
   CSV.foreach("db/seed_item_master.csv", encoding: 'UTF-8') do |line|
     item_masters << ItemMaster.new(
-      user_id: line[0],
       code: line[1],
       category: line[2],
       name: line[3],
@@ -56,60 +55,138 @@ def item_master_seed
       description: line[5]
     )
   end
-  item_masters.first
+  item_masters
 end
 
 def item_seed
-  Item.new(
-    period: "2022-4-1",
-    class_name: "中1A",
-    category: 1,
-    name: "中1国語",
-    price: 10000,
-    description: "中1国語通期講座",
-    code: 1021
-  )
+  items = []
+  CSV.foreach("db/seed_item.csv", encoding: 'UTF-8') do |line|
+    items << Item.new(
+      period: line[1],
+      code: line[2],
+      category: line[3],
+      name: line[4],
+      price: line[5],
+      description: line[6]
+    )
+  end
+  items
 end
 
-def student_registration(student)
+def qty_price_seed
+  qty_prices = []
+  0.upto(16){|grade|
+    1.upto(12){|qty|
+      price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100
+      price = price.to_i
+      price = price * 100
+      qty_prices << QtyPrice.new(
+        grade: grade,
+        qty: qty,
+        price: price)
+    }
+  }
+  qty_prices
+end
+
+def reg_student(e)
+  grades = {
+    "未就学": 0, "年少": 1, "年中": 2,
+    "年長": 3, "小学１年": 4, "小学２年": 5,
+    "小学３年": 6, "小学４年": 7, "小学５年": 8,
+    "小学６年": 9, "中学１年": 10, "中学２年": 11,
+    "中学３年": 12, "高校１年": 13, "高校２年": 14,
+    "高校３年": 15, "既卒": 16}
+  grade_name = grades.keys
+  visit root_path
+  click_link "生徒"
   click_link "新規登録"
   expect(page).to have_content('生徒の新規登録')
-  fill_in "student_start_date", with: student.start_date
-  fill_in "student_class_name", with: student.class_name
-  fill_in "student_family_name", with: student.family_name
-  fill_in "student_given_name", with: student.given_name
-  fill_in "student_family_name_kana", with: student.family_name_kana
-  fill_in "student_given_name_kana", with: student.given_name_kana
-  select student.gender, from: "student_gender"
-  fill_in "student_birth_date", with: student.birth_date
-  fill_in "student_school_belong_to", with: student.school_belong_to
-  select "中学３年", from: "student_grade"
-  fill_in "student_guardian_family_name", with: student.guardian_family_name
-  fill_in "student_guardian_given_name", with: student.guardian_given_name
-  fill_in "student_guardian_family_name_kana", with: student.guardian_family_name_kana
-  fill_in "student_guardian_given_name_kana", with: student.guardian_given_name_kana
-  fill_in "student_phone1", with: student.phone1
-  fill_in "student_phone1_belong_to", with: student.phone1_belong_to
-  fill_in "student_phone2", with: student.phone2
-  fill_in "student_phone2_belong_to", with: student.phone2_belong_to
-  fill_in "student_postal_code", with: student.postal_code
-  fill_in "student_address", with: student.address
-  fill_in "student_email", with: student.email
-  fill_in "student_user_name", with: student.user_name
-  fill_in "student_password", with: student.password
-  fill_in "student_remarks", with: student.remarks
+  fill_in "student_start_date", with: e[:start_date]
+  fill_in "student_class_name", with: e[:class_name]
+  fill_in "student_family_name", with: e[:family_name]
+  fill_in "student_given_name", with: e[:given_name]
+  fill_in "student_family_name_kana", with: e[:family_name_kana]
+  fill_in "student_given_name_kana", with: e[:given_name_kana]
+  select e[:gender], from: "student_gender"
+  fill_in "student_birth_date", with: e[:birth_date]
+  fill_in "student_school_belong_to", with: e[:school_belong_to]
+  select grade_name[e[:grade]], from: "student_grade"
+  fill_in "student_guardian_family_name", with: e[:guardian_family_name]
+  fill_in "student_guardian_given_name", with: e[:guardian_given_name]
+  fill_in "student_guardian_family_name_kana", with: e[:guardian_family_name_kana]
+  fill_in "student_guardian_given_name_kana", with: e[:guardian_given_name_kana]
+  fill_in "student_phone1", with: e[:phone1]
+  fill_in "student_phone1_belong_to", with: e[:phone1_belong_to]
+  fill_in "student_phone2", with: e[:phone2]
+  fill_in "student_phone2_belong_to", with: e[:phone2_belong_to]
   click_button "生徒を登録する"
+  expect(page).to have_content("新規生徒が登録されました。")
 end
 
-def items_master_registration(item_master)
+def reg_items_master(e)
   visit root_path
-  click_link "講座"
+  click_link "講座と費用"
   click_link "新規登録"
-  fill_in "item_master_code", with: item_master.code
-  fill_in "item_master_category", with: item_master.category
-  fill_in "item_master_name", with: item_master.name
-  fill_in "item_master_price", with: item_master.price
-  fill_in "item_master_description", with: item_master.description
-  click_button "講座を登録する"
+  expect(page).to have_content("項目の新規登録")
+  if e[:category] == 1
+    click_link "従量"
+    fill_in "item_master_code", with: e[:code]
+    fill_in "item_master_name", with: e[:name]
+    fill_in "item_master_description", with: e[:description]
+    click_button "項目を登録する"
+  elsif e[:category] == 2
+    click_link "単独"
+    fill_in "item_master_code", with: e[:code]
+    fill_in "item_master_name", with: e[:name]
+    fill_in "item_master_price", with: e[:price]
+    fill_in "item_master_description", with: e[:description]
+    click_button "項目を登録する"
+  elsif e[:category] == 3
+    click_link "諸費"
+    fill_in "item_master_code", with: e[:code]
+    fill_in "item_master_name", with: e[:name]
+    fill_in "item_master_price", with: e[:price]
+    fill_in "item_master_description", with: e[:description]
+    click_button "項目を登録する"
+  elsif e[:category] == 4
+    click_link "割引"
+    fill_in "item_master_code", with: e[:code]
+    fill_in "item_master_name", with: e[:name]
+    fill_in "item_master_price", with: e[:price]
+    fill_in "item_master_description", with: e[:description]
+    click_button "項目を登録する"
+  end
 end
 
+def reg_qty_price
+  grades = {
+    "未就学": 0, "年少": 1, "年中": 2,
+    "年長": 3, "小学１年": 4, "小学２年": 5,
+    "小学３年": 6, "小学４年": 7, "小学５年": 8,
+    "小学６年": 9, "中学１年": 10, "中学２年": 11,
+    "中学３年": 12, "高校１年": 13, "高校２年": 14,
+    "高校３年": 15, "既卒": 16}
+  grade_name = grades.keys
+  0.upto(16){|grade|
+    visit root_path
+    click_link "講座と費用"
+    click_link "設定"
+    select grade_name[grade], from: "grade"
+    click_button "選択"
+    1.upto(12){|qty|
+      price = (8000+grade*200)*(1-0.9**qty)/(1-0.9)/100
+      price = price.to_i
+      price = price * 100
+      fill_in "price" + qty.to_s, with: price
+    }
+    click_button "更新"
+  }
+end
+
+def user_login
+  visit "users/sign_in"
+  fill_in "user_email", with: current_user.email
+  fill_in "user_password", with: current_user.password
+  find("input[name='commit']").click
+end

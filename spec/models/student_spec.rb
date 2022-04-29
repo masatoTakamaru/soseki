@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe Student, type: :model do
+describe Student, type: :model do
 
   context "生徒登録のvalidationが正しく機能しているか" do
 
     let(:current_user) {user_seed}
-    let(:student) {students_seed.first}
+    let(:student) {student_seed.first}
 
     it "退会日が不正な日付はNG" do
       student.expire_date = "2021-13-20"
@@ -319,54 +319,6 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "郵便番号がハイフン入りはNG" do
-      student.postal_code = "111-1111"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "郵便番号が空白はNG" do
-      student.postal_code = ""
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "郵便番号が7字未満はNG" do
-      student.postal_code = "123456"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "郵便番号が8字以上はNG" do
-      student.postal_code = "12345678"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "郵便番号が全角文字はNG" do
-      student.postal_code = "１２３４５６７"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "郵便番号が記号文字はNG" do
-      student.postal_code = "123+4567"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "住所が空白はNG" do
-      student.address = ""
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "住所が41字以上はNG" do
-      student.address = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
     it "メールアドレスが空白はOK" do
       student.email = ""
       current_user.students << student
@@ -397,42 +349,6 @@ RSpec.describe Student, type: :model do
       expect(current_user.students.first).to be_invalid
     end
 
-    it "ユーザー名が空白はOK" do
-      student.user_name = ""
-      current_user.students << student
-      expect(current_user.students.first).to be_valid
-    end
-
-    it "ユーザー名が21字以上はNG" do
-      student.user_name = "123456789012345678901"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "ユーザー名が全角文字はNG" do
-      student.user_name = "１１１"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "パスワードが空白はOK" do
-      student.password = ""
-      current_user.students << student
-      expect(current_user.students.first).to be_valid
-    end
-
-    it "パスワードが41字以上はNG" do
-      student.password = "12345678901234567890123456789012345678901"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
-    it "パスワードが全角文字はNG" do
-      student.password = "１１１"
-      current_user.students << student
-      expect(current_user.students.first).to be_invalid
-    end
-
     it "備考欄が空白はOK" do
       student.remarks = ""
       current_user.students << student
@@ -449,7 +365,7 @@ RSpec.describe Student, type: :model do
   context "ユーザーとの関連付けが正しく機能しているか" do
 
     let(:current_user) {user_seed}
-    let(:student) {students_seed.first}
+    let(:student) {student_seed.first}
 
     it "生徒が登録できればOK" do
       current_user.students << student

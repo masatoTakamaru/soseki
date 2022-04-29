@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature "ホーム画面", type: :feature do
+describe "ホーム画面", type: :system do
 
   let(:current_user) {user_seed}
 
-  scenario "ホームページが表示される" do
+  it "ホームページが表示される" do
     visit root_path
     expect(page).to have_content "Soseki"
     expect(page).to have_content "ログイン" 
@@ -14,7 +14,7 @@ feature "ホーム画面", type: :feature do
     expect(page).to have_content "お問い合わせ"
   end
 
-  scenario "ロゴをクリックするとホームに移動する" do
+  it "ロゴをクリックするとホームに移動する" do
     visit root_path
     click_link "Soseki"
     expect(page).to have_content "Soseki"
@@ -25,7 +25,7 @@ feature "ホーム画面", type: :feature do
     expect(page).to have_content "お問い合わせ"
   end
 
-  scenario "ログインをクリックするとログイン画面に移動する" do
+  it "ログインをクリックするとログイン画面に移動する" do
     visit root_path
     click_link "ログイン"
     expect(page).to have_content "ログイン"
@@ -35,7 +35,7 @@ feature "ホーム画面", type: :feature do
     expect(page).to have_content "パスワードを忘れましたか？"
   end
 
-  scenario "ログインができる" do
+  it "ログインができる" do
     visit "users/sign_in"
     # emailを入力する
     fill_in 'user_email', with: current_user.email

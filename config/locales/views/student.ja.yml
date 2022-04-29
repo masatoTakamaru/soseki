@@ -51,7 +51,7 @@ ja:
     index:
       students_amount: 生徒数
       people: 人
-      students_empty: 生徒が登録されていません。「新規登録」をクリックして生徒を登録して下さい。
+      students_empty: 生徒は登録されていません。「新規登録」をクリックして生徒を登録して下さい。
       registration: 新規登録
       expired: 卒・退会者
     new:

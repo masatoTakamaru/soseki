@@ -59,12 +59,6 @@ class Student < ApplicationRecord
   validates :phone2_belong_to,
     allow_blank: true,
     length: {maximum: 10}
-  validates :postal_code,
-    presence: true,
-    format: {with: POSTAL_CODE_REGEXP, message: "に誤りがあります。"}
-  validates :address,
-    presence: true,
-    length: {maximum: 40}
   validates :email,
     length: {maximum: 72},
     format: {with: EMAIL_REGEXP, message: "に誤りがあります。",

@@ -1,14 +1,15 @@
 require "rails_helper"
 
-RSpec.describe Item, type: :model do
+describe Item, type: :model do
 
   context "講座が正しく登録できる" do
 
     let(:current_user) {user_seed}
     let(:item_master) {item_master_seed}
-    let(:students) {students_seed}
-    let(:item) {item_seed}
-    let(:student) {students_seed.first}
+    let(:students) {student_seed}
+    let(:items) {item_seed}
+    let(:item) {items.first}
+    let(:student) {student_seed.first}
 
     it "台帳月が空白はNG" do
       item.period = ""
@@ -20,18 +21,6 @@ RSpec.describe Item, type: :model do
       item.period = "2022-01-100"
       student.items << item
       expect(student.items.first.period).to be_nil
-    end
-
-    it "所属クラスが空白はNG" do
-      item.class_name = ""
-      student.items << item
-      expect(student.items.first).to be_invalid
-    end
-
-    it "所属クラスが11字以上はNG" do
-      item.class_name = "１２３４５６７８９０１"
-      student.items << item
-      expect(student.items.first).to be_invalid
     end
 
     it "カテゴリが空白はNG" do
@@ -46,8 +35,8 @@ RSpec.describe Item, type: :model do
       expect(student.items.first).to be_invalid
     end
 
-    it "講座名が21字以上はNG" do
-      item.name = "１２３４５６７８９０１２３４５６７８９０１"
+    it "講座名が41字以上はNG" do
+      item.name = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１"
       student.items << item
       expect(student.items.first).to be_invalid
     end
@@ -81,9 +70,10 @@ RSpec.describe Item, type: :model do
 
     let(:current_user) {user_seed}
     let(:item_master) {item_master_seed}
-    let(:students) {students_seed}
-    let(:item) {item_seed}
-    let(:student) {students_seed.first}
+    let(:students) {student_seed}
+    let(:items) {item_seed}
+    let(:item) {items.first}
+    let(:student) {student_seed.first}
 
     it "講座が登録できる" do
       student.items << item

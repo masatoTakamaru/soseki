@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ItemMaster, type: :model do
+describe ItemMaster, type: :model do
   context "講座マスターが正しく登録できる" do
 
     let(:current_user) {user_seed}
-    let(:item_master) {item_master_seed}
+    let(:item_masters) {item_master_seed}
+    let(:item_master) {item_masters.first}
 
     it "講座マスターが登録できる" do
       current_user.item_masters << item_master
@@ -71,8 +72,8 @@ RSpec.describe ItemMaster, type: :model do
       expect(current_user.item_masters.first).to be_invalid
     end
 
-    it "カテゴリが4以上はNG" do
-      item_master.category = 4
+    it "カテゴリが5以上はNG" do
+      item_master.category = 5
       current_user.item_masters << item_master
       expect(current_user.item_masters.first).to be_invalid
     end
