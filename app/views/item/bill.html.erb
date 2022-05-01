@@ -41,7 +41,7 @@
     </tr>
     </thead>
     <tbody>
-    <% if @bill[:qty].present? %>
+    <% if @bill[:qty].any? %>
       <% @bill[:qty].each do |item| %>
         <%= render partial: "shared/bill_item", locals: {item: item} %>
       <% end %>
@@ -54,12 +54,12 @@
         <td></td>
       </tr>
     <% end %>
-    <% if @bill[:single].present? %>
+    <% if @bill[:single].any? %>
       <% @bill[:single].each do |item| %>
         <%= render partial: "shared/bill_item", locals: {item: item} %>
       <% end %>
     <% end %>
-    <% if @bill[:admin].present? %>
+    <% if @bill[:admin].any? %>
       <% @bill[:admin].each do |item| %>
         <%= render partial: "shared/bill_item", locals: {item: item} %>
       <% end %>
@@ -72,7 +72,7 @@
       <td class="pr-2 pt-2 pb-6 text-right font-bold"><%= number_to_currency(@bill[:subtotal]) %></td>
       <td></td>
     </tr>
-    <% if @bill[:discount].present? %>
+    <% if @bill[:discount].any? %>
       <thead>
       <tr class="text-85 dotted-bottom">
         <th class="item-code"><%= t("item_master.code") %></th>

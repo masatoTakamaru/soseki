@@ -37,7 +37,7 @@ class ItemController < ApplicationController
       redirect_to dashboard_path and return
     end
     period = Date.new(year, month, 1)
-    if current_user.items.find_by(period: period).present?
+    if current_user.items.find_by(period: period).any?
       flash[:notice] = "台帳はすでに存在しています。"
       redirect_to dashboard_path and return
     end
@@ -46,19 +46,24 @@ class ItemController < ApplicationController
 
   def sheet
     period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    students = current_user.students.where(expire_flag: false)
+    stus = current_user.students
+    stus.each do |stu|
+      if stu[:expire_flag] && stu.items.find_by(period: period).nil?
+        stus.delete(stu)
+      end
+    end
     @sheet = {
       period: period,
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
-      belongs: students.count,
+      belongs: stus.count,
       total: 0,
       item_masters: current_user.item_masters
     }
     @siblings = []
-    students.select(:sibling_group).distinct.pluck(:sibling_group).each do |sibling_group|
-      sibling = []
-      students.where(sibling_group: sibling_group).each do |student|
-        items = student.items.where(period: period)
+    stus.select(:sibling_group).distinct.pluck(:sibling_group).each do |sibling_group|
+      sib = []
+      stus.where(sibling_group: sibling_group).each do |stu|
+        items = stu.items.where(period: period)
         if items.find_by(category: 0)
           qty_price = items.find_by(category: 0).price
           qty = items.where(period: period, category: 1).order(code: :asc)
@@ -72,17 +77,17 @@ class ItemController < ApplicationController
         dtotal = discount.pluck(:price).sum
         total = subtotal - dtotal
         @sheet[:total] += total
-        sibling << {
-          item_present: student.items.present?,
-          student_id: student.hashid,
-          name: "#{student[:family_name]} #{student[:given_name]}",
-          kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
-          class_name: student[:class_name],
-          grade_name: @grade_name[student[:grade]],
+        sib << {
+          item_present: items.any?,
+          student_id: stu.hashid,
+          name: "#{stu[:family_name]} #{stu[:given_name]}",
+          kana: "#{stu[:family_name_kana]} #{stu[:given_name_kana]}",
+          class_name: stu[:class_name],
+          grade_name: @grade_name[stu[:grade]],
           total: total
         }
       end
-      @siblings << sibling
+      @siblings << sib
     end
 
   end
@@ -105,7 +110,7 @@ class ItemController < ApplicationController
     dtotal = discount.pluck(:price).sum
     total = subtotal - dtotal
     @bill = {
-      item_present: items.present?,
+      item_present: items.any?,
       student_id: student.hashid,
       period: period,
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
@@ -123,7 +128,7 @@ class ItemController < ApplicationController
       total: total
     }
     #コードによる講座検索
-    if params[:code].present?
+    if params[:code].any?
       if item_master.find_by(code: params[:code])
         @new_item = item_master.find_by(code: params[:code])
         flash[:notice] = nil
@@ -163,16 +168,16 @@ class ItemController < ApplicationController
       qty_items = student.items.where(period: period, category: 1)
       qty_price = current_user.qty_prices.find_by(grade: student[:grade], qty: qty_items.count)
       qty = student.items.find_by(period: period, category: 0)
-      if qty.present?
+      if qty.any?
         qty.update(price: qty_price[:price])
       else
         qty = student.items.new(
           code: 0,
           period: period,
           category: 0,
-          name: "[qty]",
+          name: "-",
           price: qty_price[:price],
-          description: "[qty]"
+          description: "-"
         )
         qty.save
       end

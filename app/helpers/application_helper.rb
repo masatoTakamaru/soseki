@@ -11,30 +11,30 @@ module ApplicationHelper
   end
 
   def student_extraction  #所属クラス・学年による生徒の抽出
-    @students = current_user.students
+    @stus = current_user.students
     #所属クラスのカテゴリ配列の生成
-    @classes = @students.order(class_name: :asc).group(:class_name).pluck(:class_name)
+    @classes = @stus.order(class_name: :asc).group(:class_name).pluck(:class_name)
     @class_list = []
     @classes.each do |c|
       @class_list.push([c,c])
     end
     if params[:class_name]
-      if params[:class_name].present?
+      if params[:class_name].any?
         @class_name = params[:class_name]
-        @students = @students.where(class_name: @class_name)
+        @stus = @stus.where(class_name: @class_name)
       else
-        @students = @students.order(created_at: :desc)
+        @stus = @stus.order(created_at: :desc)
       end
     #学年の抽出
     elsif params[:grade]
-      if params[:grade].present?
+      if params[:grade].any?
         @grade = params[:grade]
-        @students = @students.where(grade: @grade)
+        @stus = @stus.where(grade: @grade)
       else
-        @students = @students.order(created_at: :desc)
+        @stus = @stus.order(created_at: :desc)
       end
     else
-      @students = @students.all.order(created_at: :desc)
+      @stus = @stus.all.order(created_at: :desc)
     end
   end
 

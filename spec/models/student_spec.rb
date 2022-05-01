@@ -369,7 +369,7 @@ describe Student, type: :model do
 
     it "生徒が登録できればOK" do
       current_user.students << student
-      expect(current_user.students.first.present?).to be_truthy
+      expect(current_user.students.first.any?).to be_truthy
     end
 
     it "生徒が削除できればOK" do

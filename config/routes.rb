@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get "home/help", to: "home#help", as:"help"
   get "home/index"
   get "home/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
+  get "home/students_csv_download", to: "home#students_csv_download", as: "students_csv_download"
+  get "home/expired_csv_download", to: "home#expired_csv_download", as: "expired_csv_download"
+  get "home/item_master_csv_download", to: "home#item_master_csv_download", as: "item_master_csv_download"
+  get "home/item_csv_download", to: "home#item_csv_download", as: "item_csv_download"
 
   get "qty_price/before_edit", to: "qty_price#before_edit", as: "qty_price_before_edit"
   get "qty_price/:grade/edit", to: "qty_price#edit", as: "qty_price_edit"

@@ -3,9 +3,13 @@
 <div class="container">
 
 <div class="flex justify-between items-center mb-2">
-  <% unless @students.count == 0 %>
-    <p class="font-bold"><%= t(".students_amount") %> : <span><%= @students.count %></span><%= t(".people") %></p>
-    <%= render partial: "shared/student_sort" %>
+  <% unless @stus.count == 0 %>
+    <p class="font-bold"><%= "#{t(".students_amount")} : #{@stus.count} #{t(".people")}" %></p>
+    <div class="flex">
+      <p class="mr-2"><%= t("student.sort") %></p>
+      <p class="mx-2"><%= link_to t("student.class_name"), student_index_path(class_name: @class_name_order) %></p>
+      <p class="mx-2"><%= link_to t("student.grade"), student_index_path(grade: @grade_order) %></p>
+    </div>
     <div>
       <%= link_to t(".registration"), new_student_path, class: "btn py-2 px-8 mr-4" %>
       <%= link_to t(".expired"), student_expired_path, class: "btn btn-cancel py-2 px-8" %>
@@ -23,7 +27,6 @@
   <th><%= t("student.gender") %></th>
   <th><%= t("student.grade") %></th>
   <th><%= t("student.school_belong_to") %></th>
-  <th><%= t("student.items") %></th>
   <th><%= t("student.phone1") %></th>
   <th><%= t("student.phone1_belong_to") %></th>
   <th><%= t("student.phone2") %></th>
@@ -31,7 +34,7 @@
 </tr>
 </thead>
 <tbody>
-<% if @students.count == 0 %>
+<% if @stus.count == 0 %>
   <tr>
     <td colspan="11">
       <div class="flex justify-center mt-4">
@@ -43,21 +46,20 @@
     </td>
   </tr>
 <% else %>
-  <% @students.each do |student| %>
+  <% @stus.each do |stu| %>
     <tr class="dotted-bottom">
-      <td class="px-2"><%= student.class_name %></td>
+      <td class="px-2"><%= stu[:class_name] %></td>
       <td class="font-bold underline pr-2">
-        <%= link_to student.family_name + " " + student.given_name, student_path(id: student.hashid), class: "text-blue-500" %>
+        <%= link_to "#{stu[:family_name]} #{stu[:given_name]}", student_path(id: stu.hashid), class: "text-blue-500" %>
       </td>
-      <td class="pr-2"><%= student.family_name_kana + " " + student.given_name_kana %></td>
-      <td class="pr-2"><%= student.gender %></td>
-      <td class="pr-2"><%= @grade_name[student.grade] %></td>
-      <td class="pr-2"><%= student.school_belong_to %></td>
-      <td class="pr-2">[未設定]</td>
-      <td class="pr-2"><%= student.phone1 %></td>
-      <td class="pr-2"><%= student.phone1_belong_to %> </td>
-      <td class="pr-2"><%= student.phone2 %></td>
-      <td class="pr-2"><%= student.phone2_belong_to %> </td>
+      <td class="pr-2"><%= "#{stu[:family_name_kana]} #{stu.given_name_kana}" %></td>
+      <td class="pr-2 text-center"><%= stu[:gender] %></td>
+      <td class="pr-2"><%= @grade_name[stu[:grade]] %></td>
+      <td class="pr-2"><%= stu[:school_belong_to] %></td>
+      <td class="pr-2"><%= stu[:phone1] %></td>
+      <td class="pr-2"><%= stu[:phone1_belong_to] %> </td>
+      <td class="pr-2"><%= stu[:phone2] %></td>
+      <td class="pr-2"><%= stu[:phone2_belong_to] %> </td>
     </tr>
   <% end %>
 <% end %>

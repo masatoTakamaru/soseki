@@ -1,151 +1,179 @@
-<%= provide :title, "#{@student_full_name} | #{t("title.student.show")}" %>
+<%= provide :title, "#{@stu[:family_name]} #{@stu[:given_name]} | #{t("title.student.show")}" %>
 
 <div class="container">
 
 <h2><%= t("title.student.show") %></h2>
 
 <div class="flex justify-between pt-4 pb-4">
-  <div>
-    <%= link_to t(".edit"), edit_student_path(@student.hashid), class: "btn py-2 px-4" %>
-    <%= link_to t(".edit_siblings"), sibling_path(@student.hashid), class: "btn py-2 px-4" %>
-  </div>
-  <% if @student[:expired_flag] %>
-    <%= link_to t(".back_to_index") , student_expired_path, class: "btn btn-cancel py-2 px-8" %>
-  <% else %>
-    <%= link_to t(".back_to_index") , student_index_path, class: "btn btn-cancel py-2 px-8" %>
-  <% end %>
+<div>
+  <%= link_to t(".edit"), edit_student_path(@stu.hashid),
+        class: "btn py-2 px-4" %>
+  <%= link_to t(".edit_siblings"), sibling_path(@stu.hashid),
+        class: "btn py-2 px-4" %>
+</div>
+<% if @stu[:expired_flag] %>
+  <%= link_to t(".back_to_index"), student_expired_path,
+        class: "btn btn-cancel py-2 px-8" %>
+<% else %>
+  <%= link_to t(".back_to_index"), student_index_path,
+        class: "btn btn-cancel py-2 px-8" %>
+<% end %>
 </div>
 <div class="table-frame flex justify-evenly bg-white">
-  <div class="p-4">
-    <table>
-      <tr class="dotted-bottom">
-        <td><%= t("student.start_date") %>:</td>
-        <td class="font-bold"><%= @student[:start_date] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.class_name") %>:</td>
-        <td class="font-bold"><%= @student[:class_name] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.name") %>:</td>
-        <td class="font-bold"><%= @student[:family_name] + " " + @student[:given_name] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.kana") %>:</td>
-        <td class="font-bold"><%= @student[:family_name_kana] + " " + @student[:given_name_kana] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.gender") %>:</td>
-        <td class="font-bold"><%= @student[:gender] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.birth_date") %>:</td>
-        <td class="font-bold"><%= @student[:birth_date] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.school_belong_to") %>:</td>
-        <td class="font-bold"><%= @student[:school_belong_to] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.grade") %>:</td>
-        <td class="font-bold"><%= @grade_name[@student[:grade]] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.guardian_name") %>:</td>
-        <td class="font-bold"><%= @student[:guardian_family_name] + " " + @student[:guardian_given_name] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.kana") %>:</td>
-        <td class="font-bold"><%= @student[:guardian_family_name_kana] + " " + @student[:guardian_given_name_kana] %></td>
-      </tr>
-    </table>
-  </div>
-  <div class="p-4">
-    <table>
-      <tr class="dotted-bottom">
-        <td><%= t("student.phone1") %>:</td>
-        <td class="font-bold"><%= @student[:phone1] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.belong") %>:</td>
-        <td class="font-bold"><%= @student[:phone1_belong_to] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.phone2") %>:</td>
-        <td class="font-bold"><%= @student[:phone2] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.belong") %>:</td>
-        <td class="font-bold"><%= @student[:phone2_belong_to] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.postal_code") %>:</td>
-        <td class="font-bold"><%= @student[:postal_code] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.address") %>:</td>
-        <td class="font-bold"><%= @student[:address] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.email") %>:</td>
-        <td class="font-bold"><%= @student[:email] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.user_name") %>:</td>
-        <td class="font-bold"><%= @student[:user_name] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.password") %>:</td>
-        <td class="font-bold"><%= @student[:password] %></td>
-      </tr>
-      <tr class="dotted-bottom">
-        <td><%= t("student.remarks") %>:</td>
-        <td class="font-bold"><%= @student[:remarks] %></td>
-      </tr>
-    </table>
-  </div>
+<div class="p-4">
+<table>
+<tr class="dotted-bottom">
+  <td><%= t("student.start_date") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:start_date] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.class_name") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:class_name] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.name") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold">
+    <%= "#{@stu[:family_name]} #{@stu[:given_name]}" %>
+  </td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.kana") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold">
+    <%= "#{@stu[:family_name_kana]} #{@stu[:given_name_kana]}" %>
+  </td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.gender") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:gender] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.birth_date") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:birth_date] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.school_belong_to") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:school_belong_to] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.grade") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @grade_name[@stu[:grade]] %></td>
+</tr>
+</table>
+</div>
+<div class="p-4">
+<table>
+<tr class="dotted-bottom">
+  <td><%= t("student.guardian_name") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold">
+    <%= "#{@stu[:guardian_family_name]} #{@stu[:guardian_given_name]}" %>
+  </td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.kana") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold">
+    <%= "#{@stu[:guardian_family_name_kana]} #{@stu[:guardian_given_name_kana]}" %>
+  </td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.phone1") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:phone1] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.belong") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:phone1_belong_to] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.phone2") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:phone2] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.belong") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:phone2_belong_to] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.email") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:email] %></td>
+</tr>
+<tr class="dotted-bottom">
+  <td><%= t("student.remarks") %></td>
+  <td class="px-2">:</td>
+  <td class="font-bold"><%= @stu[:remarks] %></td>
+</tr>
+</table>
+</div>
 </div>
 
-<% if @siblings.any? %>
-  <div class="mt-4 p-4 bg-white table-frame">
-    <p><%= t(".siblings") %></p>
-    <% @siblings.each do |sibling| %>
-      <% unless sibling.hashid == @student.hashid %>
+<% if @sibs.any? %>
+  <div class="my-4 p-4 bg-white table-frame">
+    <p class="mb-2"><%= t(".siblings") %></p>
+    <% @sibs.each do |sib| %>
+      <% unless sib.hashid == @stu.hashid %>
         <div class="flex">
-          <p class="font-bold ml-4 mr-4"><%= sibling[:family_name] + " " + sibling[:given_name] %></p>
-          <p class="mr-4"><%= sibling[:family_name_kana] + " " + sibling[:given_name_kana] %></p>
-          <p class="mr-4"><%= sibling[:class_name] %></p>
-          <p><%= @grade_name[sibling[:grade].to_i] %></p>
+          <p class="font-bold ml-4 mr-4">
+            <%= "#{sib[:family_name]} #{sib[:given_name]}" %>
+          </p>
+          <p class="mr-4">
+            <%= "#{sib[:family_name_kana]} #{sib[:given_name_kana]}" %>
+          </p>
+          <p class="mr-4"><%= sib[:class_name] %></p>
+          <p><%= @grade_name[sib[:grade].to_i] %></p>
         </div>
       <% end %>
     <% end %>
   </div>
 <% end %>
 
-<% if @student[:expire_flag] %>
+<% if @stu[:expire_flag] %>
   <h2><%= t(".header_expire_cancel") %></h2>
   <div class="flex justify-between items-center">
     <p><%= t(".expire_cancel_content") %></p>
-    <%= link_to t(".expire_cancel"), student_expire_cancel_path, method: :patch, class: "btn btn-cancel py-2 px-8" %>
+    <%= link_to t(".expire_cancel"), student_expire_cancel_path,
+          method: :patch,
+          class: "btn btn-cancel py-2 px-8" %>
   </div>
 <% else %>
   <h2><%= t(".header_expire") %></h2>
   <p><%= t(".expire_content") %></p>
-  <%= form_with model: @student, url: student_expire_path(@student.hashid), method: :patch do |f| %>
+  <%= form_with model: @stu,
+        url: student_expire_path(@stu.hashid),
+        method: :patch do |f| %>
     <div class="flex justify-end items-center mt-4 mb-10">
       <%= f.label t("student.expire_date") %>
-      <%= f.telephone_field :expire_date, size: 10, class: "p-1 mx-4",value: Date.today %>
+      <%= f.telephone_field :expire_date,
+            size: 10,
+            class: "p-1 mx-4",
+            value: Date.today %>
       <p class="text-gray-600"><%= t("student.date_example") %></p>
-      <%= f.submit t(".expire"), class: "btn btn-cancel ml-8 py-2 px-8", data: {confirm: t(".expire_confirmation")} %>
+      <%= f.submit t(".expire"),
+            class: "btn btn-cancel ml-8 py-2 px-8",
+            data: {confirm: t(".expire_confirmation")} %>
     </div>
   <% end %>
 <% end %>
 <h2><%= t(".delete") %></h2>
 <p><%= t(".delete_content") %></p>
-<div class="flex justify-end mt-4">
-  <%= link_to t(".delete"), student_path(@student.hashid),
-              class:"btn btn-cancel py-2 px-4",
-              data: {confirm: t(".delete_confirmation")}, method: :delete %>
+<div class="flex justify-end mt-4 mb-20">
+  <%= link_to t(".delete"),
+        student_path(@stu.hashid),
+        method: :delete,
+        class:"btn btn-cancel py-2 px-4",
+        data: {confirm: t(".delete_confirmation")}
+  %>
 </div>
 
 </div>

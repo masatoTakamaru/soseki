@@ -31,11 +31,7 @@ def student_seed
       phone1_belong_to: line[16],
       phone2: line[17],
       phone2_belong_to: line[18],
-      postal_code: line[19],
-      address: line[20],
       email: line[21],
-      user_name: line[22],
-      password_digest: line[23],
       sibling_group: line[24],
       expire_date: "",
       expire_flag: false

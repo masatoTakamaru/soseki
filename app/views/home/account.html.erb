@@ -2,24 +2,60 @@
 
 <div class="container">
 
+<h2>アカウントの情報</h2>
 <table>
 <tbody>
 <tr>
   <td class="pr-4"><%= t(".school_name") %></td>
+  <td class="px-2">:</td>
   <td><%= current_user.username %></td>
 </tr>
 <tr>
   <td class="pr-4"><%= t(".email") %></td>
+  <td class="px-2">:</td>
   <td><%= current_user.email %></td>
 </tr>
 <tr>
   <td class="pr-4"><%= t(".created_at") %></td>
+  <td class="px-2">:</td>
   <td><%= current_user.created_at.strftime(t("date.formats.long")) %></td>
 </tr>
 </tbody>
 </table>
 
-<h2><%= t(".destroy_header") %></h2>
+<h2>データのダウンロード</h2>
+<p class="mb-2">登録したデータをCSV形式でダウンロードできます。</p>
+<div class="ml-4">
+  <%= button_to students_csv_download_path,
+        {method: :get, class: "btn btn-flat-cancel my-2 py-2 px-4"} do %>
+    <div class="flex items-center">
+      <p class="pr-4">生徒のデータをダウンロード(.csv)</p>
+      <%= render partial: "shared/icon_download" %>
+    </div>
+  <% end %>
+  <%= button_to expired_csv_download_path,
+        {method: :get, class: "btn btn-flat-cancel my-2 py-2 px-4"} do %>
+    <div class="flex items-center">
+      <p class="pr-4">卒・退会者のデータをダウンロード(.csv)</p>
+      <%= render partial: "shared/icon_download" %>
+    </div>
+  <% end %>
+  <%= button_to item_master_csv_download_path,
+        {method: :get, class: "btn btn-flat-cancel my-2 py-2 px-4"} do %>
+    <div class="flex items-center">
+      <p class="pr-4">講座と費用のデータをダウンロード(.csv)</p>
+      <%= render partial: "shared/icon_download" %>
+    </div>
+  <% end %>
+  <%= button_to item_csv_download_path,
+      {method: :get, class: "btn btn-flat-cancel my-2 py-2 px-4"} do %>
+  <div class="flex items-center">
+    <p class="pr-4">月謝のデータをダウンロード(.csv)</p>
+    <%= render partial: "shared/icon_download" %>
+  </div>
+<% end %>
+</div>
+<h2 class="mt-20"><%= t(".destroy_header") %></h2>
 <p><%= t(".destroy_description") %>
 <div class="flex justify-end">
   <%= link_to  t(".destroy"), user_registration_path,

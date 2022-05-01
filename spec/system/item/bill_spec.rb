@@ -164,6 +164,35 @@ describe "合計額が正しく表示される", type: :system do
     expect(page).to have_content("28,000")
   end
 
+  it "兄弟姉妹が退会しても記録が残る" do
+    click_link "沼田 寧花"
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    click_button "戻る"
+    click_link "沼田 大介"
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    click_button "戻る"
+    click_link "沼田 貴隆"
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    click_link "生徒"
+    click_link "沼田 貴隆"
+    click_button "卒・退会"
+    click_link "生徒"
+    expect(page).not_to have_content("沼田 貴隆")
+    click_link "ダッシュボード"
+    click_link "2022 年 4 月"
+    expect(page).to have_content("沼田 貴隆")
+    expect(page).to have_content("8,200")
+    expect(page).to have_content("9,600")
+    expect(page).to have_content("10,200")
+    expect(page).to have_content("28,000")
+  end
+
   it "項目がない場合小計が表示されない" do
     expect(page).not_to have_content("小計")
   end

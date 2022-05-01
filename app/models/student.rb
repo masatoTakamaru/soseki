@@ -63,14 +63,6 @@ class Student < ApplicationRecord
     length: {maximum: 72},
     format: {with: EMAIL_REGEXP, message: "に誤りがあります。",
               allow_blank: true}
-  validates :user_name,
-    length: {maximum: 20},
-    format: {with: USER_NAME_REGEXP, message: "は半角文字で入力して下さい。",
-            allow_blank: true}
-  validates :password,
-    length: {maximum: 40},
-    format: {with: PASSWORD_REGEXP, message: "は半角文字で入力して下さい。",
-            allow_blank: true}    
   validates :remarks, length: {maximum: 240}
 
 end

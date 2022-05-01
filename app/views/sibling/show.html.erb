@@ -7,14 +7,14 @@
 <div class="flex items-center justify-between mb-4">
   <div class="flex">
     <p><%= t("student.name") %>:</p>
-    <p class="font-bold pr-6"><%= @student[:family_name] + " " + @student[:given_name] %></p>
+    <p class="font-bold pr-6"><%= @stu[:family_name] + " " + @stu[:given_name] %></p>
     <p><%= t("student.class_name") %>:</p>
-    <p class="font-bold pr-6"><%= @student[:class_name] %></p>
+    <p class="font-bold pr-6"><%= @stu[:class_name] %></p>
     <p><%= t("student.grade") %>:</p>
-    <p class="font-bold pr-6"><%= @grade_name[@student[:grade]] %></p>
+    <p class="font-bold pr-6"><%= @grade_name[@stu[:grade]] %></p>
   </div>
   <div>
-    <%= link_to t(".back_to_show"), student_path(id: @student.hashid), class: "btn btn-cancel py-2 px-8" %>
+    <%= link_to t(".back_to_show"), student_path(id: @stu.hashid), class: "btn btn-cancel py-2 px-8" %>
   </div>
 </div>
 
@@ -37,16 +37,16 @@
   </thead>
 
   <tbody>
-  <% @students.each do |student| %>
-    <% unless student.hashid == @student.hashid %>
-      <% if @student[:sibling_group] == student[:sibling_group] %>
+  <% @stus.each do |student| %>
+    <% unless student.hashid == @stu.hashid %>
+      <% if @stu[:sibling_group] == student[:sibling_group] %>
         <tr class="bg-pink-200">
       <% else %>
         <tr>
       <% end %>
       <td class="px-2"><%= student[:class_name] %></td>
       <td class="text-center">
-        <% if @student[:sibling_group] == student[:sibling_group] %>
+        <% if @stu[:sibling_group] == student[:sibling_group] %>
           <%= button_to t(".sibling_destroy"),
             sibling_path, {
               method: :delete,
@@ -65,9 +65,9 @@
               class: "btn btn-flat px-1",
               id: student.hashid,
               params: {
-                id: @student.hashid,
+                id: @stu.hashid,
                 sib_id: student.id,
-                sibling_group: @student[:sibling_group]
+                sibling_group: @stu[:sibling_group]
               }
             }
           %>

@@ -1,16 +1,24 @@
 <%= provide :title, t("title.student.new") %>
-<%= render "shared/input_errors", model: @student %>
+<%= render "shared/input_errors", model: @stu %>
 
 <div class="container">
 
-<h2><%= t("title.student.new") %>  </h2>
-
+<h2><%= t("title.student.new") %></h2>
 <hr class="my-4"/>
-<%= form_with model: @student, url: student_index_path, method: :post, local: true do |f| %>
+<%= form_with model: @stu,
+      url: student_index_path,
+      method: :post,
+      local: true do |f| %>
   <%= render "shared/student_form", f: f %>
   <div class="flex justify-center my-4">
-    <%= f.submit t(".registration"), class: "btn py-2 px-4 mr-4", data: {confirm: t(".confirmation")} %>
-    <%= link_to t("cancel"), student_index_path, class: "btn btn-cancel pt-3 pb-2 px-4", data: {confirm: t(".cancel_confirmation")} %>
+    <%= f.submit t(".registration"),
+          class: "btn py-2 px-4 mr-4",
+          data: {confirm: t(".confirmation")}
+    %>
+    <%= link_to t("cancel"), student_index_path,
+          class: "btn btn-cancel pt-3 pb-2 px-4",
+          data: {confirm: t(".cancel_confirmation")}
+    %>
   </div>
 <% end %>
 

@@ -28,11 +28,7 @@ ja:
         phone1_belong_to: 電話番号１の続柄
         phone2: 電話番号２
         phone2_belong_to: 電話番号２の続柄
-        postal_code: 郵便番号
-        address: 住所
         email: メールアドレス
-        user_name: ユーザー名
-        password: パスワード 
         remarks: 備考欄
         grade: 学年
       item_master:
@@ -40,6 +36,7 @@ ja:
         name: 項目名
         price: 価格
         description: 内容
+        category: 分類
   date:
     abbr_day_names:
     - 日

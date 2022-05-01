@@ -13,7 +13,7 @@
 </tr>
 </thead>
 <tbody>
-<% if current_user.students.present? && current_user.item_masters.present? %>
+<% if current_user.students.any? && current_user.item_masters.any? %>
   <tr class="dotted-bottom">
     <td colspan="3">
       <% if @book.empty? %>

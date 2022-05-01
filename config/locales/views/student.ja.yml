@@ -35,18 +35,14 @@ ja:
     phone1_belong_to: 続柄
     phone2: 電話番号２
     phone2_belong_to: 続柄
-    postal_code: 郵便番号
-    postal_code_example: 例:4620003(半角数字)
     remarks: 備考欄(240字まで)
     remarks: 備考欄
     school_belong_to: 学校名
-    search_postal_code: 郵便番号から住所を自動入力
     select: 選択して下さい。
     siblings: 兄弟姉妹
     sort: 並べ替え
     start_date: 入会日
     telephone_example: 例:03-1234-5678(半角)
-    user_name: ユーザー名
     zen_kana: 全角カタカナ
     index:
       students_amount: 生徒数
