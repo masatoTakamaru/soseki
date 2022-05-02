@@ -4,7 +4,7 @@ class ItemMasterController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @item_master = current_user.item_masters.order(code: :asc)
+    @item_master = current_user.item_masters.order(:code)
   end
 
   def new

@@ -9,7 +9,7 @@ describe ItemMaster, type: :model do
 
     it "講座マスターが登録できる" do
       current_user.item_masters << item_master
-      expect(current_user.item_masters.first.any?).to be_truthy
+      expect(current_user.item_masters.first.present?).to be_truthy
     end
 
     it "講座コードが空白はNG" do

@@ -91,7 +91,7 @@ feature "卒・退会者", type: :feature do
     end
     click_link "生徒"
     click_link "卒・退会者"
-    expect(page).to have_content("卒・退会者:100人")
+    expect(page).to have_content("卒・退会者 : 100 人")
     expect(page).to have_content("次")
     expect(page).to have_content("最後")
   end

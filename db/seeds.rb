@@ -56,7 +56,8 @@ CSV.foreach("db/seed_student expired.csv", encoding: 'UTF-8') do |line|
     phone2_belong_to: line[18],
     email: line[21],
     sibling_group: line[24],
-    expire_flag: true
+    expire_flag: true,
+    expire_date: line[25]
     )
     student.save
 end

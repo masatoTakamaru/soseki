@@ -17,7 +17,7 @@ class QtyPriceController < ApplicationController
         }
       }
     end
-    @qtys = current_user.qty_prices.where(grade: params[:grade]).order(qty: :asc).pluck(:price)
+    @qtys = current_user.qty_prices.where(grade: params[:grade]).order(:qty).pluck(:price)
   end
 
   def update

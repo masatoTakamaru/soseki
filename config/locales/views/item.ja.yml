@@ -7,9 +7,9 @@ ja:
     dashboard:
       yearmonth: 年・月
       book: 月別台帳
-      new: 新規登録
+      new: 新規台帳の作成
       error_empty: 生徒または項目が登録されていません。
-      item_empty: 台帳が存在しません。「新規登録」をクリックして台帳を作成して下さい。
+      item_empty: 台帳が存在しません。「新規台帳の作成」をクリックして台帳を作成して下さい。
     bill:
       search: 検索
       

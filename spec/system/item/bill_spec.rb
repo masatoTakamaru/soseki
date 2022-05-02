@@ -11,10 +11,9 @@ describe "帳簿の新規登録", type: :system do
     reg_items_master(item_masters.first)
     reg_qty_price
     click_link "ダッシュボード"
-    expect(page).to have_content("新規登録")
     fill_in "year", with: 2022
     fill_in "month", with: 4
-    click_button "新規登録"
+    click_button "新規台帳の作成"
     click_link "沼田 寧花"
   end
 
@@ -102,14 +101,14 @@ describe "合計額が正しく表示される", type: :system do
     s3 = current_user.students.find_by(family_name: "沼田", given_name: "貴隆")
     s3.update(sibling_group: sib)
     item_masters.each do |e|
-      reg_items_master(e)
+      current_user.item_masters << e
     end
     reg_qty_price
     click_link "ダッシュボード"
-    expect(page).to have_content("新規登録")
+    expect(page).to have_content("新規台帳の作成")
     fill_in "year", with: 2022
     fill_in "month", with: 4
-    click_button "新規登録"
+    click_button "新規台帳の作成"
   end
 
   it "合計の計算が正しく行われる" do
@@ -181,6 +180,7 @@ describe "合計額が正しく表示される", type: :system do
     click_button "追加"
     click_link "生徒"
     click_link "沼田 貴隆"
+    fill_in "student_expire_date", with: "2022-05-01"
     click_button "卒・退会"
     click_link "生徒"
     expect(page).not_to have_content("沼田 貴隆")

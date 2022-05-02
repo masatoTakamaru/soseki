@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "item/:year/:month/sheet", to: "item#sheet", as: "item_sheet"
   get "item/:student_id/:year/:month/bill", to: "item#bill", as: "item_bill"
   post "item/create", to: "item#create", as: "create_item"
+  post "item/sheet_copy", to: "item#sheet_copy", as: "sheet_copy"
 
   patch "student/:id/expire", to: "student#expire", as: "student_expire"
   patch "student/:id/expire_cancel", to: "student#expire_cancel", as: "student_expire_cancel"
@@ -36,4 +37,3 @@ Rails.application.routes.draw do
   get "search/:postal_code", to: "search#postal_code", as: "search_postal_code"
 
 end
-1

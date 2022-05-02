@@ -7,9 +7,10 @@ class ItemController < ApplicationController
 
   def dashboard
     @book = []
-    periods = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
-    periods.each do |period|
-      items = current_user.items.where(period: period)
+    prds = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
+    @newest_prd = prds.first
+    prds.each do |prd|
+      items = current_user.items.where(period: prd)
       qty = items.where(category: 0).pluck(:price).sum
       single = items.where(category: 2).pluck(:price).sum
       admin = items.where(category: 3).pluck(:price).sum
@@ -19,11 +20,11 @@ class ItemController < ApplicationController
       #period:2022-04-01, text:"2022年4月", belongs:当月の生徒数
       #total:当月請求額, path:生徒別明細ページへのパス
       @book << {
-        period: period,
-        text: "#{period.year} #{t('datetime.prompts.year')} #{period.month} #{t('datetime.prompts.month')}",
-        belongs: current_user.items.where(period: period).select(:student_id).distinct.pluck(:student_id).count,
+        period: prd,
+        text: "#{prd.year} #{t('datetime.prompts.year')} #{prd.month} #{t('datetime.prompts.month')}",
+        belongs: current_user.items.where(period: prd).select(:student_id).distinct.pluck(:student_id).count,
         total: total,
-        path: item_sheet_path(year: period.year, month: period.month)
+        path: item_sheet_path(year: prd.year, month: prd.month)
       }
     end
 
@@ -36,8 +37,8 @@ class ItemController < ApplicationController
       flash[:notice] = "正しい年月を入力して下さい。"
       redirect_to dashboard_path and return
     end
-    period = Date.new(year, month, 1)
-    if current_user.items.find_by(period: period).any?
+    prd = Date.new(year, month, 1)
+    if current_user.items.find_by(period: prd).present?
       flash[:notice] = "台帳はすでに存在しています。"
       redirect_to dashboard_path and return
     end
@@ -45,15 +46,10 @@ class ItemController < ApplicationController
   end
 
   def sheet
-    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    stus = current_user.students
-    stus.each do |stu|
-      if stu[:expire_flag] && stu.items.find_by(period: period).nil?
-        stus.delete(stu)
-      end
-    end
+    prd = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    stus = current_user.students.where("expire_flag = ? and start_date <= ?", false, prd.end_of_month).or(current_user.students.where("expire_flag = ? and start_date <= ? and expire_date >= ?", true, prd.end_of_month, prd))
     @sheet = {
-      period: period,
+      period: prd,
       period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
       belongs: stus.count,
       total: 0,
@@ -63,16 +59,16 @@ class ItemController < ApplicationController
     stus.select(:sibling_group).distinct.pluck(:sibling_group).each do |sibling_group|
       sib = []
       stus.where(sibling_group: sibling_group).each do |stu|
-        items = stu.items.where(period: period)
+        items = stu.items.where(period: prd)
         if items.find_by(category: 0)
           qty_price = items.find_by(category: 0).price
-          qty = items.where(period: period, category: 1).order(code: :asc)
+          qty = items.where(period: prd, category: 1).order(:code)
         else
           qty_price = 0
         end
-        single = items.where(period: period, category: 2).order(code: :asc)
-        admin = items.where(period: period, category: 3).order(code: :asc)
-        discount = items.where(period: period, category: 4).order(code: :asc)
+        single = items.where(period: prd, category: 2).order(:code)
+        admin = items.where(period: prd, category: 3).order(:code)
+        discount = items.where(period: prd, category: 4).order(:code)
         subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
         dtotal = discount.pluck(:price).sum
         total = subtotal - dtotal
@@ -92,28 +88,44 @@ class ItemController < ApplicationController
 
   end
 
+  def sheet_copy
+    prds = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
+    newest_prd = prds.first
+    items = current_user.items.where(period: newest_prd)
+    flag = true
+    items.each do |e|
+      item = e.dup
+      unless item.update(period: newest_prd.next_month)
+        flash[:notice] = "台帳の作成に失敗しました。"
+        redirect_to dashboard_path and return
+      end
+    end
+    flash[:notice] = "新規台帳を作成しました。"
+    redirect_to dashboard_path
+  end
+
   def bill
-    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    prd = Date.new(params[:year].to_i, params[:month].to_i, 1)
     student = current_user.students.find_by_hashid(params[:student_id])
-    items = student.items.where(period: period)
+    items = student.items.where(period: prd)
     item_master = current_user.item_masters
     if items.find_by(category: 0)
       qty_price = items.find_by(category: 0).price
-      qty = items.where(category: 1).order(code: :asc)
+      qty = items.where(category: 1).order(:code)
     else
       qty_price = 0
     end
-    single = items.where(category: 2).order(code: :asc)
-    admin = items.where(category: 3).order(code: :asc)
-    discount = items.where(category: 4).order(code: :asc)
+    single = items.where(category: 2).order(:code)
+    admin = items.where(category: 3).order(:code)
+    discount = items.where(category: 4).order(:code)
     subtotal = qty_price + single.pluck(:price).sum + admin.pluck(:price).sum
     dtotal = discount.pluck(:price).sum
     total = subtotal - dtotal
     @bill = {
       item_present: items.any?,
       student_id: student.hashid,
-      period: period,
-      period_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
+      period: prd,
+      prd_text: "#{params[:year]} #{t('datetime.prompts.year')} #{params[:month]} #{t('datetime.prompts.month')}",
       name: "#{student[:family_name]} #{student[:given_name]}",
       kana: "#{student[:family_name_kana]} #{student[:given_name_kana]}",
       class_name: student[:class_name],
@@ -128,7 +140,7 @@ class ItemController < ApplicationController
       total: total
     }
     #コードによる講座検索
-    if params[:code].any?
+    if params[:code].present?
       if item_master.find_by(code: params[:code])
         @new_item = item_master.find_by(code: params[:code])
         flash[:notice] = nil
@@ -144,8 +156,8 @@ class ItemController < ApplicationController
   def create
     item_master = current_user.item_masters.find_by(code: params[:code])
     student = current_user.students.find_by_hashid(params[:student_id])
-    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    qty_items = student.items.where(period: period, category: 1)
+    prd = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    qty_items = student.items.where(period: prd, category: 1)
     if qty_items.count == 12
       flash[:notice] = "従量型項目の上限に達しました。これ以上登録できません。"
       redirect_to item_bill_path(params[:student_id], params[:year], params[:month]) and return
@@ -153,7 +165,7 @@ class ItemController < ApplicationController
     item = student.items.new(
       student_id: student[:id],
       code: item_master[:code],
-      period: period,
+      period: prd,
       category: item_master[:category],
       name: item_master[:name],
       price: item_master[:price],
@@ -165,15 +177,15 @@ class ItemController < ApplicationController
       flash[:notice] = "項目の追加に失敗しました。"
     end
     if item[:category] == 1
-      qty_items = student.items.where(period: period, category: 1)
+      qty_items = student.items.where(period: prd, category: 1)
       qty_price = current_user.qty_prices.find_by(grade: student[:grade], qty: qty_items.count)
-      qty = student.items.find_by(period: period, category: 0)
-      if qty.any?
+      qty = student.items.find_by(period: prd, category: 0)
+      if qty.present?
         qty.update(price: qty_price[:price])
       else
         qty = student.items.new(
           code: 0,
-          period: period,
+          period: prd,
           category: 0,
           name: "-",
           price: qty_price[:price],
@@ -186,7 +198,7 @@ class ItemController < ApplicationController
   end
 
   def destroy_item
-    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    prd = Date.new(params[:year].to_i, params[:month].to_i, 1)
     student = current_user.students.find_by_hashid(params[:student_id])
     item = student.items.find_by(id: params[:id])
     item[:category] == 1 ? qty_flag = true : qty_flag = false
@@ -196,8 +208,8 @@ class ItemController < ApplicationController
       flash[:notice] = "登録項目の削除に失敗しました。"
     end
     if qty_flag
-      qty_items = student.items.where(period: period, category: 1)
-      qty = student.items.find_by(period: period, category: 0)
+      qty_items = student.items.where(period: prd, category: 1)
+      qty = student.items.find_by(period: prd, category: 0)
       if qty_items.count == 0
         qty.destroy
       else
@@ -211,7 +223,7 @@ class ItemController < ApplicationController
   def destroy_bill
     period = Date.new(params[:year].to_i, params[:month].to_i, 1)
     student = current_user.students.find_by_hashid(params[:student_id])
-    items = current_user.items.where(student_id: student, period: period)
+    items = current_user.items.where(student_id: student, period: prd)
     if items.destroy_all
       flash[:notice] = "登録項目を削除しました。"
     else
@@ -222,9 +234,8 @@ class ItemController < ApplicationController
 
   private
 
-  def item_params
-    params.permit(:year, :month, :id, :student_id, :code)
-  end
-
+    def item_params
+      params.permit(:year, :month, :id, :student_id, :code)
+    end
 
 end

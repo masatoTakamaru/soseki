@@ -6,7 +6,7 @@
   <div class="flex">
     <%= t("title.item.bill") %>
     <p class="ml-8"><%= @bill[:name] %></p>
-    <p class="ml-4"><%= @bill[:period_text] %></p>
+    <p class="ml-4"><%= @bill[:prd_text] %></p>
   </div>
 </h2>
 <div class="flex justify-end">
@@ -41,7 +41,7 @@
     </tr>
     </thead>
     <tbody>
-    <% if @bill[:qty].any? %>
+    <% if @bill[:qty].present? %>
       <% @bill[:qty].each do |item| %>
         <%= render partial: "shared/bill_item", locals: {item: item} %>
       <% end %>

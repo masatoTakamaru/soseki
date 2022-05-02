@@ -48,14 +48,14 @@ describe "ダッシュボード", type: :system do
     current_user.students << students
     current_user.item_masters << item_masters.first
     click_link "ダッシュボード"
-    expect(page).to have_content("台帳が存在しません。「新規登録」をクリックして台帳を作成して下さい。")
+    expect(page).to have_content("台帳が存在しません。「新規台帳の作成」をクリックして台帳を作成して下さい。")
   end
 
   it "台帳のタイトルが正しく表示される" do
     current_user.students << students
     current_user.item_masters << item_masters.first
     click_link "ダッシュボード"
-    click_button "新規登録"
+    click_button "新規台帳の作成"
     expect(page).to have_title("台帳")
     expect(page).to have_content("沼田 寧花")
   end

@@ -10,13 +10,13 @@ class StudentController < ApplicationController
     @class_name_order = params[:class_name]
     @grade_order = params[:grade]
     if @class_name_order == "asc"
-      @stus = e.order(class_name: :asc)
+      @stus = e.order(:class_name)
       @class_name_order = "desc"
     elsif @class_name_order == "desc"
       @stus = e.order(class_name: :desc)
       @class_name_order = "asc"
     elsif @grade_order == "asc"
-      @stus = e.order(grade: :asc)
+      @stus = e.order(:grade)
       @grade_order = "desc"
     elsif @grade_order == "desc"
       @stus = e.order(grade: :desc)
@@ -109,6 +109,26 @@ class StudentController < ApplicationController
     else
       flash[:notice] = t("notice.failure")
     end
+    redirect_to student_index_path
+  end
+
+  #進級処理
+  def promote
+    if params[:include] == "current"
+      stus = current_user.students.where(expire_flag: false)
+    elsif params[:include] == "all"
+      stus = current_user.students
+    else
+      redirect_to student_index_path and return
+    end
+    stus.each do |stu|
+      grade = stu[:grade]
+      if grade > 0 && grade < 16
+        grade += 1
+      end
+      stu.update(grade: grade)
+    end
+    flash[:notice] = "生徒を進級させました。"
     redirect_to student_index_path
   end
 

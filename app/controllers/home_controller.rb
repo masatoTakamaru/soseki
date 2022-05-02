@@ -126,7 +126,7 @@ class HomeController < ApplicationController
         t("#{str}.category"),
         t("#{str}.price")
       ]
-      item_masters = current_user.item_masters.order(code: :asc)
+      item_masters = current_user.item_masters.order(:code)
       item_masters.each do |item_master|
         item_master[:category] == 1 ? price = "-" : price = item_master[:price]
         csv << [

@@ -16,11 +16,11 @@
 <% if current_user.students.any? && current_user.item_masters.any? %>
   <tr class="dotted-bottom">
     <td colspan="3">
-      <% if @book.empty? %>
+      <% unless @book.any? %>
         <p class="pl-2 py-2"><%= t(".item_empty") %></p>
       <% end %>
       <%= form_with url: item_before_sheet_path, method: :get do |f| %>
-        <div class="flex justify-center items-center py-4">
+        <div class="flex justify-end items-center py-4">
           <p class="mx-2"><%= t(".yearmonth")%></p>
           <%= f.telephone_field :year, {size: 4, value: Date.current.strftime("%Y")} %>
           <p class="px-2">/</p>
@@ -33,21 +33,34 @@
   <tr>
     <td>
   </tr>
-  <% @book.each do |sheet| %>
-    <tr class="dotted-bottom">
-      <td class="pl-2 text-center">
-        <%= link_to sheet[:path], class: "underline text-blue-500 font-bold" do %>
-          <%= sheet[:text] %>
-        <% end %>
-      </td>
-      <td class="text-center">
-        <%= sheet[:belongs] %>
-        <%= t("student.index.people") %>
-      </td>
-      <td class="text-right pr-4 font-bold">
-        <%= number_to_currency(sheet[:total]) %>
-      </td>
+  <% if @book.any? %>
+    <tr>
+      <td colspan="3">
+        <div class="flex justify-end items-center">
+          <p><%= "#{@newest_prd.year} 年 #{@newest_prd.month} 月の台帳を引き継いで #{@newest_prd.next_month.year} 年 #{@newest_prd.next_month.month} 月の台帳を作成する。" %></p>
+          <%= button_to "作成",
+                sheet_copy_path,
+                class: "btn ml-4 my-4 py-2 px-8"
+          %>
+        </div>
+    </td>
     </tr>
+    <% @book.each do |sheet| %>
+      <tr class="dotted-bottom">
+        <td class="pl-2 text-center">
+          <%= link_to sheet[:path], class: "underline text-blue-500 font-bold" do %>
+            <%= sheet[:text] %>
+          <% end %>
+        </td>
+        <td class="text-center">
+          <%= sheet[:belongs] %>
+          <%= t("student.index.people") %>
+        </td>
+        <td class="text-right pr-4 font-bold">
+          <%= number_to_currency(sheet[:total]) %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
 <% else %>
   <tr>
