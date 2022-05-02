@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   patch "student/:id/expire_cancel", to: "student#expire_cancel", as: "student_expire_cancel"
   get "student/expired", to: "student#expired", as: "student_expired"
   resources :student
+  patch "student/promote/:include", to: "student#promote", as: "student_promote"
 
   get "search/:postal_code", to: "search#postal_code", as: "search_postal_code"
 
 end
+1
