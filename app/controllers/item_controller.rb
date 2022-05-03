@@ -6,8 +6,10 @@ class ItemController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    @stus_chart = []
+    @total_chart = []
     @book = []
-    prds = current_user.items.select(:period).distinct.order(period: :desc).pluck(:period)
+    prds = current_user.items.select(:period).distinct.order(:period).pluck(:period)
     @newest_prd = prds.first
     prds.each do |prd|
       items = current_user.items.where(period: prd)
@@ -16,17 +18,21 @@ class ItemController < ApplicationController
       admin = items.where(category: 3).pluck(:price).sum
       dtotal = items.where(category: 4).pluck(:price).sum
       total = qty + single + admin - dtotal
+      belongs = current_user.students.where("expire_flag = ? and start_date <= ?", false, prd.end_of_month).or(current_user.students.where("expire_flag = ? and start_date <= ? and expire_date >= ?", true, prd.end_of_month, prd)).count
+      @stus_chart << [prd.strftime("%y/%m"), belongs]
+      @total_chart << [prd.strftime("%y/%m"), total]
       #月ごとの概要を配列として返す
       #period:2022-04-01, text:"2022年4月", belongs:当月の生徒数
       #total:当月請求額, path:生徒別明細ページへのパス
       @book << {
         period: prd,
         text: "#{prd.year} #{t('datetime.prompts.year')} #{prd.month} #{t('datetime.prompts.month')}",
-        belongs: current_user.items.where(period: prd).select(:student_id).distinct.pluck(:student_id).count,
+        belongs: belongs,
         total: total,
         path: item_sheet_path(year: prd.year, month: prd.month)
       }
     end
+    @book.reverse!
 
   end
 
@@ -221,7 +227,7 @@ class ItemController < ApplicationController
   end
 
   def destroy_bill
-    period = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    prd = Date.new(params[:year].to_i, params[:month].to_i, 1)
     student = current_user.students.find_by_hashid(params[:student_id])
     items = current_user.items.where(student_id: student, period: prd)
     if items.destroy_all

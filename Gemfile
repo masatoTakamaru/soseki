@@ -16,6 +16,7 @@ gem "devise"
 gem 'devise-i18n'
 gem 'hashid-rails'
 gem 'kaminari'
+gem 'chartkick'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 

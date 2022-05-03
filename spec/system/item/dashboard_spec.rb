@@ -27,6 +27,26 @@ describe "ダッシュボード", type: :system do
     expect(page).to have_title("ダッシュボード")
   end
 
+  it "見出し「ダッシュボード」が表示される" do
+    expect(page).to have_content("ダッシュボード")
+  end
+
+  it "見出し「月別台帳」が表示される" do
+    expect(page).to have_content("月別台帳")
+  end
+
+  it "テーブル見出し「日付」が表示される" do
+    expect(page).to have_content("日付")
+  end
+
+  it "テーブル見出し「生徒数」が表示される" do
+    expect(page).to have_content("生徒数")
+  end
+
+  it "テーブル見出し「請求額」が表示される" do
+    expect(page).to have_content("請求額")
+  end
+
   it "生徒も項目も存在しない場合メッセージが表示される" do
     expect(page).to have_content("生徒または項目が登録されていません。")
   end

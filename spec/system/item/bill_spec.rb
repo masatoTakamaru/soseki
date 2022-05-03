@@ -80,6 +80,31 @@ describe "帳簿の新規登録", type: :system do
     expect(page).to have_content("15,500")
   end
 
+  it "シートの削除ボタンをクリックするとメッセージが表示される" do
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    click_button "戻る"
+    click_button "削除"
+    expect(page).to have_content("登録項目を削除しました。")
+  end
+
+  it "シートの削除ボタンをクリックすると項目が削除される" do
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    fill_in "code", with: 1011
+    click_button "検索"
+    click_button "追加"
+    click_button "戻る"
+    click_button "削除"
+    expect(page).not_to have_content("15,500")
+  end
+
+
 end
 
 describe "合計額が正しく表示される", type: :system do

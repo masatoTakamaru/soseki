@@ -2,6 +2,25 @@
 
 <div class="container">
 <h2><%= t("title.item.dashboard") %></h2>
+
+<div class="flex items-center">
+  <div class="mr-8">
+    <p class="text-center text-90">生徒数</p>
+    <%= column_chart @stus_chart,
+          id: "stus-chart",
+          width: "400px",
+          height: "260px" %>
+  </div>
+  <div>
+    <p class="text-center text-90">請求額</p>
+    <%= column_chart @total_chart,
+          id: "total-chart",
+          width: "400px",
+          height: "260px",
+          thousands: "," %>
+  </div>
+</div>
+
 <h3><%= t(".book") %></h3>
 <div class="table-frame bg-white p-4 mb-20">
 <table class="w-full">
